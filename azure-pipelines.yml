@@ -11,4 +11,6 @@ steps:
     echo Starting build process.
     npm install
     make build-all
+    git checkout gh-pages
+    ls
   displayName: 'Build all script'
