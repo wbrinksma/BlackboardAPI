@@ -19,8 +19,17 @@ class BBIframeBackend extends BBBackend {
      * @param parameters The parameters used with the function to send.
      */
     private sendMessageThroughConnectionManager(parameters : any) : Promise<any> {
+        //Less quality solutation, but is implemented to circumvent strict-mode behaviour
+        var callerName;
+        try { throw new Error(); }
+        catch (e) { 
+            var re = /(\w+)@|at (\w+) \(/g, st = e.stack, m;
+            re.exec(st), m = re.exec(st);
+            callerName = m[1] || m[2];
+        }
+
         return new Promise((resolve,reject) => {
-            this.connectionManager.sendMessage(new WindowFunctionCall(arguments.callee.caller.name, parameters), (returnObject) => {
+            this.connectionManager.sendMessage(new WindowFunctionCall(callerName, parameters), (returnObject) => {
                 resolve(returnObject);
             })
         });

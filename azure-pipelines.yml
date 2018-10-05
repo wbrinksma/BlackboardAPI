@@ -11,4 +11,21 @@ steps:
     echo Starting build process.
     npm install
     make build-all
+
+    git config --global user.name AzureBuildBot
+    git config --global user.email none
+
+    mv build/packages/client.js new_client.js
+    mv build/packages/server.js new_server.js
+    rm -rf build
+    git stash
+    git checkout gh-pages
+    rm client.js
+    rm server.js
+    mv new_client.js client.js
+    mv new_server.js server.js
+    git add client.js
+    git add server.js
+    git commit -m "Updated client.js and server.js"
+    git push
   displayName: 'Build all script'
