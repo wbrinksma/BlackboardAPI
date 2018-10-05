@@ -46,6 +46,9 @@ abstract class BBBackend {
     public abstract setFileBody(parameters : BBBackend.FileBodyParameter) : Promise<BBBackend.TaskComplete>;
 }
 
+/**
+ * Namespace to hold all general type information
+ */
 namespace BBBackend {
     export type UserID = { "userId": string};
     export type EnrolledCoursesParameter = UserID & {"offset": number};
