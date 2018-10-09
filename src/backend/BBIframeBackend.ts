@@ -4,6 +4,10 @@ class BBIframeBackend extends BBBackend {
     constructor(connectionManager? : WindowConnectionManager) {
         super();
 
+        if(!this.checkIfInsideIframe()) {
+            throw new Error("BBIframeBackend not loaded inside Iframe");
+        }
+
         if(!connectionManager) {
             connectionManager = new WindowConnectionManager(window.parent);
         }
@@ -11,46 +15,46 @@ class BBIframeBackend extends BBBackend {
         this.connectionManager = connectionManager;
     }
 
+    private checkIfInsideIframe() : boolean {
+        try {
+            return window.self !== window.top;
+        } catch (e) {
+            return true;
+        }
+    }
+
     /**
      * This method provides a way to automate the sending process of method calls to the Iframe. It uses
      * the method's arguments and gets the name of the caller of this function that way. When this function
      * is called by another function in this class, it automatically gets the correct to name to send to the
      * Iframe.
+     * @param methodSignature The signature (name) of the method you are trying to call on the top frame
      * @param parameters The parameters used with the function to send.
      */
-    private sendMessageThroughConnectionManager(parameters : any) : Promise<any> {
-        //Less quality solutation, but is implemented to circumvent strict-mode behaviour
-        var callerName;
-        try { throw new Error(); }
-        catch (e) { 
-            var re = /(\w+)@|at (\w+) \(/g, st = e.stack, m;
-            re.exec(st), m = re.exec(st);
-            callerName = m[1] || m[2];
-        }
-
+    private sendMessageThroughConnectionManager(methodSignature : string, parameters : any) : Promise<any> {
         return new Promise((resolve,reject) => {
-            this.connectionManager.sendMessage(new WindowFunctionCall(callerName, parameters), (returnObject) => {
+            this.connectionManager.sendMessage(new WindowFunctionCall(methodSignature, parameters), (returnObject) => {
                 resolve(returnObject);
             })
         });
     }
 
     public getEnrolledCourses(parameters : BBBackend.EnrolledCoursesParameter): Promise<BBBackend.CourseInformation[]> {
-        return this.sendMessageThroughConnectionManager(parameters);
+        return this.sendMessageThroughConnectionManager("getEnrolledCourses", parameters);
     }
     public getBlackboardDomain(): string {
         throw new Error("Method not implemented.");
     }
     public getCourseInformation(parameters: BBBackend.CourseIdParameter): Promise<BBBackend.CourseInformation> {
-        return this.sendMessageThroughConnectionManager(parameters);
+        return this.sendMessageThroughConnectionManager("getCourseInformation", parameters);
     }
     public sendMail(parameters: BBBackend.SendMailParameter): Promise<BBBackend.TaskComplete> {
-        return this.sendMessageThroughConnectionManager(parameters);
+        return this.sendMessageThroughConnectionManager("sendMail", parameters);
     }
     public getFileInfo(parameters: BBBackend.CourseIdParameter): Promise<BBBackend.FileInfo> {
-        return this.sendMessageThroughConnectionManager(parameters);
+        return this.sendMessageThroughConnectionManager("getFileInfo", parameters);
     }
     public setFileBody(parameters: BBBackend.FileBodyParameter): Promise<BBBackend.TaskComplete> {
-        return this.sendMessageThroughConnectionManager(parameters);
+        return this.sendMessageThroughConnectionManager("setFileBody", parameters);
     }
 }
