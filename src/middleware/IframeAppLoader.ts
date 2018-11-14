@@ -1,13 +1,15 @@
+import { BBBackend, WindowConnectionManager } from '../common';
+import AppLoader from './AppLoader';
 /**
  * Loader class for use with an Iframe element. This loader is used
  * to circumvent CORS problems and serves as a middle man between
  * the app and the Blackboard server.
  */
-class IframeAppLoader extends AppLoader {
-    private iframe : HTMLIFrameElement;
-    private connectionManager : WindowConnectionManager;
+export default class IframeAppLoader extends AppLoader {
+    private iframe: HTMLIFrameElement;
+    private connectionManager: WindowConnectionManager;
 
-    constructor(doc : Document, backend : BBBackend) {
+    constructor(doc: Document, backend: BBBackend) {
         super();
 
         this.iframe = document.createElement("iframe");

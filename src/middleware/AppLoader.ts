@@ -1,3 +1,3 @@
-abstract class AppLoader {
-    public abstract loadApp(appUrl : string) : void;
+export default abstract class AppLoader {
+    public abstract loadApp(appUrl: string): void;
 }

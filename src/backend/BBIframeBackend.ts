@@ -1,21 +1,42 @@
-class BBIframeBackend extends BBBackend {
-    private readonly connectionManager : WindowConnectionManager;
-    
-    constructor(connectionManager? : WindowConnectionManager) {
+import {BBBackend, WindowConnectionManager, WindowFunctionCall} from '../common';
+
+export default class BBIframeBackend extends BBBackend {
+    private readonly connectionManager: WindowConnectionManager;
+
+    constructor(connectionManager?: WindowConnectionManager) {
         super();
 
-        if(!this.checkIfInsideIframe()) {
+        if (!this.checkIfInsideIframe()) {
             throw new Error("BBIframeBackend not loaded inside Iframe");
         }
 
-        if(!connectionManager) {
+        if (!connectionManager) {
             connectionManager = new WindowConnectionManager(window.parent);
         }
 
         this.connectionManager = connectionManager;
     }
 
-    private checkIfInsideIframe() : boolean {
+    public getEnrolledCourses(parameters: BBBackend.EnrolledCoursesParameter): Promise<BBBackend.ICourseInformation[]> {
+        return this.sendMessageThroughConnectionManager("getEnrolledCourses", parameters);
+    }
+    public getBlackboardDomain(): string {
+        throw new Error("Method not implemented.");
+    }
+    public getCourseInformation(parameters: BBBackend.CourseIdParameter): Promise<BBBackend.ICourseInformation> {
+        return this.sendMessageThroughConnectionManager("getCourseInformation", parameters);
+    }
+    public sendMail(parameters: BBBackend.SendMailParameter): Promise<BBBackend.ITaskComplete> {
+        return this.sendMessageThroughConnectionManager("sendMail", parameters);
+    }
+    public getFileInfo(parameters: BBBackend.CourseIdParameter): Promise<BBBackend.IFileInfo> {
+        return this.sendMessageThroughConnectionManager("getFileInfo", parameters);
+    }
+    public setFileBody(parameters: BBBackend.FileBodyParameter): Promise<BBBackend.ITaskComplete> {
+        return this.sendMessageThroughConnectionManager("setFileBody", parameters);
+    }
+
+    private checkIfInsideIframe(): boolean {
         try {
             return window.self !== window.top;
         } catch (e) {
@@ -31,30 +52,11 @@ class BBIframeBackend extends BBBackend {
      * @param methodSignature The signature (name) of the method you are trying to call on the top frame
      * @param parameters The parameters used with the function to send.
      */
-    private sendMessageThroughConnectionManager(methodSignature : string, parameters : any) : Promise<any> {
-        return new Promise((resolve,reject) => {
+    private sendMessageThroughConnectionManager(methodSignature: string, parameters: any): Promise<any> {
+        return new Promise((resolve, reject) => {
             this.connectionManager.sendMessage(new WindowFunctionCall(methodSignature, parameters), (returnObject) => {
                 resolve(returnObject);
-            })
+            });
         });
-    }
-
-    public getEnrolledCourses(parameters : BBBackend.EnrolledCoursesParameter): Promise<BBBackend.CourseInformation[]> {
-        return this.sendMessageThroughConnectionManager("getEnrolledCourses", parameters);
-    }
-    public getBlackboardDomain(): string {
-        throw new Error("Method not implemented.");
-    }
-    public getCourseInformation(parameters: BBBackend.CourseIdParameter): Promise<BBBackend.CourseInformation> {
-        return this.sendMessageThroughConnectionManager("getCourseInformation", parameters);
-    }
-    public sendMail(parameters: BBBackend.SendMailParameter): Promise<BBBackend.TaskComplete> {
-        return this.sendMessageThroughConnectionManager("sendMail", parameters);
-    }
-    public getFileInfo(parameters: BBBackend.CourseIdParameter): Promise<BBBackend.FileInfo> {
-        return this.sendMessageThroughConnectionManager("getFileInfo", parameters);
-    }
-    public setFileBody(parameters: BBBackend.FileBodyParameter): Promise<BBBackend.TaskComplete> {
-        return this.sendMessageThroughConnectionManager("setFileBody", parameters);
     }
 }

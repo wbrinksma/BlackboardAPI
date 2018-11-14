@@ -13,6 +13,7 @@ Thumbs.db
 build/
 node_modules/
 debug/
+dist/
 
 # Documentation directories #
 ##############################

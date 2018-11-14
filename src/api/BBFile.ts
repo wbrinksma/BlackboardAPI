@@ -1,17 +1,12 @@
-namespace BB {
+export default class BBFile {
+    private _courseId: string;
 
-    export class BBFile {
-        private _courseId : string;
-
-        constructor(courseId : string) {
-            this._courseId = courseId;
-        }
-        
-        get courseId() : string {
-            return this._courseId;
-        }
-
-        
+    constructor(courseId: string) {
+        this._courseId = courseId;
     }
-    
+
+    get courseId(): string {
+        return this._courseId;
+    }
+
 }
