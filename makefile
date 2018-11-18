@@ -13,7 +13,7 @@ debug-current:
 
 
 
-build-all: build-api build-middleware build-common build-backend package-all
+build-all: build-api build-middleware build-common build-backend build-test package-all
 	@echo "Done building all packages!"
 
 package-all: clean-packages package-client package-server
@@ -100,3 +100,11 @@ package-backend:
 clean-backend-build:
 	@echo "Cleaning Backend build directory..."
 	-@rm -rf build/backend/*
+
+build-test: compile-test
+
+compile-test: clean-test
+	@npm run compile-test
+
+clean-test:
+	-@rm -rf build/test/*

@@ -53,6 +53,7 @@ export default class BBIframeBackend extends BBBackend {
      * @param parameters The parameters used with the function to send.
      */
     private sendMessageThroughConnectionManager(methodSignature: string, parameters: any): Promise<any> {
+        console.log(parameters);
         return new Promise((resolve, reject) => {
             this.connectionManager.sendMessage(new WindowFunctionCall(methodSignature, parameters), (returnObject) => {
                 resolve(returnObject);

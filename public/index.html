@@ -1,23 +1,24 @@
 <html>
-    <head></head>
     <body>
         <h1>BlackboardAPI Test Page</h1>
+        <p>Load Enrolled Courses</p>
         <input type="text" id="idBox">
         <button onclick="loadEnrolledCourses(document.getElementById('idBox').value)">Test!</button>
 
         <script>
             function loadEnrolledCourses(userId) {
                 var user = new BB.BBUser(userId);
+                console.log(userId)
                 user.getEnrolledCourses().then((result) => {
                     console.log(result);
                 })
             }
 
             window.onload = () => {
-                BB.Backend.setBackend(new BBIframeBackend());
+                BB.Backend.setBackend(new BB.BBIframeBackend());
             }
         </script>
 
-        <script src="https://wbrinksma.github.io/BlackboardAPI/client.js"></script>
+        <script src="./client.js"></script>
     </body>
 </html>

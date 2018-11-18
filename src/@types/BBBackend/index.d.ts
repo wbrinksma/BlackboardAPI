@@ -1,12 +1,13 @@
 declare namespace BBBackend {
     type UserID = {"userId": string};
-    type EnrolledCoursesParameter = UserID & {"offset": number};
+    type Offset = {"offset": number};
+    type CourseID = {"courseId": string};
 
-    type CourseIdParameter = {"courseId": string};
+    type EnrolledCoursesParameter = UserID & Offset;
 
-    type SendMailParameter = CourseIdParameter & {"recipientIds": string[], "subject": string, "body": string};
+    type SendMailParameter = CourseID & {"recipientIds": string[], "subject": string, "body": string};
 
-    type FileInfoParameter = CourseIdParameter & {};
+    type FileInfoParameter = CourseID & {};
 
     type FileBodyParameter = FileInfoParameter & {"body": string};
 
@@ -15,8 +16,15 @@ declare namespace BBBackend {
         readonly lastName: string;
     }
 
+    interface ICourseID {
+        readonly id: string;
+    }
+
     interface ICourseInformation {
         readonly id: string;
+        readonly name: string;
+        readonly description: string;
+        
     }
 
     interface IFileInfo {
