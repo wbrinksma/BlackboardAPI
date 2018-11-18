@@ -3,7 +3,7 @@ import Backend from './Backend';
 export default class BBUser {
     private _userId: string;
 
-    private enrolledCourses: BBBackend.ICourseInformation[];
+    private enrolledCourses: BBBackend.ICourseID[];
 
     constructor(userId: string) {
         this._userId = userId;
@@ -13,7 +13,7 @@ export default class BBUser {
         return this._userId;
     }
 
-    public getEnrolledCourses(): Promise<BBBackend.ICourseInformation[]> {
+    public getEnrolledCourses(): Promise<BBBackend.ICourseID[]> {
         return new Promise((resolve, reject) => {
             if (this.enrolledCourses) {
                 resolve(this.enrolledCourses);

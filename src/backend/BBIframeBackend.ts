@@ -23,13 +23,13 @@ export default class BBIframeBackend extends BBBackend {
     public getBlackboardDomain(): string {
         throw new Error("Method not implemented.");
     }
-    public getCourseInformation(parameters: BBBackend.CourseIdParameter): Promise<BBBackend.ICourseInformation> {
+    public getCourseInformation(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseInformation> {
         return this.sendMessageThroughConnectionManager("getCourseInformation", parameters);
     }
     public sendMail(parameters: BBBackend.SendMailParameter): Promise<BBBackend.ITaskComplete> {
         return this.sendMessageThroughConnectionManager("sendMail", parameters);
     }
-    public getFileInfo(parameters: BBBackend.CourseIdParameter): Promise<BBBackend.IFileInfo> {
+    public getFileInfo(parameters: BBBackend.CourseID): Promise<BBBackend.IFileInfo> {
         return this.sendMessageThroughConnectionManager("getFileInfo", parameters);
     }
     public setFileBody(parameters: BBBackend.FileBodyParameter): Promise<BBBackend.ITaskComplete> {
