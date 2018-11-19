@@ -7,7 +7,7 @@
     "compile-api": "tsc -p api.tsconfig.json",
     "compile-common": "tsc -p common.tsconfig.json",
     "compile-backend": "tsc -p backend.tsconfig.json",
-    "debug": "webpack --config webpack/webpack.config.js"
+    "build": "webpack --config webpack/webpack.config.js"
   },
   "author": "wbrinksma",
   "license": "MIT",
