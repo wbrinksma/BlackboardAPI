@@ -2,14 +2,30 @@
     <body>
         <h1>BlackboardAPI Test Page</h1>
         <p>Load Enrolled Courses</p>
-        <input type="text" id="idBox">
-        <button onclick="loadEnrolledCourses(document.getElementById('idBox').value)">Test!</button>
-
+        <input type="text" id="uidBox">
+        <button onclick="loadEnrolledCourses(document.getElementById('uidBox').value)">Get!</button>
+        <p>Load Course</p>
+        <input type="text" id="cidBox">
+        <button onclick="loadCourseInformation(document.getElementById('cidBox').value)">Information</button>
+        <button onclick="loadCourseContents(document.getElementById('cidBox').value)">Contents</button>
         <script>
             function loadEnrolledCourses(userId) {
                 var user = new BB.BBUser(userId);
-                console.log(userId)
                 user.getEnrolledCourses().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function loadCourseInformation(courseId) {
+                var course = new BB.BBCourse(courseId);
+                course.getCourseInformation().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function loadCourseContents(courseId) {
+                var course = new BB.BBCourse(courseId);
+                course.getCourseContents().then((result) => {
                     console.log(result);
                 })
             }

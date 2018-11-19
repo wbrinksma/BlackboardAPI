@@ -26,6 +26,14 @@ export default abstract class BBBackend {
         Promise<BBBackend.ICourseInformation>;
 
     /**
+     * Get contents of a course.
+     * @param parameters The parameters to use with this function.
+     * @returns A promise with contents of the selected course.
+     */
+    public abstract getCourseContents(parameters: BBBackend.CourseID):
+    Promise<BBBackend.ICourseContent[]>;
+
+    /**
      * Use this function to send an email to one or more recipients. Be aware that the sender will also receive
      * a copy of the email. You can only send email through a course and its users.
      * @param parameters The parameters to use with this function.

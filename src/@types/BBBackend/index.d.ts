@@ -23,8 +23,13 @@ declare namespace BBBackend {
     interface ICourseInformation {
         readonly id: string;
         readonly name: string;
-        readonly description: string;
-        
+        readonly description: string;    
+    }
+
+    interface ICourseContent {
+        readonly id: string;
+        readonly title: string;
+        readonly position: number;   
     }
 
     interface IFileInfo {

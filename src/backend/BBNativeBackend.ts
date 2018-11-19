@@ -5,10 +5,8 @@ export default class BBNativeBackend extends BBBackend {
         throw new Error("Method not implemented.");
     }
 
-    /* COURSES */
     public getEnrolledCourses(parameters: BBBackend.EnrolledCoursesParameter): Promise<BBBackend.ICourseID[]> {
         const path = "/learn/api/public/v1/users/" + parameters.userId + "/courses?offset=" + parameters.offset;
-        console.log(path)
         return new Promise((resolve, reject) => {
             HTTPRequest.getAsync(path).then((response) => {
                 const allCourseInformation = JSON.parse(response);
@@ -27,6 +25,9 @@ export default class BBNativeBackend extends BBBackend {
         });
     }
 
+
+    /* COURSES */
+
     public getCourseInformation(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseInformation> {
         const path = "/learn/api/public/v1/courses/" + parameters.courseId;
         return new Promise((resolve, reject) => {
@@ -43,6 +44,29 @@ export default class BBNativeBackend extends BBBackend {
             });
         });
     }
+
+    public getCourseContents(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseContent[]> {
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId + "/contents";
+        return new Promise((resolve, reject) => {
+            HTTPRequest.getAsync(path).then((response) => {
+                const allCourseContents = JSON.parse(response);
+                const responseInfo = new Array<BBBackend.ICourseContent>();
+
+                allCourseContents.results.forEach((result) => {
+                    const resultObject: BBBackend.ICourseContent = {
+                        id: result.id,
+                        title: result.title,
+                        position: result.position
+                    };
+
+                    responseInfo.push(resultObject);
+                });
+
+                resolve(responseInfo);
+            });
+        });
+    }
+
     public sendMail(parameters: BBBackend.SendMailParameter): Promise<BBBackend.ITaskComplete> {
         throw new Error("Method not implemented.");
     }

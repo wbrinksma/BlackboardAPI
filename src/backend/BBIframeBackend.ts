@@ -26,6 +26,9 @@ export default class BBIframeBackend extends BBBackend {
     public getCourseInformation(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseInformation> {
         return this.sendMessageThroughConnectionManager("getCourseInformation", parameters);
     }
+    public getCourseContents(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseContent[]> {
+        return this.sendMessageThroughConnectionManager("getCourseContents", parameters);
+    }
     public sendMail(parameters: BBBackend.SendMailParameter): Promise<BBBackend.ITaskComplete> {
         return this.sendMessageThroughConnectionManager("sendMail", parameters);
     }
