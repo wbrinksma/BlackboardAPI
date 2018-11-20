@@ -46,4 +46,11 @@ export default abstract class BBBackend {
      * @returns A promise which indicates when the task is complete.
      */
     public abstract setFileBody(parameters: BBBackend.FileBodyParameter): Promise<BBBackend.ITaskComplete>;
+
+    /**
+     * Get info about a specific user.
+     * @param parameters The parameters to use with this function.
+     * @returns A promise with the user information of specified username.
+     */
+    public abstract getUserInfo(parameters: BBBackend.UserInfoParameter): Promise<BBBackend.IUserInfo>;
 }

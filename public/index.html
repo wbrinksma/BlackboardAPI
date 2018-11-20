@@ -4,12 +4,23 @@
         <p>Load Enrolled Courses</p>
         <input type="text" id="idBox">
         <button onclick="loadEnrolledCourses(document.getElementById('idBox').value)">Test!</button>
+        <p>Get user info</p>
+        <input type="text" id="uiidBox">
+        <button onclick="loadUserInfo(document.getElementById('uiidBox').value)">Userinfo please!</button>
 
         <script>
             function loadEnrolledCourses(userId) {
                 var user = new BB.BBUser(userId);
                 console.log(userId)
                 user.getEnrolledCourses().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function loadUserInfo(userName) {
+                var user = new BB.BBUserInfo(userName);
+                console.log(userName);
+                user.getUserInfo().then((result) => {
                     console.log(result);
                 })
             }

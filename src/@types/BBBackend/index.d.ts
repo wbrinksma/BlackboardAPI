@@ -11,6 +11,8 @@ declare namespace BBBackend {
 
     type FileBodyParameter = FileInfoParameter & {"body": string};
 
+    type UserInfoParameter = {"userName": string};
+
     interface IUserInformation {
         readonly firstName: string;
         readonly lastName: string;
@@ -24,7 +26,6 @@ declare namespace BBBackend {
         readonly id: string;
         readonly name: string;
         readonly description: string;
-        
     }
 
     interface IFileInfo {
@@ -33,5 +34,14 @@ declare namespace BBBackend {
 
     interface ITaskComplete {
         success: boolean;
+    }
+
+    interface IUserInfo {
+      readonly id: string;
+      readonly username: string;
+      readonly firstname: string;
+      readonly surname: string;
+      readonly student: string;
+      readonly email: string;
     }
 }
