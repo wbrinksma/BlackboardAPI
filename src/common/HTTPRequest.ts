@@ -40,4 +40,25 @@ export default class HTTPRequest {
             postRequest.send(formData);
         });
     }
+
+    public static deleteAsync(url: string): Promise<string> {
+        const deleteRequest = new XMLHttpRequest();
+        deleteRequest.open("DELETE", url);
+
+        return new Promise<string>((resolve, reject) => {
+            deleteRequest.onload = (ev: ProgressEvent) => {
+                if (deleteRequest.status === 200) {
+                    resolve(deleteRequest.responseText);
+                } else {
+                    reject(deleteRequest.statusText);
+                }
+            };
+
+            deleteRequest.onerror = () => {
+                reject(deleteRequest.statusText);
+            };
+
+            deleteRequest.send(null);
+        });
+    }
 }

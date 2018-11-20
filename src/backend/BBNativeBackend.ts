@@ -28,7 +28,7 @@ export default class BBNativeBackend extends BBBackend {
 
     /* COURSES */
 
-    public getCourseInformation(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseInformation> {
+    public getCourse(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseInformation> {
         const path = "/learn/api/public/v1/courses/" + parameters.courseId;
         return new Promise((resolve, reject) => {
             HTTPRequest.getAsync(path).then((response) => {
@@ -41,6 +41,15 @@ export default class BBNativeBackend extends BBBackend {
                 };
 
                 resolve(resultObject);
+            });
+        });
+    }
+
+    public deleteCourse(parameters: BBBackend.CourseID): Promise<string> {
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId;
+        return new Promise((resolve, reject) => {
+            HTTPRequest.deleteAsync(path).then((response) => {
+                resolve(response);
             });
         });
     }

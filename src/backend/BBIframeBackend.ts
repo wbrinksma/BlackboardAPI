@@ -23,8 +23,11 @@ export default class BBIframeBackend extends BBBackend {
     public getBlackboardDomain(): string {
         throw new Error("Method not implemented.");
     }
-    public getCourseInformation(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseInformation> {
-        return this.sendMessageThroughConnectionManager("getCourseInformation", parameters);
+    public getCourse(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseInformation> {
+        return this.sendMessageThroughConnectionManager("getCourse", parameters);
+    }
+    public deleteCourse(parameters: BBBackend.CourseID): Promise<string> {
+        return this.sendMessageThroughConnectionManager("deleteCourse", parameters);
     }
     public getCourseContents(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseContent[]> {
         return this.sendMessageThroughConnectionManager("getCourseContents", parameters);

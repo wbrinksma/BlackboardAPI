@@ -22,8 +22,16 @@ export default abstract class BBBackend {
      * @param parameters The parameters to use with this function.
      * @returns A promise with information about the selected course.
      */
-    public abstract getCourseInformation(parameters: BBBackend.CourseID):
+    public abstract getCourse(parameters: BBBackend.CourseID):
         Promise<BBBackend.ICourseInformation>;
+
+        /**
+     * Delete a course.
+     * @param parameters The parameters to use with this function.
+     * @returns A response.
+     */
+    public abstract deleteCourse(parameters: BBBackend.CourseID):
+        Promise<string>;
 
     /**
      * Get contents of a course.

@@ -2,12 +2,13 @@
     <body>
         <h1>BlackboardAPI Test Page</h1>
         <p>Load Enrolled Courses</p>
-        <input type="text" id="uidBox">
+        <input type="text" id="uidBox" value="_114444_1">
         <button onclick="loadEnrolledCourses(document.getElementById('uidBox').value)">Get!</button>
         <p>Load Course</p>
-        <input type="text" id="cidBox">
-        <button onclick="loadCourseInformation(document.getElementById('cidBox').value)">Information</button>
-        <button onclick="loadCourseContents(document.getElementById('cidBox').value)">Contents</button>
+        <input type="text" id="cidBox" value="_20166_1">
+        <button onclick="loadCourse(document.getElementById('cidBox').value)">Get</button>
+        <button onclick="deleteCourse(document.getElementById('cidBox').value)">Delete</button>
+        <button onclick="loadCourseContents(document.getElementById('cidBox').value)">Get Contents</button>
         <script>
             function loadEnrolledCourses(userId) {
                 var user = new BB.BBUser(userId);
@@ -16,9 +17,16 @@
                 })
             }
 
-            function loadCourseInformation(courseId) {
+            function loadCourse(courseId) {
                 var course = new BB.BBCourse(courseId);
-                course.getCourseInformation().then((result) => {
+                course.getCourse().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function deleteCourse(courseId) {
+                var course = new BB.BBCourse(courseId);
+                course.deleteCourse().then((result) => {
                     console.log(result);
                 })
             }

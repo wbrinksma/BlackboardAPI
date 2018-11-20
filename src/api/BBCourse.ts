@@ -14,7 +14,7 @@ export default class BBCourse {
         return this._courseId;
     }
 
-    public getCourseInformation(): Promise<BBBackend.ICourseInformation> {
+    public getCourse(): Promise<BBBackend.ICourseInformation> {
         return new Promise((resolve, reject) => {
             if (this.courseInformation) {
                 resolve(this.courseInformation);
@@ -25,9 +25,21 @@ export default class BBCourse {
                 courseId: this._courseId
             };
 
-            Backend.getBackend().getCourseInformation(parameters).then((information) => {
+            Backend.getBackend().getCourse(parameters).then((information) => {
                 this.courseInformation = information;
                 resolve(this.courseInformation);
+            });
+        });
+    }
+
+    public deleteCourse(): Promise<string> {
+        return new Promise((resolve, reject) => {
+            const parameters: BBBackend.CourseID = {
+                courseId: this._courseId
+            };
+
+            Backend.getBackend().deleteCourse(parameters).then((information) => {
+                resolve(information);
             });
         });
     }
