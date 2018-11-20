@@ -7,8 +7,8 @@
     "compile-api": "tsc -p api.tsconfig.json",
     "compile-common": "tsc -p common.tsconfig.json",
     "compile-backend": "tsc -p backend.tsconfig.json",
+    "build": "webpack --config webpack/webpack.config.js",
     "compile-test": "tsc -p test.tsconfig.json",
-    "debug": "webpack --config webpack/webpack.config.js",
     "test": "jest"
   },
   "author": "wbrinksma",

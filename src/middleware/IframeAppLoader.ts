@@ -17,7 +17,10 @@ export default class IframeAppLoader extends AppLoader {
         this.iframe.style.height = "100%";
         this.iframe.style.border = "0px";
         this.iframe.style.display = "none";
-        doc.body.appendChild(this.iframe);
+
+        const iframeContainer = doc.getElementById("iframeContainer");
+        iframeContainer.appendChild(this.iframe);
+        // doc.body.appendChild(this.iframe);
 
         this.connectionManager = new WindowConnectionManager(this.iframe.contentWindow, backend);
     }

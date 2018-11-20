@@ -1,0 +1,5 @@
+whenever you add an .ts file, it must be registered in the index.ts in the root folder.
+
+All classes that should be imported must be exported
+
+npm run debug
