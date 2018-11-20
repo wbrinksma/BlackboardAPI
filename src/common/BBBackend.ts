@@ -25,12 +25,20 @@ export default abstract class BBBackend {
     public abstract getCourse(parameters: BBBackend.CourseID):
         Promise<BBBackend.ICourseInformation>;
 
-        /**
+    /**
      * Delete a course.
      * @param parameters The parameters to use with this function.
      * @returns A response.
      */
     public abstract deleteCourse(parameters: BBBackend.CourseID):
+        Promise<string>;
+
+    /**
+     * Patch a course.
+     * @param parameters The parameters to use with this function.
+     * @returns A promise with information about the selected course.
+     */
+    public abstract patchCourse(parameters: BBBackend.CourseID):
         Promise<string>;
 
     /**

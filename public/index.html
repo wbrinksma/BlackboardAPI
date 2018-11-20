@@ -8,6 +8,7 @@
         <input type="text" id="cidBox" value="_20166_1">
         <button onclick="loadCourse(document.getElementById('cidBox').value)">Get</button>
         <button onclick="deleteCourse(document.getElementById('cidBox').value)">Delete</button>
+        <button onclick="patchCourse(document.getElementById('cidBox').value)">Patch</button>
         <button onclick="loadCourseContents(document.getElementById('cidBox').value)">Get Contents</button>
         <script>
             function loadEnrolledCourses(userId) {
@@ -27,6 +28,13 @@
             function deleteCourse(courseId) {
                 var course = new BB.BBCourse(courseId);
                 course.deleteCourse().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function patchCourse(courseId) {
+                var course = new BB.BBCourse(courseId);
+                course.patchCourse().then((result) => {
                     console.log(result);
                 })
             }

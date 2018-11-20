@@ -1,7 +1,7 @@
 export default class HTTPRequest {
-    public static getAsync(url: string): Promise<string> {
+    private static asyncRequest(type: string, url: string, formData: FormData = null): Promise<string> {
         const getRequest = new XMLHttpRequest();
-        getRequest.open("GET", url);
+        getRequest.open(type, url);
 
         return new Promise<string>((resolve, reject) => {
             getRequest.onload = (ev: ProgressEvent) => {
@@ -16,49 +16,22 @@ export default class HTTPRequest {
                 reject(getRequest.statusText);
             };
 
-            getRequest.send(null);
+            getRequest.send(formData);
         });
+    }
+    public static getAsync(url: string): Promise<string> {
+        return this.asyncRequest("GET",url);
     }
 
     public static postAsync(url: string, formData: FormData): Promise<string> {
-        const postRequest = new XMLHttpRequest();
-        postRequest.open("POST", url);
-
-        return new Promise<string>((resolve, reject) => {
-            postRequest.onload = (ev: ProgressEvent) => {
-                if (postRequest.status === 200) {
-                    resolve(postRequest.responseText);
-                } else {
-                    reject(postRequest.statusText);
-                }
-            };
-
-            postRequest.onerror = () => {
-                reject(postRequest.statusText);
-            };
-
-            postRequest.send(formData);
-        });
+        return this.asyncRequest("POST",url,formData)
     }
 
     public static deleteAsync(url: string): Promise<string> {
-        const deleteRequest = new XMLHttpRequest();
-        deleteRequest.open("DELETE", url);
+        return this.asyncRequest("DELETE",url);
+    }
 
-        return new Promise<string>((resolve, reject) => {
-            deleteRequest.onload = (ev: ProgressEvent) => {
-                if (deleteRequest.status === 200) {
-                    resolve(deleteRequest.responseText);
-                } else {
-                    reject(deleteRequest.statusText);
-                }
-            };
-
-            deleteRequest.onerror = () => {
-                reject(deleteRequest.statusText);
-            };
-
-            deleteRequest.send(null);
-        });
+    public static patchAsync(url: string, formData: FormData): Promise<string> {
+        return this.asyncRequest("PATCH",url,formData)
     }
 }

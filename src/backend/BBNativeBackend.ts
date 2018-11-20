@@ -54,6 +54,15 @@ export default class BBNativeBackend extends BBBackend {
         });
     }
 
+    public patchCourse(parameters: BBBackend.CourseID): Promise<string> {
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId;
+        return new Promise((resolve, reject) => {
+            HTTPRequest.patchAsync(path,null).then((response) => {
+                resolve(response);
+            });
+        });
+    }
+
     public getCourseContents(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseContent[]> {
         const path = "/learn/api/public/v1/courses/" + parameters.courseId + "/contents";
         return new Promise((resolve, reject) => {

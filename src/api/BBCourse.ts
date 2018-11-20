@@ -44,6 +44,18 @@ export default class BBCourse {
         });
     }
 
+    public patchCourse(): Promise<string> {
+        return new Promise((resolve, reject) => {
+            const parameters: BBBackend.CourseID = {
+                courseId: this._courseId
+            };
+
+            Backend.getBackend().patchCourse(parameters).then((information) => {
+                resolve(information);
+            });
+        });
+    }
+
     public getCourseContents(): Promise<BBBackend.ICourseContent[]> {
         return new Promise((resolve, reject) => {
             if (this.courseContents) {
