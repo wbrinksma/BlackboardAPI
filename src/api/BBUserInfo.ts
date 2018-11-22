@@ -1,7 +1,7 @@
 import Backend from './Backend';
 
 export default class BBUserInfo {
-    private _userName;
+    private _userName: string;
 
     private userInfo: BBBackend.IUserInfo;
     private enrolledCourses: BBBackend.ICourseID[];
@@ -16,7 +16,7 @@ export default class BBUserInfo {
 
     public getUserInfo(): Promise<BBBackend.IUserInfo> {
         return new Promise((resolve, reject) => {
-            if(this.userInfo) {
+            if (this.userInfo) {
                 resolve(this.userInfo);
                 return;
             }

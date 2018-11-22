@@ -61,7 +61,9 @@ export default class BBNativeBackend extends BBBackend {
             HTTPRequest.getAsync(path).then((response) => {
                 const userJson = JSON.parse(response);
 
-                if(userJson.results.length < 1) return;
+                if (userJson.results.length < 1) {
+                  return;
+                }
 
                 const userObject: BBBackend.IUserInfo = {
                   id: userJson.results[0].id,
