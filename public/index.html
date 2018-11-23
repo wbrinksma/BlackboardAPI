@@ -9,19 +9,24 @@
         <button onclick="loadUserInfo(document.getElementById('uiidBox').value)">Userinfo please!</button>
 
         <script>
-            function loadEnrolledCourses(userName) {
-                var user = loadUserInfo(userName);
-                user.getEnrolledCourses().then((result) => {
-                    console.log(result);
-                })
-            }
-
-            function loadUserInfo(userName) {
-                var user = new BB.BBUserInfo(userName);
-                console.log(userName);
+            function loadEnrolledCourses(userId) {
+                var user = new BB.BBUserInfoById(userId);
                 user.getUserInfo().then((result) => {
                     console.log(result);
                 })
+
+                console.log(user.getUserName);
+
+                return user;
+            }
+
+            function loadUserInfo(userName) {
+                var user = new BB.BBUserInfoByUname(userName);
+                user.getUserInfo().then((result) => {
+                    console.log(result);
+                })
+
+                console.log(user.getUserId)
 
                 return user;
             }

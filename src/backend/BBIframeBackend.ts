@@ -35,7 +35,7 @@ export default class BBIframeBackend extends BBBackend {
     public setFileBody(parameters: BBBackend.FileBodyParameter): Promise<BBBackend.ITaskComplete> {
         return this.sendMessageThroughConnectionManager("setFileBody", parameters);
     }
-    public getUserInfo(parameters: BBBackend.UserInfoParameter): Promise<BBBackend.IUserInfo> {
+    public getUserInfo(parameters: BBBackend.UserParameter): Promise<BBBackend.IUserInfo> {
         return this.sendMessageThroughConnectionManager("getUserInfo", parameters);
     }
 

@@ -55,27 +55,48 @@ export default class BBNativeBackend extends BBBackend {
 
     /* USERS */
 
-    public getUserInfo(parameters: BBBackend.UserInfoParameter): Promise<BBBackend.IUserInfo> {
-        const path = "/learn/api/public/v1/users?limit=1&userName=" + parameters.userName;
-        return new Promise((resolve, reject) => {
-            HTTPRequest.getAsync(path).then((response) => {
-                const userJson = JSON.parse(response);
+    public getUserInfo(parameters: BBBackend.UserParameter): Promise<BBBackend.IUserInfo> {
+        if (parameters.userId) {
+          const path = "/learn/api/public/v1/users/" + parameters.userId;
+          return new Promise((resolve, reject) => {
+              HTTPRequest.getAsync(path).then((response) => {
+                  const userJson = JSON.parse(response);
 
-                if (userJson.results.length < 1) {
-                  return;
-                }
+                  const userObject: BBBackend.IUserInfo = {
+                      id: userJson.id,
+                      username: userJson.userName,
+                      firstname: userJson.name.given,
+                      surname: userJson.name.family,
+                      student: userJson.studentId,
+                      email: userJson.contact.email
+                  };
 
-                const userObject: BBBackend.IUserInfo = {
-                  id: userJson.results[0].id,
-                  username: userJson.results[0].userName,
-                  firstname: userJson.results[0].name.given,
-                  surname: userJson.results[0].name.family,
-                  student: userJson.results[0].studentId,
-                  email: userJson.results[0].contact.email
-                };
-
-                resolve(userObject);
-            });
+                  resolve(userObject);
+              });
         });
+        } else if (parameters.userName) {
+            const path = "/learn/api/public/v1/users?limit=1&userName=" + parameters.userName;
+            return new Promise((resolve, reject) => {
+                HTTPRequest.getAsync(path).then((response) => {
+                    const userJson = JSON.parse(response);
+
+                    if (userJson.results.length < 1) {
+                        reject();
+                        return;
+                    }
+
+                    const userObject: BBBackend.IUserInfo = {
+                        id: userJson.results[0].id,
+                        username: userJson.results[0].userName,
+                        firstname: userJson.results[0].name.given,
+                        surname: userJson.results[0].name.family,
+                        student: userJson.results[0].studentId,
+                        email: userJson.results[0].contact.email
+                    };
+
+                    resolve(userObject);
+                });
+            });
+        }
     }
 }
