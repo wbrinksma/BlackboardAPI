@@ -2,7 +2,7 @@ import Backend from './Backend';
 
 /**
  * An object for referring to users. Can only be constructed by
- * derived classes {@link BBUserInfoById} and {@link BBUserInfoByUname}.
+ * derived classes {@link BBUserInfoById} and {@link BBUserInfoByUsername}.
  */
 export abstract class BBUserInfo {
     protected _userName: string;
@@ -98,7 +98,7 @@ export abstract class BBUserInfo {
 /**
  * Should be treated as {@link BBUserInfo}.
  * @extends BBUserInfo
- * @see BBUserInfoByUname
+ * @see BBUserInfoByUsername
  */
 export class BBUserInfoById extends BBUserInfo {
   /**
@@ -117,11 +117,11 @@ export class BBUserInfoById extends BBUserInfo {
  * @extends BBUserInfo
  * @see BBUserInfoById
  */
-export class BBUserInfoByUname extends BBUserInfo {
+export class BBUserInfoByUsername extends BBUserInfo {
   /**
    * @constructor
    * @param userName The user's name.
-   * @example let user = new BBUserInfoByUname("gast0000");
+   * @example let user = new BBUserInfoByUsername("guest0000");
    */
   constructor(userName: string) {
     super();

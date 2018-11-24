@@ -52,6 +52,5 @@ export default abstract class BBBackend {
      * @param parameters The parameters to use with this function.
      * @returns A promise with the user information of specified username.
      */
-    public abstract getUserInfo(
-      parameters: BBBackend.UserParameter): Promise<BBBackend.IUserInfo>;
+    public abstract getUserInfo(parameters: BBBackend.UserParameter): Promise<BBBackend.IUserInfo>;
 }

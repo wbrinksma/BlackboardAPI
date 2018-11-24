@@ -1,15 +1,16 @@
 <html>
     <body>
         <h1>BlackboardAPI Test Page</h1>
-        <p>Load Enrolled Courses</p>
+        <h2>Get user</h2>
+        <p>Search by user ID</p>
         <input type="text" id="idBox">
-        <button onclick="loadEnrolledCourses(document.getElementById('idBox').value)">Test!</button>
-        <p>Get user info</p>
-        <input type="text" id="uiidBox">
-        <button onclick="loadUserInfo(document.getElementById('uiidBox').value)">Userinfo please!</button>
+        <button onclick="loadUserByUserId(document.getElementById('idBox').value)">Submit</button>
+        <p>Search by user name</p>
+        <input type="text" id="usernameBox">
+        <button onclick="loadUserByUserName(document.getElementById('usernameBox').value)">Submit</button>
 
         <script>
-            function loadEnrolledCourses(userId) {
+            function loadUserByUserId(userId) {
                 var user = new BB.BBUserInfoById(userId);
                 user.getUserInfo().then((result) => {
                     console.log(result);
@@ -20,8 +21,8 @@
                 return user;
             }
 
-            function loadUserInfo(userName) {
-                var user = new BB.BBUserInfoByUname(userName);
+            function loadUserByUserName(userName) {
+                var user = new BB.BBUserInfoByUsername(userName);
                 user.getUserInfo().then((result) => {
                     console.log(result);
                 })
