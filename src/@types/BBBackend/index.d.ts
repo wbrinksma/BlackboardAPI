@@ -2,6 +2,8 @@ declare namespace BBBackend {
     type UserID = {"userId": string};
     type Offset = {"offset": number};
     type CourseID = {"courseId": string};
+    type UserName = {"userName": string};
+    type UserParameter = {"userId"?: string, "userName"?: string};
 
     type EnrolledCoursesParameter = UserID & Offset;
 
@@ -29,7 +31,13 @@ declare namespace BBBackend {
     interface ICourseContent {
         readonly id: string;
         readonly title: string;
-        readonly position: number;   
+        readonly position: number;
+    }
+
+    interface ICourseChild {
+        readonly id: string;
+        readonly datasourceId: string;
+        readonly created: string;
     }
 
     interface IFileInfo {
@@ -38,5 +46,14 @@ declare namespace BBBackend {
 
     interface ITaskComplete {
         success: boolean;
+    }
+
+    interface IUserInfo {
+      readonly id: string;
+      readonly username: string;
+      readonly firstname: string;
+      readonly surname: string;
+      readonly student: string;
+      readonly email: string;
     }
 }

@@ -5,6 +5,7 @@ export default class BBCourse {
 
     private courseInformation: BBBackend.ICourseInformation;
     private courseContents: BBBackend.ICourseContent[];
+    private courseChildren: BBBackend.ICourseChild[];
 
     constructor(courseId: string) {
         this._courseId = courseId;
@@ -70,6 +71,24 @@ export default class BBCourse {
             Backend.getBackend().getCourseContents(parameters).then((contents) => {
                 this.courseContents = contents;
                 resolve(this.courseContents);
+            });
+        });
+    }
+
+    public getCourseChildren(): Promise<BBBackend.ICourseChild[]> {
+        return new Promise((resolve, reject) => {
+            if (this.courseChildren) {
+                resolve(this.courseChildren);
+                return;
+            }
+
+            const parameters: BBBackend.CourseID = {
+                courseId: this._courseId
+            };
+
+            Backend.getBackend().getCourseChildren(parameters).then((children) => {
+                this.courseChildren = children;
+                resolve(this.courseChildren);
             });
         });
     }

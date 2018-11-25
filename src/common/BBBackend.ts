@@ -50,6 +50,15 @@ export default abstract class BBBackend {
     Promise<BBBackend.ICourseContent[]>;
 
     /**
+     * Get children of a course.
+     * @param parameters The parameters to use with this function.
+     * @returns A promise with contents of the selected course.
+     */
+    public abstract getCourseChildren(parameters: BBBackend.CourseID):
+    Promise<BBBackend.ICourseChild[]>;
+
+
+    /**
      * Use this function to send an email to one or more recipients. Be aware that the sender will also receive
      * a copy of the email. You can only send email through a course and its users.
      * @param parameters The parameters to use with this function.
@@ -70,4 +79,11 @@ export default abstract class BBBackend {
      * @returns A promise which indicates when the task is complete.
      */
     public abstract setFileBody(parameters: BBBackend.FileBodyParameter): Promise<BBBackend.ITaskComplete>;
+
+    /**
+     * Get info about a specific user. Use 'BBUserInfo' for a more OOP approach.
+     * @param parameters The parameters to use with this function.
+     * @returns A promise with the user information of specified username.
+     */
+    public abstract getUserInfo(parameters: BBBackend.UserParameter): Promise<BBBackend.IUserInfo>;
 }

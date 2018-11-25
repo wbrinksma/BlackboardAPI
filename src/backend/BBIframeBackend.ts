@@ -35,6 +35,9 @@ export default class BBIframeBackend extends BBBackend {
     public getCourseContents(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseContent[]> {
         return this.sendMessageThroughConnectionManager("getCourseContents", parameters);
     }
+    public getCourseChildren(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseChild[]> {
+        return this.sendMessageThroughConnectionManager("getCourseChildren", parameters);
+    }
     public sendMail(parameters: BBBackend.SendMailParameter): Promise<BBBackend.ITaskComplete> {
         return this.sendMessageThroughConnectionManager("sendMail", parameters);
     }
@@ -43,6 +46,9 @@ export default class BBIframeBackend extends BBBackend {
     }
     public setFileBody(parameters: BBBackend.FileBodyParameter): Promise<BBBackend.ITaskComplete> {
         return this.sendMessageThroughConnectionManager("setFileBody", parameters);
+    }
+    public getUserInfo(parameters: BBBackend.UserParameter): Promise<BBBackend.IUserInfo> {
+        return this.sendMessageThroughConnectionManager("getUserInfo", parameters);
     }
 
     private checkIfInsideIframe(): boolean {
