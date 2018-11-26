@@ -2,7 +2,7 @@
 
 [![Build Status](https://dev.azure.com/BrWProjects/BlackboardAPI%20Builds/_apis/build/status/BlackboardAPI%20Builds-CI)](https://dev.azure.com/BrWProjects/BlackboardAPI%20Builds/_build/latest?definitionId=5)
 
-Master
+Master  
 [![Build status](https://dev.azure.com/BBReverseEngineering/CI%20Environment/_apis/build/status/CI%20Environment-CI%20Master?branchName=master)](https://dev.azure.com/BBReverseEngineering/CI%20Environment/_build/latest?definitionId=2)
 
 An API to communicate with a Blackboard server. This can be used to build apps on the Blackboard platform that can either be hosten on-site or off-site through the use of special loaders.
