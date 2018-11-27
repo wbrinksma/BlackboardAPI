@@ -61,8 +61,41 @@ export default abstract class BBBackend {
      * @param parameters The parameters to use with this function.
      * @returns A promise with the content of the selected course.
      */
-    public abstract getCourseContent(parameters: any):
+    public abstract getCourseContent(parameters: BBBackend.CourseID):
     Promise<BBBackend.ICourseContent>;
+
+
+    /**
+     * Create new course content.
+     * @param parameters The parameters to use with this function.
+     * @returns A response.
+     */
+    public abstract postCourseContent(parameters: BBBackend.CourseID):
+        Promise<string>;
+
+    /**
+     * Delete course content.
+     * @param parameters The parameters to use with this function.
+     * @returns A response.
+     */
+    public abstract deleteCourseContent(parameters: BBBackend.CourseContentParameter):
+    Promise<string>;
+
+    /**
+     * Patch course content.
+     * @param parameters The parameters to use with this function.
+     * @returns A response.
+     */
+    public abstract patchCourseContent(parameters: BBBackend.CourseContentParameter):
+    Promise<string>;
+
+    /**
+     * Get children of course content.
+     * @param parameters The parameters to use with this function.
+     * @returns A promise with children of the selected course.
+     */
+    public abstract getCourseContentChildren(parameters: BBBackend.CourseContentParameter):
+    Promise<BBBackend.ICourseContent[]>;
 
     /**
      * Get children of a course.

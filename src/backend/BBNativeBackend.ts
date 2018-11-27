@@ -119,30 +119,35 @@ export default class BBNativeBackend extends BBBackend {
         });
     }
 
-    public getCourseChildren(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseChild[]> {
-        const path = "/learn/api/public/v1/courses/" + parameters.courseId + "/children";
+    public postCourseContent(parameters: BBBackend.CourseID): Promise<string> {
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId + '/contents'
         return new Promise((resolve, reject) => {
-            HTTPRequest.getAsync(path).then((response) => {
-                const allCourseChildren = JSON.parse(response);
-                const responseInfo = new Array<BBBackend.ICourseChild>();
+            HTTPRequest.postAsync(path, null).then((response) => {
+                resolve(response);
+            });
+        });
+    }
 
-                allCourseChildren.results.forEach((result) => {
-                    const resultObject: BBBackend.ICourseChild = {
-                        id: result.id,
-                        datasourceId: result.datasourceId,
-                        created: result.created
-                    };
+    public deleteCourseContent(parameters: BBBackend.CourseContentParameter): Promise<string> {
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId + '/contents/' + parameters.contentId
+        return new Promise((resolve, reject) => {
+            HTTPRequest.deleteAsync(path).then((response) => {
+                resolve(response);
+            });
+        });
+    }
 
-                    responseInfo.push(resultObject);
-                });
-
-                resolve(responseInfo);
+    public patchCourseContent(parameters: BBBackend.CourseContentParameter): Promise<string> {
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId + "/contents/" + parameters.contentId;
+        return new Promise((resolve, reject) => {
+            HTTPRequest.patchAsync(path, null).then((response) => {
+                resolve(response);
             });
         });
     }
 
     public getCourseContent(parameters: BBBackend.CourseContentParameter): Promise<BBBackend.ICourseContent> {
-        const path = "/learn/api/public/v1/courses/" + parameters.courseId + "/content/" + parameters.contentId;
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId + "/contents/" + parameters.contentId;
         return new Promise((resolve, reject) => {
             HTTPRequest.getAsync(path).then((response) => {
                 const result = JSON.parse(response);
@@ -163,6 +168,59 @@ export default class BBNativeBackend extends BBBackend {
                 };
 
                 resolve(resultObject);
+            });
+        });
+    }
+
+    public getCourseContentChildren(parameters: BBBackend.CourseContentParameter): Promise<BBBackend.ICourseContent[]> {
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId + "/contents/" + parameters.contentId + '/children';
+        return new Promise((resolve, reject) => {
+            HTTPRequest.getAsync(path).then((response) => {
+                const allCourseContents = JSON.parse(response);
+                const responseInfo = new Array<BBBackend.ICourseContent>();
+
+                allCourseContents.results.forEach((result) => {
+                    const resultObject: BBBackend.ICourseContent = {
+                        id: result.id,
+                        parentId: result.parentId,
+                        title: result.title,
+                        body: result.body,
+                        description: result.description,
+                        created: result.created,
+                        position: result.position,
+                        hasChildren: result.hasChildren,
+                        hasGrafebookColumns: result.hasGrafebookColumns,
+                        hasAssociatedGroups: result.hasAssociatedGroups,
+                        available: result.availability.available,
+                        allowGuests: result.availability.allowGuests
+                    };
+
+                    responseInfo.push(resultObject);
+                });
+
+                resolve(responseInfo);
+            });
+        });
+    }
+
+    public getCourseChildren(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseChild[]> {
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId + "/children";
+        return new Promise((resolve, reject) => {
+            HTTPRequest.getAsync(path).then((response) => {
+                const allCourseChildren = JSON.parse(response);
+                const responseInfo = new Array<BBBackend.ICourseChild>();
+
+                allCourseChildren.results.forEach((result) => {
+                    const resultObject: BBBackend.ICourseChild = {
+                        id: result.id,
+                        datasourceId: result.datasourceId,
+                        created: result.created
+                    };
+
+                    responseInfo.push(resultObject);
+                });
+
+                resolve(responseInfo);
             });
         });
     }

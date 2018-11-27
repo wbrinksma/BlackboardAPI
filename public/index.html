@@ -18,8 +18,12 @@
         <button onclick="loadCourseChildren(document.getElementById('cidBox').value)">Get All</button>
         <p>Load Contents</p>
         <button onclick="loadCourseContents(document.getElementById('cidBox').value)">Get All</button>
+        <button onclick="postCourseContent(document.getElementById('cidBox').value)">Post</button>
         <input type="text" id="contentBox" value="_4430884_1">
         <button onclick="loadCourseContent(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Get</button>
+        <button onclick="deleteCourseContent(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Delete</button>
+        <button onclick="patchCourseContent(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Patch</button>
+        <button onclick="loadCourseContentChildren(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Get Children</button>
         <script>
             var user = null;
             var course = null;
@@ -81,9 +85,23 @@
                 })
             }
 
-            function loadCourseChildren(courseId) {
+            function postCourseContent(courseId) {
                 if(course == null) course = new BB.BBCourse(courseId);
-                course.getCourseChildren().then((result) => {
+                course.postCourseContent().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function deleteCourseContent(courseId, contentId) {
+                if(course == null) course = new BB.BBCourse(courseId);
+                course.deleteCourseContent(contentId).then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function patchCourseContent(courseId, contentId) {
+                if(course == null) course = new BB.BBCourse(courseId);
+                course.patchCourseContent(contentId).then((result) => {
                     console.log(result);
                 })
             }
@@ -91,6 +109,20 @@
             function loadCourseContent(courseId, contentId) {
                 if(course == null) course = new BB.BBCourse(courseId);
                 course.getCourseContent(contentId).then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function loadCourseContentChildren(courseId, contentId) {
+                if(course == null) course = new BB.BBCourse(courseId);
+                course.getCourseContentChildren(contentId).then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function loadCourseChildren(courseId) {
+                if(course == null) course = new BB.BBCourse(courseId);
+                course.getCourseChildren().then((result) => {
                     console.log(result);
                 })
             }

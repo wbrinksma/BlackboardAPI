@@ -38,8 +38,20 @@ export default class BBIframeBackend extends BBBackend {
     public getCourseContents(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseContent[]> {
         return this.sendMessageThroughConnectionManager("getCourseContents", parameters);
     }
-    public getCourseContent(parameters: any): Promise<BBBackend.ICourseContent> {
+    public getCourseContent(parameters: BBBackend.CourseContentParameter): Promise<BBBackend.ICourseContent> {
         return this.sendMessageThroughConnectionManager("getCourseContent", parameters);
+    }
+    public getCourseContentChildren(parameters: BBBackend.CourseContentParameter): Promise<BBBackend.ICourseContent[]> {
+        return this.sendMessageThroughConnectionManager("getCourseContentChildren", parameters);
+    }
+    public postCourseContent(parameters: BBBackend.CourseID): Promise<string> {
+        return this.sendMessageThroughConnectionManager("postCourseContent", parameters);
+    }
+    public deleteCourseContent(parameters: BBBackend.CourseContentParameter): Promise<string> {
+        return this.sendMessageThroughConnectionManager("deleteCourseContent", parameters);
+    }
+    public patchCourseContent(parameters: BBBackend.CourseContentParameter): Promise<string> {
+        return this.sendMessageThroughConnectionManager("patchCourseContent", parameters);
     }
     public getCourseChildren(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseChild[]> {
         return this.sendMessageThroughConnectionManager("getCourseChildren", parameters);

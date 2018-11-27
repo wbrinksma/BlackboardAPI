@@ -103,4 +103,55 @@ export default class BBCourse {
             });
         });
     }
+
+    public postCourseContent(): Promise<string> {
+        return new Promise((resolve, reject) => {
+
+            Backend.getBackend().postCourseContent(this._courseId).then((course) => {
+                resolve(course);
+            });
+        });
+    }
+
+    public deleteCourseContent(contentId: string): Promise<string> {
+        return new Promise((resolve, reject) => {
+
+            const parameters: BBBackend.CourseContentParameter = {
+                courseId: this._courseId.courseId,
+                contentId: contentId
+            };
+
+            Backend.getBackend().deleteCourseContent(parameters).then((course) => {
+                resolve(course);
+            });
+        });
+    }
+
+    public patchCourseContent(contentId: string): Promise<string> {
+        return new Promise((resolve, reject) => {
+
+            const parameters: BBBackend.CourseContentParameter = {
+                courseId: this._courseId.courseId,
+                contentId: contentId
+            };
+
+            Backend.getBackend().patchCourseContent(parameters).then((course) => {
+                resolve(course);
+            });
+        });
+    }
+
+    public getCourseContentChildren(contentId: string): Promise<BBBackend.ICourseContent[]> {
+        return new Promise((resolve, reject) => {
+
+            const parameters: BBBackend.CourseContentParameter = {
+                courseId: this._courseId.courseId,
+                contentId: contentId
+            };
+
+            Backend.getBackend().getCourseContentChildren(parameters).then((course) => {
+                resolve(course);
+            });
+        });
+    }
 }
