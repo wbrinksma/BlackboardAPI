@@ -26,6 +26,9 @@ export default class BBIframeBackend extends BBBackend {
     public getCourse(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseInformation> {
         return this.sendMessageThroughConnectionManager("getCourse", parameters);
     }
+    public postCourse(): Promise<string> {
+        return this.sendMessageThroughConnectionManager("postCourse");
+    }
     public deleteCourse(parameters: BBBackend.CourseID): Promise<string> {
         return this.sendMessageThroughConnectionManager("deleteCourse", parameters);
     }
@@ -34,6 +37,9 @@ export default class BBIframeBackend extends BBBackend {
     }
     public getCourseContents(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseContent[]> {
         return this.sendMessageThroughConnectionManager("getCourseContents", parameters);
+    }
+    public getCourseContent(parameters: any): Promise<BBBackend.ICourseContent> {
+        return this.sendMessageThroughConnectionManager("getCourseContent", parameters);
     }
     public getCourseChildren(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseChild[]> {
         return this.sendMessageThroughConnectionManager("getCourseChildren", parameters);
@@ -67,7 +73,7 @@ export default class BBIframeBackend extends BBBackend {
      * @param methodSignature The signature (name) of the method you are trying to call on the top frame
      * @param parameters The parameters used with the function to send.
      */
-    private sendMessageThroughConnectionManager(methodSignature: string, parameters: any): Promise<any> {
+    private sendMessageThroughConnectionManager(methodSignature: string, parameters: any = null): Promise<any> {
         console.log(parameters);
         return new Promise((resolve, reject) => {
             this.connectionManager.sendMessage(new WindowFunctionCall(methodSignature, parameters), (returnObject) => {

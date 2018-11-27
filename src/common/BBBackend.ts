@@ -26,6 +26,13 @@ export default abstract class BBBackend {
         Promise<BBBackend.ICourseInformation>;
 
     /**
+     * Create a new course.
+     * @returns A response.
+     */
+    public abstract postCourse():
+        Promise<string>;
+
+    /**
      * Delete a course.
      * @param parameters The parameters to use with this function.
      * @returns A response.
@@ -50,13 +57,20 @@ export default abstract class BBBackend {
     Promise<BBBackend.ICourseContent[]>;
 
     /**
+     * Get a content of a course.
+     * @param parameters The parameters to use with this function.
+     * @returns A promise with the content of the selected course.
+     */
+    public abstract getCourseContent(parameters: any):
+    Promise<BBBackend.ICourseContent>;
+
+    /**
      * Get children of a course.
      * @param parameters The parameters to use with this function.
-     * @returns A promise with contents of the selected course.
+     * @returns A promise with children of the selected course.
      */
     public abstract getCourseChildren(parameters: BBBackend.CourseID):
     Promise<BBBackend.ICourseChild[]>;
-
 
     /**
      * Use this function to send an email to one or more recipients. Be aware that the sender will also receive

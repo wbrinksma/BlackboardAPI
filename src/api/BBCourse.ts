@@ -1,18 +1,18 @@
 import Backend from './Backend';
+import { BBBackend } from '../common';
 
 export default class BBCourse {
-    private _courseId: string;
-
+    private _courseId: BBBackend.CourseID;
     private courseInformation: BBBackend.ICourseInformation;
     private courseContents: BBBackend.ICourseContent[];
     private courseChildren: BBBackend.ICourseChild[];
 
-    constructor(courseId: string) {
-        this._courseId = courseId;
+    constructor(courseId: string = null) {
+        this._courseId = {courseId};
     }
 
     get courseId(): string {
-        return this._courseId;
+        return this.courseInformation.courseId;
     }
 
     public getCourse(): Promise<BBBackend.ICourseInformation> {
@@ -22,24 +22,25 @@ export default class BBCourse {
                 return;
             }
 
-            const parameters: BBBackend.CourseID = {
-                courseId: this._courseId
-            };
-
-            Backend.getBackend().getCourse(parameters).then((information) => {
+            Backend.getBackend().getCourse(this._courseId).then((information) => {
                 this.courseInformation = information;
                 resolve(this.courseInformation);
             });
         });
     }
 
+    public postCourse(): Promise<string> {
+        return new Promise((resolve, reject) => {
+
+            Backend.getBackend().postCourse().then((course) => {
+                resolve(course);
+            });
+        });
+    }
+
     public deleteCourse(): Promise<string> {
         return new Promise((resolve, reject) => {
-            const parameters: BBBackend.CourseID = {
-                courseId: this._courseId
-            };
-
-            Backend.getBackend().deleteCourse(parameters).then((information) => {
+            Backend.getBackend().deleteCourse(this._courseId).then((information) => {
                 resolve(information);
             });
         });
@@ -47,11 +48,7 @@ export default class BBCourse {
 
     public patchCourse(): Promise<string> {
         return new Promise((resolve, reject) => {
-            const parameters: BBBackend.CourseID = {
-                courseId: this._courseId
-            };
-
-            Backend.getBackend().patchCourse(parameters).then((information) => {
+            Backend.getBackend().patchCourse(this._courseId).then((information) => {
                 resolve(information);
             });
         });
@@ -64,11 +61,7 @@ export default class BBCourse {
                 return;
             }
 
-            const parameters: BBBackend.CourseID = {
-                courseId: this._courseId
-            };
-
-            Backend.getBackend().getCourseContents(parameters).then((contents) => {
+            Backend.getBackend().getCourseContents(this._courseId).then((contents) => {
                 this.courseContents = contents;
                 resolve(this.courseContents);
             });
@@ -82,13 +75,31 @@ export default class BBCourse {
                 return;
             }
 
-            const parameters: BBBackend.CourseID = {
-                courseId: this._courseId
-            };
-
-            Backend.getBackend().getCourseChildren(parameters).then((children) => {
+            Backend.getBackend().getCourseChildren(this._courseId).then((children) => {
                 this.courseChildren = children;
                 resolve(this.courseChildren);
+            });
+        });
+    }
+
+    public getCourseContent(contentId: string): Promise<BBBackend.ICourseContent> {
+        return new Promise((resolve, reject) => {
+            if (this.courseContents) {
+                this.courseContents.forEach(element => {
+                    if(element.id == contentId){
+                        resolve(element);
+                        return;
+                    }
+                });
+            }
+
+            const parameters: BBBackend.CourseContentParameter = {
+                courseId: this._courseId.courseId,
+                contentId: contentId
+            };
+
+            Backend.getBackend().getCourseContent(parameters).then((child) => {
+                resolve(child);
             });
         });
     }

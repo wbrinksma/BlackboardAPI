@@ -36,11 +36,36 @@ export default class BBNativeBackend extends BBBackend {
 
                 const resultObject: BBBackend.ICourseInformation = {
                     id: courseInformation.courseId,
+                    uuid: courseInformation.uuid,
+                    externalId: courseInformation.externalId,
+                    dataSourceId: courseInformation.dataSourceId,
+                    courseId: courseInformation.courseId,
                     name: courseInformation.name,
-                    description: courseInformation.description
+                    description: courseInformation.description,
+                    created: courseInformation.created,
+                    organization: courseInformation.organization,
+                    ultraStatus: courseInformation.ultraStatus,
+                    allowGuests: courseInformation.allowGuests,
+                    readOnly: courseInformation.readOnly,
+                    available: courseInformation.availability.available,
+                    duration: courseInformation.availability.duration.type,
+                    enrollment: courseInformation.enrollment.type,
+                    accessCode: courseInformation.enrollment.accessCode,
+                    locale: courseInformation.locale.force,
+                    hasChildren: courseInformation.hasChildren,
+                    parentId: courseInformation.parentId
                 };
 
                 resolve(resultObject);
+            });
+        });
+    }
+
+    public postCourse(): Promise<string> {
+        const path = "/learn/api/public/v1/courses/"
+        return new Promise((resolve, reject) => {
+            HTTPRequest.postAsync(path, null).then((response) => {
+                resolve(response);
             });
         });
     }
@@ -73,8 +98,17 @@ export default class BBNativeBackend extends BBBackend {
                 allCourseContents.results.forEach((result) => {
                     const resultObject: BBBackend.ICourseContent = {
                         id: result.id,
+                        parentId: result.parentId,
                         title: result.title,
-                        position: result.position
+                        body: result.body,
+                        description: result.description,
+                        created: result.created,
+                        position: result.position,
+                        hasChildren: result.hasChildren,
+                        hasGrafebookColumns: result.hasGrafebookColumns,
+                        hasAssociatedGroups: result.hasAssociatedGroups,
+                        available: result.availability.available,
+                        allowGuests: result.availability.allowGuests
                     };
 
                     responseInfo.push(resultObject);
@@ -103,6 +137,32 @@ export default class BBNativeBackend extends BBBackend {
                 });
 
                 resolve(responseInfo);
+            });
+        });
+    }
+
+    public getCourseContent(parameters: BBBackend.CourseContentParameter): Promise<BBBackend.ICourseContent> {
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId + "/content/" + parameters.contentId;
+        return new Promise((resolve, reject) => {
+            HTTPRequest.getAsync(path).then((response) => {
+                const result = JSON.parse(response);
+
+                const resultObject: BBBackend.ICourseContent = {
+                    id: result.id,
+                    parentId: result.parentId,
+                    title: result.title,
+                    body: result.body,
+                    description: result.description,
+                    created: result.created,
+                    position: result.position,
+                    hasChildren: result.hasChildren,
+                    hasGrafebookColumns: result.hasGrafebookColumns,
+                    hasAssociatedGroups: result.hasAssociatedGroups,
+                    available: result.availability.available,
+                    allowGuests: result.availability.allowGuests
+                };
+
+                resolve(resultObject);
             });
         });
     }
