@@ -1,6 +1,7 @@
 <html>
     <body>
         <h1>BlackboardAPI Test Page</h1>
+
         <h2>Get user</h2>
         <p>Search by user ID</p>
         <input type="text" id="idBox">
@@ -8,6 +9,11 @@
         <p>Search by user name</p>
         <input type="text" id="usernameBox">
         <button onclick="loadUserByUserName(document.getElementById('usernameBox').value)">Submit</button>
+
+        <h2>Get groups</h2>
+        <p>Get groups by course ID</p>
+        <input type="text" id="groupsBox">
+        <button onclick="loadGroupsByCourseId(document.getElementById('groupsBox').value)">Submit</button>
 
         <script>
             function loadUserByUserId(userId) {
@@ -30,6 +36,15 @@
                 console.log(user.getUserId)
 
                 return user;
+            }
+
+            function loadGroupsByCourseId(courseId) {
+                var groups = new BB.BBGroup(courseId);
+                groups.getGroups().then((result) => {
+                      console.log(result);
+                })
+
+                return groups;
             }
 
             window.onload = () => {
