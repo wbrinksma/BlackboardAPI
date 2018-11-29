@@ -5,6 +5,12 @@
 Master  
 [![Build status](https://dev.azure.com/BBReverseEngineering/CI%20Environment/_apis/build/status/CI%20Environment-CI%20Master?branchName=master)](https://dev.azure.com/BBReverseEngineering/CI%20Environment/_build/latest?definitionId=2)
 
+Jan  
+[![Build status](https://dev.azure.com/BBReverseEngineering/CI%20Environment/_apis/build/status/CI%20Environment-CI%20Jan)](https://dev.azure.com/BBReverseEngineering/CI%20Environment/_build/latest?definitionId=3)
+
+Klaas Skelte  
+[![Build status](https://dev.azure.com/BBReverseEngineering/CI%20Environment/_apis/build/status/CI%20Environment-CI%20KS)](https://dev.azure.com/BBReverseEngineering/CI%20Environment/_build/latest?definitionId=4)
+
 An API to communicate with a Blackboard server. This can be used to build apps on the Blackboard platform that can either be hosten on-site or off-site through the use of special loaders.
 
 This project is still in its infancy, meaning that it will not work fully until a stable release is published.
