@@ -8,7 +8,7 @@ export default class BBNativeBackend extends BBBackend {
     /* COURSES */
     public getEnrolledCourses(parameters: BBBackend.EnrolledCoursesParameter): Promise<BBBackend.ICourseID[]> {
         const path = "/learn/api/public/v1/users/" + parameters.userId + "/courses?offset=" + parameters.offset;
-        console.log(path)
+        console.log(path);
         return new Promise((resolve, reject) => {
             HTTPRequest.getAsync(path).then((response) => {
                 const allCourseInformation = JSON.parse(response);
@@ -34,9 +34,9 @@ export default class BBNativeBackend extends BBBackend {
                 const courseInformation = JSON.parse(response);
 
                 const resultObject: BBBackend.ICourseInformation = {
+                    description: courseInformation.description,
                     id: courseInformation.courseId,
-                    name: courseInformation.name,
-                    description: courseInformation.description
+                    name: courseInformation.name
                 };
 
                 resolve(resultObject);
@@ -63,12 +63,12 @@ export default class BBNativeBackend extends BBBackend {
                   const userJson = JSON.parse(response);
 
                   const userObject: BBBackend.IUserInfo = {
-                      id: userJson.id,
-                      username: userJson.userName,
+                      email: userJson.contact.email,
                       firstname: userJson.name.given,
-                      surname: userJson.name.family,
+                      id: userJson.id,
                       student: userJson.studentId,
-                      email: userJson.contact.email
+                      surname: userJson.name.family,
+                      username: userJson.userName
                   };
 
                   resolve(userObject);
@@ -86,12 +86,12 @@ export default class BBNativeBackend extends BBBackend {
                     }
 
                     const userObject: BBBackend.IUserInfo = {
-                        id: userJson.results[0].id,
-                        username: userJson.results[0].userName,
+                        email: userJson.results[0].contact.email,
                         firstname: userJson.results[0].name.given,
-                        surname: userJson.results[0].name.family,
+                        id: userJson.results[0].id,
                         student: userJson.results[0].studentId,
-                        email: userJson.results[0].contact.email
+                        surname: userJson.results[0].name.family,
+                        username: userJson.results[0].userName
                     };
 
                     resolve(userObject);

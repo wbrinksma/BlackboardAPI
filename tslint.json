@@ -8,6 +8,7 @@
         "interface-over-type-literal": false,
         "quotemark": false,
         "member-ordering": false,
+        "no-console": false,
         "variable-name": [true, "allow-leading-underscore"],
         "trailing-comma": false
     },
