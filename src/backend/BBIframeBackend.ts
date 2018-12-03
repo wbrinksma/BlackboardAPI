@@ -47,6 +47,9 @@ export default class BBIframeBackend extends BBBackend {
     public postCourseContent(parameters: BBBackend.CourseID): Promise<string> {
         return this.sendMessageThroughConnectionManager("postCourseContent", parameters);
     }
+    public postCourseContentChildren(parameters: BBBackend.CourseContentParameter): Promise<string> {
+        return this.sendMessageThroughConnectionManager("postCourseContentChildren", parameters);
+    }
     public deleteCourseContent(parameters: BBBackend.CourseContentParameter): Promise<string> {
         return this.sendMessageThroughConnectionManager("deleteCourseContent", parameters);
     }

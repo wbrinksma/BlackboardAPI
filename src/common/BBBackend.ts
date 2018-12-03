@@ -98,6 +98,14 @@ export default abstract class BBBackend {
     Promise<BBBackend.ICourseContent[]>;
 
     /**
+     * Createn children for course content.
+     * @param parameters The parameters to use with this function.
+     * @returns A response.
+     */
+    public abstract postCourseContentChildren(parameters: BBBackend.CourseContentParameter):
+    Promise<string>;
+
+    /**
      * Get children of a course.
      * @param parameters The parameters to use with this function.
      * @returns A promise with children of the selected course.

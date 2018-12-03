@@ -95,7 +95,7 @@ export default class BBCourse {
 
             const parameters: BBBackend.CourseContentParameter = {
                 courseId: this._courseId.courseId,
-                contentId: contentId
+                contentId
             };
 
             Backend.getBackend().getCourseContent(parameters).then((child) => {
@@ -118,7 +118,7 @@ export default class BBCourse {
 
             const parameters: BBBackend.CourseContentParameter = {
                 courseId: this._courseId.courseId,
-                contentId: contentId
+                contentId
             };
 
             Backend.getBackend().deleteCourseContent(parameters).then((course) => {
@@ -132,7 +132,7 @@ export default class BBCourse {
 
             const parameters: BBBackend.CourseContentParameter = {
                 courseId: this._courseId.courseId,
-                contentId: contentId
+                contentId
             };
 
             Backend.getBackend().patchCourseContent(parameters).then((course) => {
@@ -146,10 +146,24 @@ export default class BBCourse {
 
             const parameters: BBBackend.CourseContentParameter = {
                 courseId: this._courseId.courseId,
-                contentId: contentId
+                contentId
             };
 
             Backend.getBackend().getCourseContentChildren(parameters).then((course) => {
+                resolve(course);
+            });
+        });
+    }
+
+    public postCourseContentChildren(contentId: string): Promise<string> {
+        return new Promise((resolve, reject) => {
+
+            const parameters: BBBackend.CourseContentParameter = {
+                courseId: this._courseId.courseId,
+                contentId
+            };
+
+            Backend.getBackend().postCourseContentChildren(parameters).then((course) => {
                 resolve(course);
             });
         });
