@@ -24,7 +24,7 @@ export default class BBGroup {
                 courseId: this.courseId
             };
 
-            Backend.getBackend().getGroups(parameters).then((information) => {
+            Backend.getBackend().groups.getGroups(parameters).then((information) => {
                 this.groups = information;
                 resolve(this.groups);
             });

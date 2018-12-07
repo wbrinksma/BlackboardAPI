@@ -60,6 +60,6 @@ export default class BBEmail {
             subject: this.subject,
         };
 
-        return Backend.getBackend().sendMail(parameters);
+        return Backend.getBackend().email.sendMail(parameters);
     }
 }
