@@ -8,7 +8,7 @@ export default class WindowConnectionManager {
 
     constructor(_window: Window, backend?: BBBackend) {
         this.window = _window;
-        this.callbackList = new Object();
+        this.callbackList = {};
         this.backend = backend;
 
         const selfRef = this;

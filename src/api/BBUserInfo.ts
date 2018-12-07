@@ -41,7 +41,7 @@ export abstract class BBUserInfo {
 
     public getUserInfo(): Promise<BBBackend.IUserInfo> {
         return new Promise((resolve, reject) => {
-            let parameters;
+            let parameters: BBBackend.UserParameter;
 
             if (this.userInfo) {
                 resolve(this.userInfo);
@@ -49,21 +49,17 @@ export abstract class BBUserInfo {
             }
 
             if (this._userName) {
-                const param: BBBackend.UserParameter = {
+                parameters = {
                     userName: this._userName
                 };
-                parameters = param;
             } else if (this._userId) {
-                const param: BBBackend.UserParameter = {
+                parameters = {
                     userId: this._userId
                 };
-                parameters = param;
             } else {
                 throw new Error (
-                  "BBUserInfo: expecting userId or userName to be not null. Rejecting getUserInfo().."
+                  "BBUserInfo: expecting userId or userName to be not null."
                 );
-                reject();
-                return;
             }
 
             Backend.getBackend().getUserInfo(parameters).then((information) => {

@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file */
+
 import BBBackend from './BBBackend';
 
 export enum WindowMessageType {
@@ -5,7 +7,6 @@ export enum WindowMessageType {
     RETURN = 2
 }
 
-// tslint:disable-next-line:max-classes-per-file
 export class WindowMessageFactory {
     public static fromJson(jsonObject: any) {
         const baseMessage = WindowMessage.fromJsonObject(jsonObject);
@@ -21,7 +22,6 @@ export class WindowMessageFactory {
     }
 }
 
-// tslint:disable-next-line:max-classes-per-file
 export class WindowMessage {
     private static readonly UUID_ID = "uuid";
     private static readonly TYPE_ID = "type";
@@ -62,7 +62,7 @@ export class WindowMessage {
         });
     }
 }
-// tslint:disable-next-line:max-classes-per-file
+
 export class WindowFunctionCall extends WindowMessage {
     private static readonly METHOD_SIGNATURE_ID = "methodSignature";
     private static readonly PARAMETERS_ID = "parameters";
@@ -102,7 +102,6 @@ export class WindowFunctionCall extends WindowMessage {
     }
 }
 
-// tslint:disable-next-line:max-classes-per-file
 export class WindowFunctionReturn extends WindowMessage {
     private static readonly RETURN_VALUE_ID = "returnValue";
 

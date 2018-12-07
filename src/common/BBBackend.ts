@@ -11,7 +11,7 @@ export default abstract class BBBackend {
 
     /**
      * Get courses the user is enrolled.
-     * @param The parameters to use with this function.
+     * @param parameters The parameters to use with this function.
      * @returns A promise with an array of courses the user is enrolled in.
      */
     public abstract getEnrolledCourses(parameters: BBBackend.EnrolledCoursesParameter):
