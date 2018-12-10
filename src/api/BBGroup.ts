@@ -1,4 +1,5 @@
-import Backend from './Backend';
+import { BBBackend } from "../@types/BBBackend";
+import Backend from "./Backend";
 
 export default class BBGroup {
     private _courseId: string;

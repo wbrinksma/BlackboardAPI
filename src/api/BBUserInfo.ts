@@ -1,5 +1,6 @@
 /* tslint:disable:max-classes-per-file */
 
+import { BBBackend } from "../@types/BBBackend";
 import Backend from './Backend';
 
 /**

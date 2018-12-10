@@ -1,6 +1,6 @@
 /* tslint:disable:max-classes-per-file */
 
-import BBBackend from './BBBackend';
+import BBAbstractBackend from './BBAbstractBackend';
 
 export enum WindowMessageType {
     FUNCTION = 1,
@@ -88,7 +88,7 @@ export class WindowFunctionCall extends WindowMessage {
         return s;
     }
 
-    public tryCall(backend: BBBackend, callBack: (data) => void): any {
+    public tryCall(backend: BBAbstractBackend, callBack: (data) => void): any {
         return backend[this.methodSignature](this.parameters, callBack);
     }
 

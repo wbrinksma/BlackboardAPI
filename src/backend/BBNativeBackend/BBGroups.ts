@@ -1,5 +1,6 @@
-import { BBBackend, HTTPRequest } from '../../common';
-import Groups from '../../common/BBBackend/groups';
+import {BBBackend} from "../../@types/BBBackend";
+import { HTTPRequest } from '../../common';
+import Groups from '../../common/BBAbstractBackend/groups';
 
 export default class BBGroups extends Groups {
   public getGroups(parameters: BBBackend.CourseID): Promise<BBBackend.IGroup[]> {

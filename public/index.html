@@ -1,26 +1,50 @@
 <html>
     <body>
         <h1>BlackboardAPI Test Page</h1>
-
         <h2>Get user</h2>
-        <p>Search by user ID</p>
-        <input type="text" id="idBox">
-        <button onclick="loadUserByUserId(document.getElementById('idBox').value)">Submit</button>
-        <p>Search by user name</p>
-        <input type="text" id="usernameBox">
-        <button onclick="loadUserByUserName(document.getElementById('usernameBox').value)">Submit</button>
-
-        <h2>Get groups</h2>
-        <p>Get groups by course ID</p>
-        <input type="text" id="groupsBox">
-        <button onclick="loadGroupsByCourseId(document.getElementById('groupsBox').value)">Submit</button>
+        <form>
+            <label for="idBox">Search by user ID</label><br>
+            <input type="text" id="idBox">
+            <button onclick="loadUserByUserId(document.getElementById('idBox').value)">Submit</button>
+        </form>
+        <form>
+            <label for="usernameBox">Search by user name</label><br>
+            <input type="text" id="usernameBox">
+            <button onclick="loadUserByUserName(document.getElementById('usernameBox').value)">Submit</button>
+        </form>
+        <h2>Send mail</h2>
+        <form>
+            <label for="emailTargetBox">Recipients</label><br>
+            <select id="emailTargetBox">
+                <optgroup label="Presets">
+                    <option value="AllUsers">All Users</option>
+                    <option value="AllGroups">All Groups</option>
+                    <option value="AllTeachers">All Teachers</option>
+                    <option value="AllStudents">All Students</option>
+                    <option value="AllCourseManagers">All Course Managers</option>
+                    <option value="AllObservers">All Observers</option>
+                </optgroup>
+            </select><br>
+            <label for="subjectBox">Subject</label><br>
+            <input type="text" max="250" id="subjectBox"><br>
+            <label for="bodyBox">Body</label><br>
+            <textarea id="bodyBox" rows="7" cols="42"></textarea><br>
+            <label for="attachmentBox">Attachment</label><br>
+            <input type="file" id="attachmentBox" multiple><br>
+            <button onclick="sendMail(
+                        document.getElementById('emailTargetBox').value,
+                        document.getElementById('subjectBox').value,
+                        document.getElementById('bodyBox').value,
+                        document.getElementById('attachmentBox').files
+                    )">Send!</button>
+        </form>
 
         <script>
             function loadUserByUserId(userId) {
-                var user = new BB.BBUserInfoById(userId);
+                let user = new BB.BBUserInfoById(userId);
                 user.getUserInfo().then((result) => {
                     console.log(result);
-                })
+                });
 
                 console.log(user.getUserName);
 
@@ -28,23 +52,60 @@
             }
 
             function loadUserByUserName(userName) {
-                var user = new BB.BBUserInfoByUsername(userName);
+                let user = new BB.BBUserInfoByUsername(userName);
                 user.getUserInfo().then((result) => {
                     console.log(result);
-                })
+                });
 
-                console.log(user.getUserId)
+                console.log(user.getUserId);
 
                 return user;
             }
 
-            function loadGroupsByCourseId(courseId) {
-                var groups = new BB.BBGroup(courseId);
-                groups.getGroups().then((result) => {
-                      console.log(result);
-                })
+            /**
+             *
+             * @param {string} target
+             * @param {string} subject
+             * @param {string} body
+             * @param {FileList} attachments
+             */
+            function sendMail(target, subject, body, attachments) {
+                let emailTarget;
+                switch (target) {
+                    case "AllUsers":
+                        emailTarget = BB.EmailTarget.AllUsers;
+                        break;
+                    case "AllGroups":
+                        emailTarget = BB.EmailTarget.AllGroups;
+                        break;
+                    case "AllTeachers":
+                        emailTarget = BB.EmailTarget.AllTeachers;
+                        break;
+                    case "AllStudents":
+                        emailTarget = BB.EmailTarget.AllStudents;
+                        break;
+                    case "AllCourseManagers":
+                        emailTarget = BB.EmailTarget.AllCourseManagers;
+                        break;
+                    case "AllObservers":
+                        emailTarget = BB.EmailTarget.AllObservers;
+                        break;
+                    default:
+                        throw new Error('Not supported target!');
+                }
 
-                return groups;
+                const recipient = new BB.EmailRecipient(emailTarget);
+                let email = new BB.BBEmail('_20166_1', recipient);
+                email.message = body;
+                email.subject = subject;
+
+                for (let i = 0; i < attachments.length; i++) {
+                    email.addAttachment(attachments.item(i));
+                }
+
+                email.send().then((result)=> {
+                    console.log(result);
+                });
             }
 
             window.onload = () => {

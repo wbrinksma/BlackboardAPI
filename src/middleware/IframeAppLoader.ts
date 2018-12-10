@@ -1,4 +1,4 @@
-import { BBBackend, WindowConnectionManager } from '../common';
+import { BBAbstractBackend, WindowConnectionManager } from '../common';
 import AppLoader from './AppLoader';
 /**
  * Loader class for use with an Iframe element. This loader is used
@@ -9,7 +9,7 @@ export default class IframeAppLoader extends AppLoader {
     private iframe: HTMLIFrameElement;
     private connectionManager: WindowConnectionManager;
 
-    constructor(doc: Document, backend: BBBackend) {
+    constructor(doc: Document, backend: BBAbstractBackend) {
         super();
 
         this.iframe = document.createElement("iframe");

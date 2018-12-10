@@ -1,3 +1,4 @@
+import { BBBackend } from "../@types/BBBackend";
 import Backend from './Backend';
 
 export default class BBUser {

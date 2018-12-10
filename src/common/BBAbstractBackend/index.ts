@@ -9,7 +9,7 @@ import Users from './users';
  * Abstract class which specifies the entry point of the API. This contains
  * all function declarations that communicate with Blackboard.
  */
-export default abstract class BBBackend {
+export default abstract class BBAbstractBackend {
     public courses: Courses;
     public email: Email;
     public files: Files;

@@ -1,8 +1,10 @@
+import {BBBackend} from "../../@types/BBBackend";
+
 /**
  * A class containing all course-related functions.
- * @memberof BBBackend
+ * @memberof BBAbstractBackend
  */
-  export default abstract class Courses {
+export default abstract class Courses {
     /**
      * Get courses the user is enrolled.
      * @param parameters The parameters to use with this function.

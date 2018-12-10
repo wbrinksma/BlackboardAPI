@@ -1,5 +1,6 @@
-import { BBBackend, HTTPRequest } from '../../common';
-import Users from '../../common/BBBackend/users';
+import {BBBackend} from "../../@types/BBBackend";
+import { HTTPRequest } from '../../common';
+import Users from '../../common/BBAbstractBackend/users';
 
 export default class BBUsers extends Users {
   public getUserInfo(parameters: BBBackend.UserParameter): Promise<BBBackend.IUserInfo> {

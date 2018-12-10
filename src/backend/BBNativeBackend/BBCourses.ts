@@ -1,5 +1,6 @@
-import { BBBackend, HTTPRequest } from '../../common';
-import Courses from '../../common/BBBackend/courses';
+import {BBBackend} from "../../@types/BBBackend";
+import { HTTPRequest } from '../../common';
+import Courses from '../../common/BBAbstractBackend/courses';
 
 export default class BBCourses extends Courses {
   public getEnrolledCourses(parameters: BBBackend.EnrolledCoursesParameter): Promise<BBBackend.ICourseID[]> {
