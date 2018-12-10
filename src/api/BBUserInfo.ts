@@ -62,7 +62,7 @@ export abstract class BBUserInfo {
                 );
             }
 
-            Backend.getBackend().getUserInfo(parameters).then((information) => {
+            Backend.getBackend().users.getUserInfo(parameters).then((information) => {
                 this.userInfo = information;
                 this._userId = this.userInfo.id;
                 this._userName = this.userInfo.username;
@@ -84,7 +84,7 @@ export abstract class BBUserInfo {
                     userId: uinfo.id
                 };
 
-                Backend.getBackend().getEnrolledCourses(parameters).then((information) => {
+                Backend.getBackend().courses.getEnrolledCourses(parameters).then((information) => {
                     this.enrolledCourses = information;
                     resolve(this.enrolledCourses);
                 });

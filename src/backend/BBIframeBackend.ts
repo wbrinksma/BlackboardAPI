@@ -38,6 +38,9 @@ export default class BBIframeBackend extends BBBackend {
     public getUserInfo(parameters: BBBackend.UserParameter): Promise<BBBackend.IUserInfo> {
         return this.sendMessageThroughConnectionManager("getUserInfo", parameters);
     }
+    public getGroups(parameters: BBBackend.CourseID): Promise<BBBackend.IGroup[]> {
+        return this.sendMessageThroughConnectionManager("getGroups", parameters);
+    }
 
     private checkIfInsideIframe(): boolean {
         try {
