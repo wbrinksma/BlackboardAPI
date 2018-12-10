@@ -44,4 +44,10 @@ declare namespace BBBackend {
       readonly student: string;
       readonly email: string;
     }
+
+    interface IGroup {
+      readonly id: string;
+      readonly name: string;
+      readonly desc: string;
+    }
 }
