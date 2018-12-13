@@ -1,5 +1,5 @@
 import Backend from './Backend';
-import { BBBackend } from '../common';
+import { BBBackend } from "../@types/BBBackend";
 
 export default class BBCourse {
     private _courseId: BBBackend.CourseID;
@@ -22,7 +22,7 @@ export default class BBCourse {
                 return;
             }
 
-            Backend.getBackend().getCourse(this._courseId).then((information) => {
+            Backend.getBackend().courses.getCourseInformation(this._courseId).then((information) => {
                 this.courseInformation = information;
                 resolve(this.courseInformation);
             });
@@ -32,7 +32,7 @@ export default class BBCourse {
     public postCourse(): Promise<string> {
         return new Promise((resolve, reject) => {
 
-            Backend.getBackend().postCourse().then((course) => {
+            Backend.getBackend().courses.postCourse().then((course) => {
                 resolve(course);
             });
         });
@@ -40,7 +40,7 @@ export default class BBCourse {
 
     public deleteCourse(): Promise<string> {
         return new Promise((resolve, reject) => {
-            Backend.getBackend().deleteCourse(this._courseId).then((information) => {
+            Backend.getBackend().courses.deleteCourse(this._courseId).then((information) => {
                 resolve(information);
             });
         });
@@ -48,7 +48,7 @@ export default class BBCourse {
 
     public patchCourse(): Promise<string> {
         return new Promise((resolve, reject) => {
-            Backend.getBackend().patchCourse(this._courseId).then((information) => {
+            Backend.getBackend().courses.patchCourse(this._courseId).then((information) => {
                 resolve(information);
             });
         });
@@ -61,7 +61,7 @@ export default class BBCourse {
                 return;
             }
 
-            Backend.getBackend().getCourseContents(this._courseId).then((contents) => {
+            Backend.getBackend().courses.getCourseContents(this._courseId).then((contents) => {
                 this.courseContents = contents;
                 resolve(this.courseContents);
             });
@@ -75,7 +75,7 @@ export default class BBCourse {
                 return;
             }
 
-            Backend.getBackend().getCourseChildren(this._courseId).then((children) => {
+            Backend.getBackend().courses.getCourseChildren(this._courseId).then((children) => {
                 this.courseChildren = children;
                 resolve(this.courseChildren);
             });
@@ -98,7 +98,7 @@ export default class BBCourse {
                 contentId
             };
 
-            Backend.getBackend().getCourseContent(parameters).then((child) => {
+            Backend.getBackend().courses.getCourseContent(parameters).then((child) => {
                 resolve(child);
             });
         });
@@ -107,7 +107,7 @@ export default class BBCourse {
     public postCourseContent(): Promise<string> {
         return new Promise((resolve, reject) => {
 
-            Backend.getBackend().postCourseContent(this._courseId).then((course) => {
+            Backend.getBackend().courses.postCourseContent(this._courseId).then((course) => {
                 resolve(course);
             });
         });
@@ -121,7 +121,7 @@ export default class BBCourse {
                 contentId
             };
 
-            Backend.getBackend().deleteCourseContent(parameters).then((course) => {
+            Backend.getBackend().courses.deleteCourseContent(parameters).then((course) => {
                 resolve(course);
             });
         });
@@ -135,7 +135,7 @@ export default class BBCourse {
                 contentId
             };
 
-            Backend.getBackend().patchCourseContent(parameters).then((course) => {
+            Backend.getBackend().courses.patchCourseContent(parameters).then((course) => {
                 resolve(course);
             });
         });
@@ -149,7 +149,7 @@ export default class BBCourse {
                 contentId
             };
 
-            Backend.getBackend().getCourseContentChildren(parameters).then((course) => {
+            Backend.getBackend().courses.getCourseContentChildren(parameters).then((course) => {
                 resolve(course);
             });
         });
@@ -163,7 +163,7 @@ export default class BBCourse {
                 contentId
             };
 
-            Backend.getBackend().postCourseContentChildren(parameters).then((course) => {
+            Backend.getBackend().courses.postCourseContentChildren(parameters).then((course) => {
                 resolve(course);
             });
         });
