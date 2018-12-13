@@ -1,3 +1,4 @@
+import { BBBackend } from "../@types/BBBackend";
 import Backend from './Backend';
 
 export default class BBUser {
@@ -25,7 +26,7 @@ export default class BBUser {
                 userId: this.userId
             };
 
-            Backend.getBackend().getEnrolledCourses(parameters).then((information) => {
+            Backend.getBackend().courses.getEnrolledCourses(parameters).then((information) => {
                 this.enrolledCourses = information;
                 resolve(this.enrolledCourses);
             });

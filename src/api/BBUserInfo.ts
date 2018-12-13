@@ -1,5 +1,6 @@
 /* tslint:disable:max-classes-per-file */
 
+import { BBBackend } from "../@types/BBBackend";
 import Backend from './Backend';
 
 /**
@@ -41,7 +42,7 @@ export abstract class BBUserInfo {
 
     public getUserInfo(): Promise<BBBackend.IUserInfo> {
         return new Promise((resolve, reject) => {
-            let parameters;
+            let parameters: BBBackend.UserParameter;
 
             if (this.userInfo) {
                 resolve(this.userInfo);
@@ -49,24 +50,20 @@ export abstract class BBUserInfo {
             }
 
             if (this._userName) {
-                const param: BBBackend.UserParameter = {
+                parameters = {
                     userName: this._userName
                 };
-                parameters = param;
             } else if (this._userId) {
-                const param: BBBackend.UserParameter = {
+                parameters = {
                     userId: this._userId
                 };
-                parameters = param;
             } else {
                 throw new Error (
-                  "BBUserInfo: expecting userId or userName to be not null. Rejecting getUserInfo().."
+                  "BBUserInfo: expecting userId or userName to be not null."
                 );
-                reject();
-                return;
             }
 
-            Backend.getBackend().getUserInfo(parameters).then((information) => {
+            Backend.getBackend().users.getUserInfo(parameters).then((information) => {
                 this.userInfo = information;
                 this._userId = this.userInfo.id;
                 this._userName = this.userInfo.username;
@@ -88,7 +85,7 @@ export abstract class BBUserInfo {
                     userId: uinfo.id
                 };
 
-                Backend.getBackend().getEnrolledCourses(parameters).then((information) => {
+                Backend.getBackend().courses.getEnrolledCourses(parameters).then((information) => {
                     this.enrolledCourses = information;
                     resolve(this.enrolledCourses);
                 });

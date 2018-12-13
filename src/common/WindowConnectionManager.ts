@@ -1,14 +1,14 @@
-import BBBackend from './BBBackend';
+import BBAbstractBackend from './BBAbstractBackend';
 import { WindowFunctionCall, WindowFunctionReturn, WindowMessage, WindowMessageFactory } from './WindowMessage';
 
 export default class WindowConnectionManager {
     private window;
     private callbackList;
-    private backend: BBBackend;
+    private backend: BBAbstractBackend;
 
-    constructor(_window: Window, backend?: BBBackend) {
+    constructor(_window: Window, backend?: BBAbstractBackend) {
         this.window = _window;
-        this.callbackList = new Object();
+        this.callbackList = {};
         this.backend = backend;
 
         const selfRef = this;

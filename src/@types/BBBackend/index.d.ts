@@ -1,3 +1,5 @@
+import {EmailRecipient} from "../../common";
+
 declare namespace BBBackend {
     type UserID = {"userId": string};
     type Offset = {"offset": number};
@@ -8,7 +10,13 @@ declare namespace BBBackend {
 
     type EnrolledCoursesParameter = UserID & Offset;
 
-    type SendMailParameter = CourseID & {"recipientIds": string[], "subject": string, "body": string};
+    type SendMailParameter = CourseID & {
+        "attachments": Blob[],
+        "recipients": EmailRecipient,
+        "returnRecipient": boolean,
+        "subject": string,
+        "body": string
+    };
 
     type FileInfoParameter = CourseID & {};
 
@@ -83,5 +91,11 @@ declare namespace BBBackend {
       readonly surname: string;
       readonly student: string;
       readonly email: string;
+    }
+
+    interface IGroup {
+      readonly id: string;
+      readonly name: string;
+      readonly desc: string;
     }
 }
