@@ -1,10 +1,10 @@
 <html>
     <body>
         <h1>BlackboardAPI Test Page</h1>
-        <h2>Get user</h2>
+        <h2>User</h2>
         <form>
             <label for="idBox">Search by user ID</label><br>
-            <input type="text" id="idBox">
+            <input type="text" id="idBox" value="_114444_1">
             <button onclick="loadUserByUserId(document.getElementById('idBox').value)">Submit</button>
         </form>
         <form>
@@ -12,6 +12,28 @@
             <input type="text" id="usernameBox">
             <button onclick="loadUserByUserName(document.getElementById('usernameBox').value)">Submit</button>
         </form>
+        <button onclick="loadUser(document.getElementById('idBox').value)">Submit</button>
+        <p>Load Enrolled Courses</p>
+        <button onclick="loadEnrolledCourses(document.getElementById('idBox').value)">Get!</button>
+        <h2>Courses</h2>
+        <input type="text" id="cidBox" value="_20166_1">
+        <p>Load Course</p>
+        <button onclick="loadCourse(document.getElementById('cidBox').value)">Get</button>
+        <button onclick="postCourse()">Post</button>
+        <button onclick="deleteCourse(document.getElementById('cidBox').value)">Delete</button>
+        <button onclick="patchCourse(document.getElementById('cidBox').value)">Patch</button>
+        <p>Load Children</p>
+        <button onclick="loadCourseChildren(document.getElementById('cidBox').value)">Get All</button>
+        <p>Load Contents</p>
+        <button onclick="loadCourseContents(document.getElementById('cidBox').value)">Get All</button>
+        <button onclick="postCourseContent(document.getElementById('cidBox').value)">Post</button>
+        <input type="text" id="contentBox" value="_4430884_1">
+        <button onclick="loadCourseContent(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Get</button>
+        <button onclick="deleteCourseContent(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Delete</button>
+        <button onclick="patchCourseContent(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Patch</button>
+        <button onclick="loadCourseContentChildren(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Get Children</button>
+        <button onclick="postCourseContentChildren(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Post Child</button>
+
         <h2>Send mail</h2>
         <form>
             <label for="emailTargetBox">Recipients</label><br>
@@ -40,6 +62,9 @@
         </form>
 
         <script>
+            var user = null;
+            var course = null;
+
             function loadUserByUserId(userId) {
                 let user = new BB.BBUserInfoById(userId);
                 user.getUserInfo().then((result) => {
@@ -51,6 +76,23 @@
                 return user;
             }
 
+            function loadEnrolledCourses(userId) {
+                if(user == null) {
+                    user = userId[0] == '_' ? new BB.BBUserInfoById(userId) : new BB.BBUserInfoByUsername(userId);
+                }
+                user.getEnrolledCourses().then((result) => {
+                    console.log(result);
+
+                })
+                return user
+            }
+
+            function loadCourse(courseId) {
+                course = new BB.BBCourse(courseId);
+                course.getCourse().then((result) => {
+                    console.log(result);
+                })
+            }
             function loadUserByUserName(userName) {
                 let user = new BB.BBUserInfoByUsername(userName);
                 user.getUserInfo().then((result) => {
@@ -58,8 +100,84 @@
                 });
 
                 console.log(user.getUserId);
+            }
 
-                return user;
+            function postCourse() {
+                course = new BB.BBCourse();
+                course.postCourse().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function deleteCourse(courseId) {
+                course = new BB.BBCourse(courseId);
+                course.deleteCourse().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function patchCourse(courseId) {
+                course = new BB.BBCourse(courseId);
+                course.patchCourse().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function loadCourseContents(courseId) {
+                course = new BB.BBCourse(courseId);
+                course.getCourseContents().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function postCourseContent(courseId) {
+                course = new BB.BBCourse(courseId);
+                course.postCourseContent().then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function deleteCourseContent(courseId, contentId) {
+                course = new BB.BBCourse(courseId);
+                course.deleteCourseContent(contentId).then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function patchCourseContent(courseId, contentId) {
+                course = new BB.BBCourse(courseId);
+                course.patchCourseContent(contentId).then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function loadCourseContent(courseId, contentId) {
+                course = new BB.BBCourse(courseId);
+                course.getCourseContent(contentId).then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function loadCourseContentChildren(courseId, contentId) {
+                course = new BB.BBCourse(courseId);
+                course.getCourseContentChildren(contentId).then((result) => {
+                    console.log(result);
+                })
+            }
+
+            function postCourseContentChildren(courseId, contentId) {
+                course = new BB.BBCourse(courseId);
+                course.postCourseContentChildren(contentId).then((result) => {
+                    console.log(result);
+                })
+            }
+
+
+            function loadCourseChildren(courseId) {
+                course = new BB.BBCourse(courseId);
+                course.getCourseChildren().then((result) => {
+                    console.log(result);
+                })
             }
 
             /**

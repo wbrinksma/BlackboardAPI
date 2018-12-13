@@ -6,6 +6,7 @@ declare namespace BBBackend {
     type CourseID = {"courseId": string};
     type UserName = {"userName": string};
     type UserParameter = {"userId"?: string, "userName"?: string};
+    type ContentID = {"contentId": string};
 
     type EnrolledCoursesParameter = UserID & Offset;
 
@@ -21,6 +22,8 @@ declare namespace BBBackend {
 
     type FileBodyParameter = FileInfoParameter & {"body": string};
 
+    type CourseContentParameter = CourseID & ContentID;
+
     interface IUserInformation {
         readonly firstName: string;
         readonly lastName: string;
@@ -31,9 +34,46 @@ declare namespace BBBackend {
     }
 
     interface ICourseInformation {
+        courseId: string;
         readonly id: string;
+        readonly uuid: string;
+        readonly externalId: string;
+        readonly dataSourceId: string;
         readonly name: string;
         readonly description: string;
+        readonly created: string;
+        readonly organization: boolean;
+        readonly ultraStatus: string;
+        readonly allowGuests: boolean;
+        readonly readOnly: boolean;
+        readonly available: string;
+        readonly duration: string;
+        readonly enrollment: string;
+        readonly locale: boolean;    
+        readonly accessCode: string;
+        readonly hasChildren: boolean;
+        readonly parentId: string;
+    }
+
+    interface ICourseContent {
+        readonly id: string;
+        readonly parentId: string;
+        readonly title: string;
+        readonly body: string;
+        readonly description: string;
+        readonly created: string;
+        readonly position: number;
+        readonly hasChildren: boolean;
+        readonly hasGrafebookColumns: boolean;
+        readonly hasAssociatedGroups: boolean;
+        readonly available: string;
+        readonly allowGuests: boolean;
+    }
+
+    interface ICourseChild {
+        readonly id: string;
+        readonly datasourceId: string;
+        readonly created: string;
     }
 
     interface IFileInfo {
