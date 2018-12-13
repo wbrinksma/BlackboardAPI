@@ -238,6 +238,15 @@
                 })
             }
 
+            function submitAssignment(courseId, contentId, submission) {
+                var assignment = new BB.BBAssignment(courseId, contentId);
+                assignment.submit(submission).then((result) => {
+                  console.log("submitted!");
+                })
+
+                return assignment;
+            }
+
             window.onload = () => {
                 BB.Backend.setBackend(new BB.BBIframeBackend());
             }

@@ -3,6 +3,7 @@ declare namespace BBBackend {
     type Offset = {"offset": number};
     type CourseID = {"courseId": string};
     type UserName = {"userName": string};
+    type ContentID = {"contentId": string};
     type UserParameter = {"userId"?: string, "userName"?: string};
     type ContentID = {"contentId": string};
 
@@ -31,6 +32,7 @@ declare namespace BBBackend {
     type FileBodyParameter = FileInfoParameter & {"body": string};
 
     type CourseContentParameter = CourseID & ContentID;
+    type AssignmentParameter = CourseID & ContentID & {"submission": string};
 
     interface IUserInformation {
         readonly firstName: string;

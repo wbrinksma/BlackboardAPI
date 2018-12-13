@@ -1,4 +1,5 @@
 import { BBAbstractBackend } from '../../common';
+import BBAssignments from './BBAssignments';
 import BBCourses from './BBCourses';
 import BBEmails from './BBEmails';
 import BBFiles from './BBFiles';
@@ -10,6 +11,7 @@ import BBUsers from './BBUsers';
  * @see BBAbstractBackend
  */
 export default class BBNativeBackend extends BBAbstractBackend {
+    public assignments = new BBAssignments();
     public courses = new BBCourses();
     public email = new BBEmails();
     public files = new BBFiles();
