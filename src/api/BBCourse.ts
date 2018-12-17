@@ -9,18 +9,24 @@ export default class BBCourse {
 
     constructor(courseId: string = null) {
         this._courseId = {courseId};
-        this.getCourse();
+        this.getCourseInformation();
     }
 
     get courseId(): string {
-        return this.courseInformation.courseId;
+        this.getCourseInformation().then(() => {
+            return this.courseInformation.courseId;
+        });
+        return
     }
 
     get courseName(): string {
-        return this.courseInformation.name;
+        this.getCourseInformation().then(() => {
+            return this.courseInformation.name;
+        });
+        return
     }
 
-    public getCourse(): Promise<BBBackend.ICourseInformation> {
+    public getCourseInformation(): Promise<BBBackend.ICourseInformation> {
         return new Promise((resolve, reject) => {
             if (this.courseInformation) {
                 resolve(this.courseInformation);

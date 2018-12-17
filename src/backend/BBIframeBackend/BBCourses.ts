@@ -17,7 +17,7 @@ export default class BBCourses extends Courses {
     }
 
     public getCourseInformation(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseInformation> {
-        return this.backend.sendMessageThroughConnectionManager(this.category,"getCourse", parameters);
+        return this.backend.sendMessageThroughConnectionManager(this.category,"getCourseInformation", parameters);
     }
         
     public postCourse(): Promise<string> {
