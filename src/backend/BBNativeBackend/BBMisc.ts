@@ -1,4 +1,4 @@
-import {BBBackend} from "../../@types/BBBackend";
+import {HTTPRequest} from '../../common';
 import Misc from '../../common/BBAbstractBackend/misc';
 
 export default class BBMisc extends Misc {

@@ -12,6 +12,7 @@ export {
     BBFile,
     BBGroup,
     BBUser,
+    BBCourse,
     BBUserInfo,
     BBUserInfoById,
     BBUserInfoByUsername

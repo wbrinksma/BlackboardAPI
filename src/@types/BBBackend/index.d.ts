@@ -18,6 +18,11 @@ declare namespace BBBackend {
         "body": string
     };
 
+    type CreateFolderParameter = CourseID & {
+        "courseName": string,
+        "folderName": string
+    };
+
     type FileInfoParameter = CourseID & {};
 
     type FileBodyParameter = FileInfoParameter & {"body": string};

@@ -9,10 +9,15 @@ export default class BBCourse {
 
     constructor(courseId: string = null) {
         this._courseId = {courseId};
+        this.getCourse();
     }
 
     get courseId(): string {
         return this.courseInformation.courseId;
+    }
+
+    get courseName(): string {
+        return this.courseInformation.name;
     }
 
     public getCourse(): Promise<BBBackend.ICourseInformation> {
@@ -21,7 +26,6 @@ export default class BBCourse {
                 resolve(this.courseInformation);
                 return;
             }
-
             Backend.getBackend().courses.getCourseInformation(this._courseId).then((information) => {
                 this.courseInformation = information;
                 resolve(this.courseInformation);

@@ -60,7 +60,8 @@
                         document.getElementById('attachmentBox').files
                     )">Send!</button>
         </form>
-
+        <h2>Files</h2>
+        <button onclick="createFolder(document.getElementById('cidBox').value)">Create Folder</button>
         <script>
             var user = null;
             var course = null;
@@ -224,6 +225,17 @@
                 email.send().then((result)=> {
                     console.log(result);
                 });
+            }
+
+            function createFolder(courseId){
+                if(course == null){
+                    course = new BB.BBCourse(courseId);
+                }
+                file = new BB.BBFile(course)
+                console.log(file);
+                file.createFolder().then((result) => {
+                    console.log(result);
+                })
             }
 
             window.onload = () => {

@@ -32,7 +32,7 @@ export default class WindowConnectionManager {
         if (message instanceof WindowFunctionCall) {
             if (connectionManager.backend) {
                 const fcMessage = message as WindowFunctionCall;
-                connectionManager.backend[fcMessage.methodSignature](fcMessage.parameters).then((value) => {
+                connectionManager.backend[fcMessage.category][fcMessage.methodSignature](fcMessage.parameters).then((value) => {
                     connectionManager.sendMessage(new WindowFunctionReturn(value, fcMessage.uuid));
                 });
             }
