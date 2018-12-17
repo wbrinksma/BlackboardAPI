@@ -3,20 +3,19 @@ import Backend from './Backend';
 export default class BBAssignment {
     private _submission: string;
 
-    private _courseId: string;
-    private _contentId: string;
+    private assignment: BBBackend.IAssignment;
+    private course: BBBackend.CourseID;
 
-    constructor(courseId: string, contentId: string) {
-        this._courseId = courseId;
-        this._contentId = contentId;
+    constructor(courseId: string) {
+        this.course = {courseId};
     }
 
     get courseId(): string {
-      return this._courseId;
+      return this.course.courseId;
     }
 
     get contentId(): string {
-      return this._contentId;
+      return this.assignment.contentId;
     }
 
     get submission(): string {

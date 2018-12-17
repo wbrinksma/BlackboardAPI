@@ -44,6 +44,9 @@ export default class BBIframeBackend extends BBBackend {
     public submit(parameters: BBBackend.AssignmentParameter): Promise<BBBackend.ITaskComplete> {
         return this.sendMessageThroughConnectionManager("submit", parameters);
     }
+    public getAssignments(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
+      return this.sendMessageThroughConnectionManager("getAssignments", parameters);
+    }
 
     private checkIfInsideIframe(): boolean {
         try {

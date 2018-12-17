@@ -1,3 +1,5 @@
+/* tslint:disable:no-namespace */
+
 declare namespace BBBackend {
     type UserID = {"userId": string};
     type Offset = {"offset": number};
@@ -107,5 +109,17 @@ declare namespace BBBackend {
       readonly id: string;
       readonly name: string;
       readonly desc: string;
+    }
+
+    interface IAssignment {
+      readonly id: string; // Redundant?
+      readonly name: string;
+      readonly desc: string;
+      readonly possibleScore: number;
+      readonly decimals: number;
+      readonly available: boolean;
+      readonly contentId: string;
+      readonly attemptsAllowed: number;
+      readonly scoringModel: string;
     }
 }

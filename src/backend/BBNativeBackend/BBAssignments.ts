@@ -38,4 +38,33 @@ export default class BBAssignments extends Assignments {
           });
         });
     }
+
+    public getAssignments(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
+      const path: string = "/learn/api/public/v1/courses/" + parameters.courseId + "/gradebook/columns";
+
+      return new Promise((resolve, reject) => {
+        HTTPRequest.getAsync(path).then((response) => {
+            const assignmentInformation = JSON.parse(response);
+            const responseInfo = new Array<BBBackend.IAssignment>();
+
+            assignmentInformation.results.forEach((result) => {
+                const resultObject: BBBackend.IAssignment = {
+                    attemptsAllowed: result.grading.attemptsAllowed,
+                    available: result.availability.available,
+                    contentId: result.contentId,
+                    decimals: result.score.decimalPlaces,
+                    desc: result.description,
+                    id: result.id,
+                    name: result.name,
+                    possibleScore: result.score.possible,
+                    scoringModel: result.grading.scoringModel
+                };
+
+                responseInfo.push(resultObject);
+            });
+
+            resolve(responseInfo);
+        });
+      });
+    }
 }
