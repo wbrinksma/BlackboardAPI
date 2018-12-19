@@ -1,16 +1,22 @@
-import Backend from './Backend';
-import BBUser from './BBUser';
+import EmailRecipient from "../common/EmailRecipient";
+import Backend from "./Backend";
 
 export default class BBEmail {
-    private _courseId: string;
+    private readonly _courseId: string;
 
     private _subject: string;
     private _message: string;
+    private _recipients: EmailRecipient;
+    private _returnRecipient: boolean;
+    private _attachments: Blob[];
 
-    private _recipients = new Array<BBUser>();
-
-    constructor(courseId: string) {
+    constructor(courseId: string, recipients: EmailRecipient) {
         this._courseId = courseId;
+        this._recipients = recipients;
+        this._subject = '';
+        this._message = '';
+        this._returnRecipient = false;
+        this._attachments = [];
     }
 
     get courseId(): string {
@@ -33,31 +39,40 @@ export default class BBEmail {
         this._message = message;
     }
 
-    get recipients(): BBUser[] {
+    get recipients(): EmailRecipient {
         return this._recipients;
     }
 
-    public addRecipient(user: BBUser): void {
-        if (this._recipients.find((value, index, obj) => {
-            return value.userId === user.userId;
-        })) {
-            return;
-        }
+    set recipients(recipients: EmailRecipient) {
+        this._recipients = recipients;
+    }
 
-        this._recipients.push(user);
+    get returnRecipient(): boolean {
+        return this._returnRecipient;
+    }
+
+    set returnRecipient(returnRecipient: boolean) {
+        this._returnRecipient = returnRecipient;
+    }
+
+    get attachments(): Blob[] {
+        return this._attachments;
+    }
+    set attachments(attachments: Blob[]) {
+        this._attachments = attachments;
+    }
+    public addAttachment(attachment: Blob) {
+        this._attachments.push(attachment);
     }
 
     public send(): Promise<BBBackend.ITaskComplete> {
-        const recipientIds = new Array<string>();
-        this._recipients.forEach((value, index, array) => {
-            recipientIds.push(value.userId);
-        });
-
         const parameters: BBBackend.SendMailParameter = {
+            attachments: this.attachments,
             body: this.message,
             courseId: this.courseId,
-            recipientIds,
-            subject: this.subject,
+            recipients: this.recipients.asPlainObject(),
+            returnRecipient: this.returnRecipient,
+            subject: this.subject
         };
 
         return Backend.getBackend().email.sendMail(parameters);

@@ -1,4 +1,21 @@
+import HTTPRequest from "./HTTPRequest";
+
 export default class Utilities {
+    /**
+     * Get a Blackboard nonce from a course id
+     * @param {string} courseId The course id
+     * @returns {string} the nonce
+     */
+    public static getNonceFromCourseId(courseId: string): string {
+        const noncePath: string = "https://blackboard.nhlstenden.com/webapps/blackboard/execute/modulepage/view?course_id=" + courseId;
+        HTTPRequest.getAsync( noncePath ).then( (response) => {
+            const parser: DOMParser = new DOMParser();
+            const dom: HTMLDocument = parser.parseFromString(response, 'text/html') as HTMLDocument;
+            const nonceObject = dom.getElementsByName("blackboard.platform.security.NonceUtil.nonce")[0] as HTMLInputElement;
+            return nonceObject.value;
+        });
+        return "";
+    }
 
     /**
      * Get a Blackboard nonce from a specified document, located by the formName
@@ -9,13 +26,7 @@ export default class Utilities {
     public static getNonceFromForm(doc: HTMLDocument, formName: string): string {
         const form = doc.getElementsByName(formName)[0] as HTMLFormElement;
 
-        form.getInputs().forEach((input) => {
-            if (input.name === "blackboard.platform.security.NonceUtil.nonce") {
-                return input.value;
-            }
-        });
-
-        return "";
+        return form.elements["blackboard.platform.security.NonceUtil.nonce"].value || "";
     }
 
     private static readonly SURROGATE_PAIR_REGEXP = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;

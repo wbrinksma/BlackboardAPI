@@ -1,12 +1,22 @@
-export default class BBFile {
-    private _courseId: string;
+import Backend from "./Backend";
+import BBCourse from "./BBCourse";
 
-    constructor(courseId: string) {
-        this._courseId = courseId;
+export default class BBFile {
+    private _course: BBCourse;
+
+    constructor(course: BBCourse) {
+        this._course = course;
+        console.log(this.createFolder);
     }
 
-    get courseId(): string {
-        return this._courseId;
+    public createFolder(): Promise<BBBackend.ITaskComplete> {
+        const parameters: BBBackend.CreateFolderParameter = {
+            courseId: this._course.courseId,
+            courseName: this._course.courseName,
+            folderName: 'Test'
+        };
+
+        return Backend.getBackend().files.createFolder(parameters);
     }
 
 }

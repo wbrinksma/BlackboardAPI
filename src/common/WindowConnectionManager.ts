@@ -1,12 +1,12 @@
-import BBBackend from './BBBackend';
+import BBAbstractBackend from './BBAbstractBackend';
 import { WindowFunctionCall, WindowFunctionReturn, WindowMessage, WindowMessageFactory } from './WindowMessage';
 
 export default class WindowConnectionManager {
-    private window;
+    private window: Window;
     private callbackList;
-    private backend: BBBackend;
+    private backend: BBAbstractBackend;
 
-    constructor(_window: Window, backend?: BBBackend) {
+    constructor(_window: Window, backend?: BBAbstractBackend) {
         this.window = _window;
         this.callbackList = {};
         this.backend = backend;
@@ -31,15 +31,18 @@ export default class WindowConnectionManager {
 
         if (message instanceof WindowFunctionCall) {
             if (connectionManager.backend) {
-                const fcMessage = message as WindowFunctionCall;
-                connectionManager.backend[fcMessage.methodSignature](fcMessage.parameters).then((value) => {
+                const fcMessage: WindowFunctionCall = message;
+                connectionManager.backend[fcMessage.category][fcMessage.methodSignature](fcMessage.parameters).then((value) => {
                     connectionManager.sendMessage(new WindowFunctionReturn(value, fcMessage.uuid));
                 });
             }
         } else if (message instanceof WindowFunctionReturn) {
-            const frMessage = message as WindowFunctionReturn;
-            connectionManager.callbackList[frMessage.uuid](frMessage.returnValue);
-            delete connectionManager.callbackList[frMessage.uuid];
+            const frMessage: WindowFunctionReturn = message;
+
+            if (frMessage.uuid in connectionManager.callbackList) {
+                connectionManager.callbackList[frMessage.uuid](frMessage.returnValue);
+                delete connectionManager.callbackList[frMessage.uuid];
+            }
         }
     }
 }

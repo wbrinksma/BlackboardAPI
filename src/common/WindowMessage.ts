@@ -1,6 +1,6 @@
 /* tslint:disable:max-classes-per-file */
 
-import BBBackend from './BBBackend';
+import BBAbstractBackend from './BBAbstractBackend';
 
 export enum WindowMessageType {
     FUNCTION = 1,
@@ -66,11 +66,13 @@ export class WindowMessage {
 export class WindowFunctionCall extends WindowMessage {
     private static readonly METHOD_SIGNATURE_ID = "methodSignature";
     private static readonly PARAMETERS_ID = "parameters";
+    private static readonly CATEGORY_ID = "category";
 
     public readonly methodSignature: string;
     public readonly parameters: any;
+    public readonly category: string;
 
-    constructor(methodSignature: string, parameters: any, uuid?: string) {
+    constructor(category: string, methodSignature: string, parameters: any, uuid?: string) {
         if (uuid) {
             super(WindowMessageType.FUNCTION, uuid);
         } else {
@@ -79,22 +81,25 @@ export class WindowFunctionCall extends WindowMessage {
 
         this.methodSignature = methodSignature;
         this.parameters = parameters;
+        this.category = category;
     }
 
     public toJsonObject(): any {
         const s = super.toJsonObject();
+        s[WindowFunctionCall.CATEGORY_ID] = this.category;
         s[WindowFunctionCall.METHOD_SIGNATURE_ID] = this.methodSignature;
         s[WindowFunctionCall.PARAMETERS_ID] = this.parameters;
         return s;
     }
 
-    public tryCall(backend: BBBackend, callBack: (data) => void): any {
+    public tryCall(backend: BBAbstractBackend, callBack: (data) => void): any {
         return backend[this.methodSignature](this.parameters, callBack);
     }
 
     public static fromJsonObject(jsonObject: any): WindowMessage {
         const superImpl = WindowMessage.fromJsonObject(jsonObject);
         return new WindowFunctionCall(
+            jsonObject[WindowFunctionCall.CATEGORY_ID],
             jsonObject[WindowFunctionCall.METHOD_SIGNATURE_ID],
             jsonObject[WindowFunctionCall.PARAMETERS_ID],
             superImpl.uuid

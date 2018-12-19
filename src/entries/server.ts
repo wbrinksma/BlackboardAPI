@@ -7,7 +7,7 @@
 // export * from '../backend/BBNativeBackend';
 
 // // Export Common modules
-// export * from '../common/BBBackend';
+// export * from '../common/BBAbstractBackend';
 // export * from '../common/HTTPRequest';
 // export * from '../common/Utilities';
 // export * from '../common/WindowConnectionManager';
