@@ -54,7 +54,7 @@ declare namespace BBBackend {
         readonly available: string;
         readonly duration: string;
         readonly enrollment: string;
-        readonly locale: boolean;    
+        readonly locale: boolean;
         readonly accessCode: string;
         readonly hasChildren: boolean;
         readonly parentId: string;

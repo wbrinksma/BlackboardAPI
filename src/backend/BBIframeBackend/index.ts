@@ -47,6 +47,7 @@ export default class BBIframeBackend extends BBAbstractBackend {
      * the method's arguments and gets the name of the caller of this function that way. When this function
      * is called by another function in this class, it automatically gets the correct to name to send to the
      * Iframe.
+     * @param category
      * @param methodSignature The signature (name) of the method you are trying to call on the top frame
      * @param parameters The parameters used with the function to send.
      */

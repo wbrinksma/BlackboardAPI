@@ -20,18 +20,18 @@ export default class HTTPRequest {
         });
     }
     public static getAsync(url: string): Promise<string> {
-        return this.asyncRequest("GET",url);
+        return this.asyncRequest("GET", url);
     }
 
     public static postAsync(url: string, formData: FormData): Promise<string> {
-        return this.asyncRequest("POST",url,formData)
+        return this.asyncRequest("POST", url, formData);
     }
 
     public static deleteAsync(url: string): Promise<string> {
-        return this.asyncRequest("DELETE",url);
+        return this.asyncRequest("DELETE", url);
     }
 
     public static patchAsync(url: string, formData: FormData): Promise<string> {
-        return this.asyncRequest("PATCH",url,formData)
+        return this.asyncRequest("PATCH", url, formData);
     }
 }

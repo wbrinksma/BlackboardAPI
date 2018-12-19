@@ -16,14 +16,14 @@ export default class BBCourse {
         this.getCourseInformation().then(() => {
             return this.courseInformation.courseId;
         });
-        return
+        return;
     }
 
     get courseName(): string {
         this.getCourseInformation().then(() => {
             return this.courseInformation.name;
         });
-        return
+        return;
     }
 
     public getCourseInformation(): Promise<BBBackend.ICourseInformation> {

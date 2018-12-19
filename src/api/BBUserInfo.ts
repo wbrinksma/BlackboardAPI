@@ -100,15 +100,15 @@ export abstract class BBUserInfo {
  * @see BBUserInfoByUsername
  */
 export class BBUserInfoById extends BBUserInfo {
-  /**
-   * @constructor
-   * @param userId The user's ID.
-   * @example let user = new BBUserInfoById("_666666_1_");
-   */
-  constructor(userId: string) {
-    super();
-    this._userId = userId;
-  }
+    /**
+     * @constructor
+     * @param userId The user's ID.
+     * @example let user = new BBUserInfoById("_666666_1_");
+     */
+    constructor(userId: string) {
+        super();
+        this._userId = userId;
+    }
 }
 
 /**
@@ -117,13 +117,13 @@ export class BBUserInfoById extends BBUserInfo {
  * @see BBUserInfoById
  */
 export class BBUserInfoByUsername extends BBUserInfo {
-  /**
-   * @constructor
-   * @param userName The user's name.
-   * @example let user = new BBUserInfoByUsername("guest0000");
-   */
-  constructor(userName: string) {
-    super();
-    this._userName = userName;
-  }
+    /**
+     * @constructor
+     * @param userName The user's name.
+     * @example let user = new BBUserInfoByUsername("guest0000");
+     */
+    constructor(userName: string) {
+        super();
+        this._userName = userName;
+    }
 }

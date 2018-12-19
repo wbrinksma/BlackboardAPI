@@ -13,10 +13,10 @@ export default class Utilities {
             const dom: HTMLDocument = parser.parseFromString(response, 'text/html') as HTMLDocument;
             const nonceObject = dom.getElementsByName("blackboard.platform.security.NonceUtil.nonce")[0] as HTMLInputElement;
             return nonceObject.value;
-        })
+        });
         return "";
     }
-    
+
     /**
      * Get a Blackboard nonce from a specified document, located by the formName
      * @param {HTMLDocument} doc The document the nonce is on

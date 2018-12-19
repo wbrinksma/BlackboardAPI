@@ -14,7 +14,7 @@ export default class BBFile {
         const parameters: BBBackend.CreateFolderParameter = {
             courseId: this._course.courseId,
             courseName: this._course.courseName,
-            folderName: 'Test' 
+            folderName: 'Test'
         };
 
         return Backend.getBackend().files.createFolder(parameters);
