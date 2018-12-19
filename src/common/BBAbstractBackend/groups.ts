@@ -1,5 +1,3 @@
-import {BBBackend} from "../../@types/BBBackend";
-
 /**
  * A class that contains all Group-related functions.
  * @memberof BBAbstractBackend

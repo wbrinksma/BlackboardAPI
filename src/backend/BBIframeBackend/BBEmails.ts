@@ -1,4 +1,3 @@
-import {BBBackend} from "../../@types/BBBackend";
 import { BBIframeBackend } from "..";
 import Email from "../../common/BBAbstractBackend/email";
 

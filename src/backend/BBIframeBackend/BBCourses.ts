@@ -1,4 +1,3 @@
-import {BBBackend} from "../../@types/BBBackend";
 import { BBIframeBackend } from "..";
 import Courses from '../../common/BBAbstractBackend/courses';
 

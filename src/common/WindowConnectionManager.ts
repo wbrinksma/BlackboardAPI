@@ -37,9 +37,12 @@ export default class WindowConnectionManager {
                 });
             }
         } else if (message instanceof WindowFunctionReturn) {
-            const frMessage = message as WindowFunctionReturn;
-            connectionManager.callbackList[frMessage.uuid](frMessage.returnValue);
-            delete connectionManager.callbackList[frMessage.uuid];
+            const frMessage: WindowFunctionReturn = message;
+
+            if (frMessage.uuid in connectionManager.callbackList) {
+                connectionManager.callbackList[frMessage.uuid](frMessage.returnValue);
+                delete connectionManager.callbackList[frMessage.uuid];
+            }
         }
     }
 }

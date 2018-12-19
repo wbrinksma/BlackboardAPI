@@ -1,5 +1,4 @@
 import Backend from './Backend';
-import { BBBackend } from "../@types/BBBackend";
 
 export default class BBCourse {
     private _courseId: BBBackend.CourseID;

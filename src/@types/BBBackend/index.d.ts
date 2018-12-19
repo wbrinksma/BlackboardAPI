@@ -1,5 +1,3 @@
-import {EmailRecipient} from "../../common";
-
 declare namespace BBBackend {
     type UserID = {"userId": string};
     type Offset = {"offset": number};
@@ -12,10 +10,15 @@ declare namespace BBBackend {
 
     type SendMailParameter = CourseID & {
         "attachments": Blob[],
-        "recipients": EmailRecipient,
+        "recipients": Recipient,
         "returnRecipient": boolean,
         "subject": string,
         "body": string
+    };
+
+    type Recipient = {
+        "targets": string,
+        "navItem": string
     };
 
     type CreateFolderParameter = CourseID & {

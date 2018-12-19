@@ -74,4 +74,14 @@ export default class EmailRecipient {
         }
         return 'cp_send_email_' + postfix;
     }
+
+    /**
+     * Converts this object to a plain JavaScript object to allow passing it through the WindowConnectionManager
+     */
+    public asPlainObject(): BBBackend.Recipient {
+        return {
+            navItem: this.getNavItem(),
+            targets: this.type === 0 ? '' : this.asTargetList()
+        };
+    }
 }

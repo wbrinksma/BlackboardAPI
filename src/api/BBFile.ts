@@ -1,4 +1,3 @@
-import { BBBackend } from "../@types/BBBackend";
 import Backend from "./Backend";
 import BBCourse from "./BBCourse";
 

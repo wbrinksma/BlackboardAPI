@@ -1,4 +1,3 @@
-import {BBBackend} from "../../@types/BBBackend";
 import { BBIframeBackend } from "..";
 import Files from "../../common/BBAbstractBackend/files";
 

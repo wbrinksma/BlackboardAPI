@@ -1,4 +1,3 @@
-import { BBBackend } from "../@types/BBBackend";
 import EmailRecipient from "../common/EmailRecipient";
 import Backend from "./Backend";
 
@@ -71,7 +70,7 @@ export default class BBEmail {
             attachments: this.attachments,
             body: this.message,
             courseId: this.courseId,
-            recipients: this.recipients,
+            recipients: this.recipients.asPlainObject(),
             returnRecipient: this.returnRecipient,
             subject: this.subject
         };

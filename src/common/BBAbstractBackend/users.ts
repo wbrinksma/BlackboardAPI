@@ -1,5 +1,3 @@
-import {BBBackend} from "../../@types/BBBackend";
-
 /**
  * A class that contains all the user-specific functions.
  * @memberof BBAbstractBackend

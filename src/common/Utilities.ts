@@ -26,13 +26,7 @@ export default class Utilities {
     public static getNonceFromForm(doc: HTMLDocument, formName: string): string {
         const form = doc.getElementsByName(formName)[0] as HTMLFormElement;
 
-        for (const input of form.getInputs()) {
-            if (input.name === "blackboard.platform.security.NonceUtil.nonce") {
-                return input.value;
-            }
-        }
-
-        return "";
+        return form.elements["blackboard.platform.security.NonceUtil.nonce"].value || "";
     }
 
     private static readonly SURROGATE_PAIR_REGEXP = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;

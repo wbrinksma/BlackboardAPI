@@ -1,5 +1,3 @@
-import {BBBackend} from "../../@types/BBBackend";
-
 /**
  * A class containing all course-related functions.
  * @memberof BBAbstractBackend

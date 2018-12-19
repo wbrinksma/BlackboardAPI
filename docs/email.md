@@ -8,6 +8,8 @@ Below is an overview with the different options offered to users.
 
 ### General information
 There is no unified form in Blackboard for sending emails. Each option, as elaborated below, has its own page.
+All email options share a common entry point: `/webapps/blackboard/execute/displayEmail?navItem=NAV_ITEM&course_id=_COURSE_ID`.
+All form submissions should be send to `/webapps/blackboard/execute/sendEmail?navItem=NAV_ITEM&course_id=_COURSE_ID`.
 
 #### Hidden inputs shared by all
 - `course_id` - Course id.

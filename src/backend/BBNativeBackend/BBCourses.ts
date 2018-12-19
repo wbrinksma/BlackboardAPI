@@ -1,4 +1,3 @@
-import {BBBackend} from "../../@types/BBBackend";
 import { HTTPRequest } from '../../common';
 import Courses from '../../common/BBAbstractBackend/courses';
 
