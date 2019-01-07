@@ -1,3 +1,5 @@
+/* tslint:disable:max-line-length */
+
 import { BBAbstractBackend, WindowConnectionManager, WindowFunctionCall } from '../../common';
 import BBCourses from './BBCourses';
 import BBEmails from './BBEmails';
@@ -27,12 +29,12 @@ export default class BBIframeBackend extends BBAbstractBackend {
         this.connectionManager = connectionManager;
     }
 
-    public courses = new BBCourses('courses',this);
-    public email = new BBEmails('email',this);
-    public files = new BBFiles('files',this);
-    public groups = new BBGroups('groups',this);
-    public misc = new BBMisc('misc',this);
-    public users = new BBUsers('users',this);
+    public courses = new BBCourses('courses', this);
+    public email = new BBEmails('email', this);
+    public files = new BBFiles('files', this);
+    public groups = new BBGroups('groups', this);
+    public misc = new BBMisc('misc', this);
+    public users = new BBUsers('users', this);
 
     private checkIfInsideIframe(): boolean {
         try {

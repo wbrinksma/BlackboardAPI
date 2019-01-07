@@ -33,6 +33,8 @@
         <button onclick="patchCourseContent(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Patch</button>
         <button onclick="loadCourseContentChildren(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Get Children</button>
         <button onclick="postCourseContentChildren(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Post Child</button>
+        <p>Load Assignments</p>
+        <button onclick="loadAssignments(document.getElementById('cidBox').value)">Get</button>
 
         <h2>Send mail</h2>
         <form>
@@ -173,6 +175,13 @@
                 });
             }
 
+            function loadAssignments(courseId) {
+                course = new BB.BBCourse(courseId);
+                course.getAssignments().then((result) => {
+                    console.log(result);
+                });
+            }
+
 
             function loadCourseChildren(courseId) {
                 course = new BB.BBCourse(courseId);
@@ -236,15 +245,6 @@
                 file.createFolder().then((result) => {
                     console.log(result);
                 })
-            }
-
-            function submitAssignment(courseId, contentId, submission) {
-                var assignment = new BB.BBAssignment(courseId, contentId);
-                assignment.submit(submission).then((result) => {
-                  console.log("submitted!");
-                })
-
-                return assignment;
             }
 
             window.onload = () => {

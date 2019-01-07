@@ -1,6 +1,5 @@
 import Backend from './Backend';
 import BBCourse from './BBCourse';
-import BBAssignment from './BBAssignment';
 import BBEmail from './BBEmail';
 import BBFile from './BBFile';
 import BBGroup from './BBGroup';
@@ -9,7 +8,6 @@ import {BBUserInfo, BBUserInfoById, BBUserInfoByUsername} from './BBUserInfo';
 
 export {
     Backend,
-    BBAssignment,
     BBEmail,
     BBFile,
     BBGroup,

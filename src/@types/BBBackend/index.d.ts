@@ -119,7 +119,5 @@ declare namespace BBBackend {
       readonly decimals: number;
       readonly available: boolean;
       readonly contentId: string;
-      readonly attemptsAllowed: number;
-      readonly scoringModel: string;
     }
 }

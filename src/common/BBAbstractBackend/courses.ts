@@ -58,7 +58,6 @@ export default abstract class Courses {
     public abstract getCourseContent(parameters: BBBackend.CourseID):
     Promise<BBBackend.ICourseContent>;
 
-
     /**
      * Create new course content.
      * @param parameters The parameters to use with this function.
@@ -99,7 +98,6 @@ export default abstract class Courses {
     public abstract getCourseChildren(parameters: BBBackend.CourseID):
     Promise<BBBackend.ICourseChild[]>;
 
-
     /**
      * Post children of course content.
      * @param parameters The parameters to use with this function.
@@ -108,4 +106,10 @@ export default abstract class Courses {
     public abstract postCourseContentChildren(parameters: BBBackend.CourseContentParameter):
     Promise<string>;
 
+    /**
+     * Get all assignments from a specified course.
+     * @param parameters The parameters to use with this function.
+     * @returns A promise containing an array of assignments.
+     */
+     public abstract getAssignments(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]>;
 }

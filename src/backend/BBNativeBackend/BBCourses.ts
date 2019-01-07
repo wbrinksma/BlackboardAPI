@@ -52,7 +52,7 @@ export default class BBCourses extends Courses {
             });
         });
     }
-        
+
     public postCourse(): Promise<string> {
         const path = "/learn/api/public/v1/courses/"
         return new Promise((resolve, reject) => {
@@ -213,9 +213,36 @@ export default class BBCourses extends Courses {
 
                 allCourseChildren.results.forEach((result) => {
                     const resultObject: BBBackend.ICourseChild = {
-                        id: result.id,
+                        created: result.created,
                         datasourceId: result.datasourceId,
-                        created: result.created
+                        id: result.id
+                    };
+
+                    responseInfo.push(resultObject);
+                });
+
+                resolve(responseInfo);
+            });
+        });
+    }
+
+    public getAssignments(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
+        const path: string = "/learn/api/public/v1/courses/" + parameters.courseId + "/gradebook/columns";
+
+        return new Promise((resolve, reject) => {
+            HTTPRequest.getAsync(path).then((response) => {
+                const assignmentInformation = JSON.parse(response);
+                const responseInfo = new Array<BBBackend.IAssignment>();
+
+                assignmentInformation.results.forEach((result) => {
+                    const resultObject: BBBackend.IAssignment = {
+                        available: result.availability.available,
+                        contentId: result.contentId,
+                        decimals: result.score.decimalPlaces,
+                        desc: result.description,
+                        id: result.id,
+                        name: result.name,
+                        possibleScore: result.score.possible
                     };
 
                     responseInfo.push(resultObject);
