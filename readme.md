@@ -17,33 +17,21 @@ This project is still in its infancy, meaning that it will not work fully until 
 
 In this state, the build process uses a makefile which in turn uses npm and the Typescript compiler with seperate configuration files. This might change in the future.
 
-## Project structure
+## Documentation
 
-- All definitions in the `api` folder are used by a client/UI.
+To get started, these markdown files are propbably of use:
 
-- `BBIframeBackend.ts` redirects all calls from the client/UI to
-`BBNativeBackend.ts`.
+- [The structure of the code](docs/project_structure.md)
 
-- `BBNativeBackend.ts` contains all the logic to manage HTTP Requests to the
-actual BlackboardAPI. Once the request has been successful, the response will be
-stored in a specific object defined by `BBBackend.ts` as interface.
+- [How to create an assignment column using the API](docs/column_example.md)
 
-- `BBAbstractBBackend.ts` has an abstract class in which the method signatures are
-defined and documented. The file also has interfaces that are used to structure
-the responses from `BBNativeBackend.ts`.
+- [How to send emails to course members using the API](docs/email.md)
 
 ## Building
 
 ### UNIX
 
-For first run:
-
 ```
-npm i && npm run build
-```
-
-After first run:
-
-```
-npm run build
+$ npm i # only for first run
+$ npm run build
 ```
