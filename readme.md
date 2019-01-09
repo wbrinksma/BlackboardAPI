@@ -28,7 +28,7 @@ In this state, the build process uses a makefile which in turn uses npm and the 
 actual BlackboardAPI. Once the request has been successful, the response will be
 stored in a specific object defined by `BBBackend.ts` as interface.
 
-- `BBBackend.ts` has an abstract class in which the method signatures are
+- `BAbstractBBackend.ts` has an abstract class in which the method signatures are
 defined and documented. The file also has interfaces that are used to structure
 the responses from `BBNativeBackend.ts`.
 

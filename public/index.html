@@ -35,6 +35,16 @@
         <button onclick="postCourseContentChildren(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Post Child</button>
         <p>Load Assignments</p>
         <button onclick="loadAssignments(document.getElementById('cidBox').value)">Get</button>
+        <p>Create Assignment Cloumn</p>
+        <!--form-->
+          <label for="createAssName">Name:</label><br>
+          <input type="text" id="createAssName"><br>
+          <label for="createAssDesc">Description:</label><br>
+          <input type="text" id="createAssDesc"><br>
+          <label for="assScorePossible">Possible score:</label><br>
+          <input type="text" id="assScorePossible"><br>
+          <button onclick="createAssignment()">Create</button>
+        <!--/form-->
 
         <h2>Send mail</h2>
         <form>
@@ -246,6 +256,31 @@
                     console.log(result);
                 })
             }
+
+            function createAssignment() {
+                let name = document.getElementById('createAssName').value;
+                let desc = document.getElementById('createAssDesc').value;
+                let score = document.getElementById('assScorePossible').value;
+                let course = document.getElementById('cidBox').value;
+                let request = new BB.BBCourse(course);
+
+                let json = {
+                    name: name,
+                    description: desc,
+                    score: {
+                        possible: score
+                    },
+                    grading: {
+                        type: "Attempts",
+                        anonymousGrading: {}
+                    }
+                };
+
+                request.createAssignmentCol(JSON.stringify(json)).then((result) => {
+                    console.log(result);
+                });
+            }
+
 
             window.onload = () => {
                 BB.Backend.setBackend(new BB.BBIframeBackend());
