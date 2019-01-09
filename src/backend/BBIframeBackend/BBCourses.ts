@@ -13,7 +13,7 @@ export default class BBCourses extends Courses {
     }
 
     public getEnrolledCourses(parameters: BBBackend.EnrolledCoursesParameter): Promise<BBBackend.ICourseInformation[]> {
-        return  this.backend.sendMessageThroughConnectionManager(this.category, "getEnrolledCourses", parameters);
+        return this.backend.sendMessageThroughConnectionManager(this.category, "getEnrolledCourses", parameters);
     }
 
     public getCourseInformation(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseInformation> {
