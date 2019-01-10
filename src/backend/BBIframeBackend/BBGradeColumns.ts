@@ -15,4 +15,12 @@ export default class BBGradeColumns extends GradeColumns {
     public getAssignmentCol(parameters: BBBackend.ColumnID): Promise<BBBackend.IAssignment> {
         return this.backend.sendMessageThroughConnectionManager(this.category, "getAssignmentCol", parameters);
     }
+
+    public deleteAssignmentCol(parameters: BBBackend.ColumnID): Promise<BBBackend.ITaskComplete> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "deleteAssignmentCol", parameters);
+    }
+
+    public updateAssignmentCol(parameters: BBBackend.UpdateColParameter): Promise<BBBackend.IAssignment> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "updateAssignmentCol", parameters);
+    }
 }

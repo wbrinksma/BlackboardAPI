@@ -37,6 +37,7 @@ declare namespace BBBackend {
     type CourseContentParameter = CourseID & ContentID;
     type AssignmentParameter = CourseID & ContentID;
     type CreateColParameter = CourseID & {"body": string};
+    type UpdateColParameter = CreateColParameter & {"columnId": string};
 
     interface IUserInformation {
         readonly firstName: string;

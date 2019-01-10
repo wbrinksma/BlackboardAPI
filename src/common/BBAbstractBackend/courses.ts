@@ -113,7 +113,7 @@ export default abstract class Courses {
      * @param parameters The parameters to use with this function.
      * @returns A promise containing an array of assignment columns.
      */
-     public abstract getAssignments(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]>;
+     public abstract getAssignmentsCol(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]>;
 
     /**
      * Create a new assignment column.

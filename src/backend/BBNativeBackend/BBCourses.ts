@@ -226,7 +226,7 @@ export default class BBCourses extends Courses {
         });
     }
 
-    public getAssignments(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
+    public getAssignmentsCol(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
         const path: string = "/learn/api/public/v1/courses/" + parameters.courseId + "/gradebook/columns";
 
         return new Promise((resolve, reject) => {

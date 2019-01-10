@@ -110,7 +110,7 @@ function postCourseContentChildren(courseId, contentId) {
 
 function loadAssignments(courseId) {
     course = new BB.BBCourse(courseId);
-    course.getAssignments().then((result) => {
+    course.getAssignmentsCol().then((result) => {
         console.log(result);
     });
 }
@@ -204,10 +204,43 @@ function createAssignment() {
     });
 }
 
+function updateAssignment() {
+    let name = document.getElementById('createAssName').value;
+    let desc = document.getElementById('createAssDesc').value;
+    let score = document.getElementById('assScorePossible').value;
+    let course = document.getElementById('cidBox').value;
+    let assignment = document.getElementById('asBox').value;
+    let column = new BB.BBGradeColumn(course, assignment);
+
+    let json = {
+        name: name,
+        description: desc,
+        score: {
+            possible: score
+        },
+        grading: {
+            type: "Attempts",
+            anonymousGrading: {}
+        }
+    };
+
+    column.updateAssignmentCol(JSON.stringify(json)).then((result) => {
+        console.log(result);
+    });
+}
+
 function getAssignment(courseId, assignmentId) {
     let column = new BB.BBGradeColumn(courseId, assignmentId);
 
     column.getAssignmentCol().then((result) => {
+        console.log(result);
+    });
+}
+
+function delAssignment(courseId, assignmentId) {
+    let column = new BB.BBGradeColumn(courseId, assignmentId);
+
+    column.deleteAssignmentCol().then((result) => {
         console.log(result);
     });
 }
