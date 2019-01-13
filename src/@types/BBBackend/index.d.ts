@@ -5,10 +5,10 @@ declare namespace BBBackend {
     type Offset = {"offset": number};
     type CourseID = {"courseId": string};
     type UserName = {"userName": string};
-    type ContentID = {"contentId": string};
     type UserParameter = {"userId"?: string, "userName"?: string};
     type ContentID = {"contentId": string};
     type ColumnID = {"courseId": string, "columnId": string};
+    type AssignmentID = ColumnID & {"attemptId": string};
 
     type EnrolledCoursesParameter = UserID & Offset;
 
@@ -100,27 +100,40 @@ declare namespace BBBackend {
     }
 
     interface IUserInfo {
-      readonly id: string;
-      readonly username: string;
-      readonly firstname: string;
-      readonly surname: string;
-      readonly student: string;
-      readonly email: string;
+        readonly id: string;
+        readonly username: string;
+        readonly firstname: string;
+        readonly surname: string;
+        readonly student: string;
+        readonly email: string;
     }
 
     interface IGroup {
-      readonly id: string;
-      readonly name: string;
-      readonly desc: string;
+        readonly id: string;
+        readonly name: string;
+        readonly desc: string;
     }
 
     interface IAssignment {
-      readonly id: string;
-      readonly name: string;
-      readonly desc: string;
-      readonly possibleScore: number;
-      readonly decimals: number;
-      readonly available: boolean;
-      readonly contentId: string;
+        readonly id: string;
+        readonly name: string;
+        readonly desc: string;
+        readonly possibleScore: number;
+        readonly decimals: number;
+        readonly available: boolean;
+        readonly contentId: string;
+    }
+
+    interface IAssignmentAttempt {
+        readonly created: string;
+        readonly feedback: string;
+        readonly groupAttemptId: string;
+        readonly id: string;
+        readonly notes: string;
+        readonly score: number;
+        readonly studentComments: string;
+        readonly studentSubmission: string;
+        readonly text: string;
+        readonly userId: string;
     }
 }
