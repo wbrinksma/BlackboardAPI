@@ -6,15 +6,17 @@ export default class Utilities {
      * @param {string} courseId The course id
      * @returns {string} the nonce
      */
-    public static getNonceFromCourseId(courseId: string): string {
+    public static getNonceFromCourseId(courseId: string): Promise<string> {
+        console.log(courseId)
+        return new Promise((resolve, reject) => {
         const noncePath: string = "https://blackboard.nhlstenden.com/webapps/blackboard/execute/modulepage/view?course_id=" + courseId;
         HTTPRequest.getAsync( noncePath ).then( (response) => {
             const parser: DOMParser = new DOMParser();
             const dom: HTMLDocument = parser.parseFromString(response, 'text/html') as HTMLDocument;
             const nonceObject = dom.getElementsByName("blackboard.platform.security.NonceUtil.nonce")[0] as HTMLInputElement;
-            return nonceObject.value;
+            resolve(nonceObject.value);
         });
-        return "";
+        })
     }
 
     /**

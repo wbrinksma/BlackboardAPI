@@ -8,21 +8,8 @@ export default class BBCourse {
 
     constructor(courseId: string = null) {
         this._courseId = {courseId};
-        this.getCourseInformation();
-    }
-
-    get courseId(): string {
-        this.getCourseInformation().then(() => {
-            return this.courseInformation.courseId;
-        });
-        return;
-    }
-
-    get courseName(): string {
-        this.getCourseInformation().then(() => {
-            return this.courseInformation.name;
-        });
-        return;
+        console.log('Creating')
+        this.getCourseInformation()
     }
 
     public getCourseInformation(): Promise<BBBackend.ICourseInformation> {
@@ -32,6 +19,7 @@ export default class BBCourse {
                 return;
             }
             Backend.getBackend().courses.getCourseInformation(this._courseId).then((information) => {
+                console.log('Got information')
                 this.courseInformation = information;
                 resolve(this.courseInformation);
             });

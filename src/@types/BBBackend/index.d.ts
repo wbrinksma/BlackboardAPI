@@ -21,8 +21,8 @@ declare namespace BBBackend {
         "navItem": string
     };
 
-    type CreateFolderParameter = CourseID & {
-        "courseName": string,
+    type FolderParameter = CourseID & {
+        "id": string,
         "folderName": string
     };
 

@@ -61,10 +61,12 @@
                     )">Send!</button>
         </form>
         <h2>Files</h2>
-        <button onclick="createFolder(document.getElementById('cidBox').value)">Create Folder</button>
+        <input type="text" id="folderBox" value="Test">
+        <button onclick="createFolder(document.getElementById('cidBox').value,document.getElementById('folderBox').value)">Create Folder</button>
+        <button onclick="deleteFolder(document.getElementById('cidBox').value,document.getElementById('folderBox').value)">Delete Folder</button>
         <script>
-            let user = null;
-            let course = null;
+            var user = null;
+            var course = null;
 
             function loadUserByUserId(userId) {
                 let user = new BB.BBUserInfoById(userId);
@@ -79,20 +81,20 @@
 
             function loadEnrolledCourses(userId) {
                 if(user == null) {
-                    user = userId[0] === '_' ? new BB.BBUserInfoById(userId) : new BB.BBUserInfoByUsername(userId);
+                    user = userId[0] == '_' ? new BB.BBUserInfoById(userId) : new BB.BBUserInfoByUsername(userId);
                 }
                 user.getEnrolledCourses().then((result) => {
                     console.log(result);
 
-                });
-                return user;
+                })
+                return user
             }
 
             function loadCourse(courseId) {
                 course = new BB.BBCourse(courseId);
-                course.getCourse().then((result) => {
+                course.getCourseInformation().then((result) => {
                     console.log(result);
-                });
+                })
             }
             function loadUserByUserName(userName) {
                 let user = new BB.BBUserInfoByUsername(userName);
@@ -107,70 +109,70 @@
                 course = new BB.BBCourse();
                 course.postCourse().then((result) => {
                     console.log(result);
-                });
+                })
             }
 
             function deleteCourse(courseId) {
                 course = new BB.BBCourse(courseId);
                 course.deleteCourse().then((result) => {
                     console.log(result);
-                });
+                })
             }
 
             function patchCourse(courseId) {
                 course = new BB.BBCourse(courseId);
                 course.patchCourse().then((result) => {
                     console.log(result);
-                });
+                })
             }
 
             function loadCourseContents(courseId) {
                 course = new BB.BBCourse(courseId);
                 course.getCourseContents().then((result) => {
                     console.log(result);
-                });
+                })
             }
 
             function postCourseContent(courseId) {
                 course = new BB.BBCourse(courseId);
                 course.postCourseContent().then((result) => {
                     console.log(result);
-                });
+                })
             }
 
             function deleteCourseContent(courseId, contentId) {
                 course = new BB.BBCourse(courseId);
                 course.deleteCourseContent(contentId).then((result) => {
                     console.log(result);
-                });
+                })
             }
 
             function patchCourseContent(courseId, contentId) {
                 course = new BB.BBCourse(courseId);
                 course.patchCourseContent(contentId).then((result) => {
                     console.log(result);
-                });
+                })
             }
 
             function loadCourseContent(courseId, contentId) {
                 course = new BB.BBCourse(courseId);
                 course.getCourseContent(contentId).then((result) => {
                     console.log(result);
-                });
+                })
             }
 
             function loadCourseContentChildren(courseId, contentId) {
                 course = new BB.BBCourse(courseId);
                 course.getCourseContentChildren(contentId).then((result) => {
                     console.log(result);
-                });
+                })
             }
 
             function postCourseContentChildren(courseId, contentId) {
                 course = new BB.BBCourse(courseId);
                 course.postCourseContentChildren(contentId).then((result) => {
                     console.log(result);
-                });
+                })
             }
 
 
@@ -178,7 +180,7 @@
                 course = new BB.BBCourse(courseId);
                 course.getCourseChildren().then((result) => {
                     console.log(result);
-                });
+                })
             }
 
             /**
@@ -227,14 +229,21 @@
                 });
             }
 
-            function createFolder(courseId){
+            function createFolder(courseId,name){
                 if(course == null){
                     course = new BB.BBCourse(courseId);
                 }
-                let file = new BB.BBFile(course);
-                console.log(file);
-                file.createFolder().then((result) => {
-                    console.log(result);
+                file = new BB.BBFile(course);
+                file.createFolder(name).then((result) => {
+                })
+            }
+
+            function deleteFolder(courseId,name){
+                if(course == null){
+                    course = new BB.BBCourse(courseId);
+                }
+                file = new BB.BBFile(course);
+                file.deleteFolder(name).then((result) => {
                 })
             }
 

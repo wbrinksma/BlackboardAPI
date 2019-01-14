@@ -22,23 +22,27 @@ export default class WindowConnectionManager {
         if (onReturn) {
             this.callbackList[message.uuid] = onReturn;
         }
-
         this.window.postMessage(message, "*");
     }
 
     private static receiveMessage(connectionManager: WindowConnectionManager, event: MessageEvent) {
         const message = WindowMessageFactory.fromJson(event.data);
 
+        console.log(message)
         if (message instanceof WindowFunctionCall) {
             if (connectionManager.backend) {
                 const fcMessage: WindowFunctionCall = message;
+                console.log('Call')
+                console.log(fcMessage)
+                console.log(connectionManager.backend[fcMessage.category][fcMessage.methodSignature])
                 connectionManager.backend[fcMessage.category][fcMessage.methodSignature](fcMessage.parameters).then((value) => {
+                    console.log('Result')
+                    console.log(value)
                     connectionManager.sendMessage(new WindowFunctionReturn(value, fcMessage.uuid));
                 });
             }
         } else if (message instanceof WindowFunctionReturn) {
             const frMessage: WindowFunctionReturn = message;
-
             if (frMessage.uuid in connectionManager.callbackList) {
                 connectionManager.callbackList[frMessage.uuid](frMessage.returnValue);
                 delete connectionManager.callbackList[frMessage.uuid];

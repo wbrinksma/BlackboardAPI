@@ -29,7 +29,7 @@ export default class BBCourses extends Courses {
                 const courseInformation = JSON.parse(response);
 
                 const resultObject: BBBackend.ICourseInformation = {
-                    id: courseInformation.courseId,
+                    id: courseInformation.id,
                     uuid: courseInformation.uuid,
                     externalId: courseInformation.externalId,
                     dataSourceId: courseInformation.dataSourceId,
@@ -49,6 +49,8 @@ export default class BBCourses extends Courses {
                     hasChildren: courseInformation.hasChildren,
                     parentId: courseInformation.parentId
                 }
+
+                resolve(resultObject)
             });
         });
     }

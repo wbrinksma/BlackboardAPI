@@ -19,7 +19,11 @@ export default class BBFiles extends Files {
         return this.backend.sendMessageThroughConnectionManager(this.category, "setFileBody", parameters);
     }
 
-    public createFolder(parameters: BBBackend.CreateFolderParameter): Promise<BBBackend.ITaskComplete> {
+    public createFolder(parameters: BBBackend.FolderParameter): Promise<BBBackend.ITaskComplete> {
         return this.backend.sendMessageThroughConnectionManager( this.category, "createFolder", parameters );
+    }
+
+    public deleteFolder(parameters: BBBackend.FolderParameter): Promise<BBBackend.ITaskComplete> {
+        return this.backend.sendMessageThroughConnectionManager( this.category, "deleteFolder", parameters );
     }
 }

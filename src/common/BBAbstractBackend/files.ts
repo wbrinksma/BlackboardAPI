@@ -22,5 +22,12 @@ export default abstract class Files {
      * @param parameters The parameters to use with this function.
      * @returns A promise which indicates when the task is complete.
      */
-    public abstract createFolder(parameters: BBBackend.CreateFolderParameter): Promise<BBBackend.ITaskComplete>;
+    public abstract createFolder(parameters: BBBackend.FolderParameter): Promise<BBBackend.ITaskComplete>;
+
+        /**
+     * Delete a folder in the content management system
+     * @param parameters The parameters to use with this function.
+     * @returns A promise which indicates when the task is complete.
+     */
+    public abstract deleteFolder(parameters: BBBackend.FolderParameter): Promise<BBBackend.ITaskComplete>;
 }
