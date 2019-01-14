@@ -181,15 +181,28 @@ export default class BBCourse {
         });
     }
 
-    public getAssignments(): Promise<BBBackend.IAssignment[]> {
+    public getAssignmentsCol(): Promise<BBBackend.IAssignment[]> {
         return new Promise((resolve, reject) => {
             if (this.assignments) {
                 resolve(this.assignments);
                 return;
             }
 
-            Backend.getBackend().courses.getAssignments(this._courseId).then((assignments) => {
+            Backend.getBackend().courses.getAssignmentsCol(this._courseId).then((assignments) => {
                 resolve(assignments);
+            });
+        });
+    }
+
+    public createAssignmentCol(config: string): Promise<BBBackend.IAssignment> {
+        return new Promise((resolve, reject) => {
+            const parameters: BBBackend.CreateColParameter = {
+                courseId: this._courseId.courseId,
+                body: config
+            };
+
+            Backend.getBackend().courses.createAssignmentCol(parameters).then((assignment) => {
+                resolve(assignment);
             });
         });
     }
