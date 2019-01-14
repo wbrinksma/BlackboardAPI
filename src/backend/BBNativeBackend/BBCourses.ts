@@ -54,7 +54,7 @@ export default class BBCourses extends Courses {
             });
         });
     }
-        
+
     public postCourse(): Promise<string> {
         const path = "/learn/api/public/v1/courses/"
         return new Promise((resolve, reject) => {
@@ -215,9 +215,9 @@ export default class BBCourses extends Courses {
 
                 allCourseChildren.results.forEach((result) => {
                     const resultObject: BBBackend.ICourseChild = {
-                        id: result.id,
+                        created: result.created,
                         datasourceId: result.datasourceId,
-                        created: result.created
+                        id: result.id
                     };
 
                     responseInfo.push(resultObject);
@@ -226,5 +226,57 @@ export default class BBCourses extends Courses {
                 resolve(responseInfo);
             });
         });
+    }
+
+    public getAssignmentsCol(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
+        const path: string = "/learn/api/public/v1/courses/" + parameters.courseId + "/gradebook/columns";
+
+        return new Promise((resolve, reject) => {
+            HTTPRequest.getAsync(path).then((response) => {
+                const assignmentInformation = JSON.parse(response);
+                const responseInfo = new Array<BBBackend.IAssignment>();
+
+                assignmentInformation.results.forEach((result) => {
+                    const resultObject: BBBackend.IAssignment = {
+                        available: result.availability.available,
+                        contentId: result.contentId,
+                        decimals: result.score.decimalPlaces,
+                        desc: result.description,
+                        id: result.id,
+                        name: result.name,
+                        possibleScore: result.score.possible
+                    };
+
+                    responseInfo.push(resultObject);
+                });
+
+                resolve(responseInfo);
+            });
+        });
+    }
+
+    public createAssignmentCol(parameters: BBBackend.CreateColParameter): Promise<BBBackend.IAssignment> {
+      const path: string = "/learn/api/public/v1/courses/" + parameters.courseId + "/gradebook/columns";
+      const formData = new FormData();
+
+      formData.append('courseId', parameters.courseId); // Obsolete?
+      formData.append('input', parameters.body);
+
+      return new Promise((resolve, reject) => {
+        HTTPRequest.postAsync(path, formData).then((response) => {
+          const information = JSON.parse(response);
+          const column: BBBackend.IAssignment = {
+            available: information.availability.available,
+            contentId: information.contentId,
+            decimals: information.decimals,
+            desc: information.description,
+            id: information.id,
+            name: information.name,
+            possibleScore: information.score.possible
+          };
+
+          resolve(column);
+        });
+      });
     }
 }

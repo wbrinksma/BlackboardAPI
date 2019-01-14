@@ -1,3 +1,5 @@
+/* tslint:disable:no-namespace */
+
 declare namespace BBBackend {
     type UserID = {"userId": string};
     type Offset = {"offset": number};
@@ -5,6 +7,8 @@ declare namespace BBBackend {
     type UserName = {"userName": string};
     type UserParameter = {"userId"?: string, "userName"?: string};
     type ContentID = {"contentId": string};
+    type ColumnID = {"courseId": string, "columnId": string};
+    type AssignmentID = ColumnID & {"attemptId": string};
 
     type EnrolledCoursesParameter = UserID & Offset;
 
@@ -31,6 +35,9 @@ declare namespace BBBackend {
     type FileBodyParameter = FileInfoParameter & {"body": string};
 
     type CourseContentParameter = CourseID & ContentID;
+    type AssignmentParameter = CourseID & ContentID;
+    type CreateColParameter = CourseID & {"body": string};
+    type UpdateColParameter = CreateColParameter & {"columnId": string};
 
     interface IUserInformation {
         readonly firstName: string;
@@ -93,17 +100,40 @@ declare namespace BBBackend {
     }
 
     interface IUserInfo {
-      readonly id: string;
-      readonly username: string;
-      readonly firstname: string;
-      readonly surname: string;
-      readonly student: string;
-      readonly email: string;
+        readonly id: string;
+        readonly username: string;
+        readonly firstname: string;
+        readonly surname: string;
+        readonly student: string;
+        readonly email: string;
     }
 
     interface IGroup {
-      readonly id: string;
-      readonly name: string;
-      readonly desc: string;
+        readonly id: string;
+        readonly name: string;
+        readonly desc: string;
+    }
+
+    interface IAssignment {
+        readonly id: string;
+        readonly name: string;
+        readonly desc: string;
+        readonly possibleScore: number;
+        readonly decimals: number;
+        readonly available: boolean;
+        readonly contentId: string;
+    }
+
+    interface IAssignmentAttempt {
+        readonly created: string;
+        readonly feedback: string;
+        readonly groupAttemptId: string;
+        readonly id: string;
+        readonly notes: string;
+        readonly score: number;
+        readonly studentComments: string;
+        readonly studentSubmission: string;
+        readonly text: string;
+        readonly userId: string;
     }
 }

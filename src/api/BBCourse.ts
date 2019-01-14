@@ -1,3 +1,5 @@
+/* tslint:disable:object-literal-sort-keys */
+
 import Backend from './Backend';
 
 export default class BBCourse {
@@ -5,6 +7,7 @@ export default class BBCourse {
     private courseInformation: BBBackend.ICourseInformation;
     private courseContents: BBBackend.ICourseContent[];
     private courseChildren: BBBackend.ICourseChild[];
+    private assignments: BBBackend.IAssignment[];
 
     constructor(courseId: string = null) {
         this._courseId = {courseId};
@@ -82,8 +85,8 @@ export default class BBCourse {
     public getCourseContent(contentId: string): Promise<BBBackend.ICourseContent> {
         return new Promise((resolve, reject) => {
             if (this.courseContents) {
-                this.courseContents.forEach(element => {
-                    if(element.id == contentId){
+                this.courseContents.forEach((element) => {
+                    if (element.id == contentId) {
                         resolve(element);
                         return;
                     }
@@ -162,6 +165,32 @@ export default class BBCourse {
 
             Backend.getBackend().courses.postCourseContentChildren(parameters).then((course) => {
                 resolve(course);
+            });
+        });
+    }
+
+    public getAssignmentsCol(): Promise<BBBackend.IAssignment[]> {
+        return new Promise((resolve, reject) => {
+            if (this.assignments) {
+                resolve(this.assignments);
+                return;
+            }
+
+            Backend.getBackend().courses.getAssignmentsCol(this._courseId).then((assignments) => {
+                resolve(assignments);
+            });
+        });
+    }
+
+    public createAssignmentCol(config: string): Promise<BBBackend.IAssignment> {
+        return new Promise((resolve, reject) => {
+            const parameters: BBBackend.CreateColParameter = {
+                courseId: this._courseId.courseId,
+                body: config
+            };
+
+            Backend.getBackend().courses.createAssignmentCol(parameters).then((assignment) => {
+                resolve(assignment);
             });
         });
     }

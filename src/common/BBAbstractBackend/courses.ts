@@ -1,3 +1,5 @@
+/* tslint:disable:max-line-length */
+
 /**
  * A class containing all course-related functions.
  * @memberof BBAbstractBackend
@@ -58,7 +60,6 @@ export default abstract class Courses {
     public abstract getCourseContent(parameters: BBBackend.CourseID):
     Promise<BBBackend.ICourseContent>;
 
-
     /**
      * Create new course content.
      * @param parameters The parameters to use with this function.
@@ -99,7 +100,6 @@ export default abstract class Courses {
     public abstract getCourseChildren(parameters: BBBackend.CourseID):
     Promise<BBBackend.ICourseChild[]>;
 
-
     /**
      * Post children of course content.
      * @param parameters The parameters to use with this function.
@@ -108,4 +108,19 @@ export default abstract class Courses {
     public abstract postCourseContentChildren(parameters: BBBackend.CourseContentParameter):
     Promise<string>;
 
+    /**
+     * Get all assignment columns from a specified course.
+     * @param parameters The parameters to use with this function.
+     * @returns A promise containing an array of assignment columns.
+     */
+     public abstract getAssignmentsCol(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]>;
+
+    /**
+     * Create a new assignment column.
+     * @param parameters The parameters to use with this function, including a config body.
+     * A config body is a string containing a JSON with info on how the column should look like.
+     * @see {@link docs/column_example.md|docs/column_example.md} for an example of a config body.
+     * @returns A promise containing the newly created assignment column.
+     */
+     public abstract createAssignmentCol(parameters: BBBackend.CreateColParameter): Promise<BBBackend.IAssignment>;
 }

@@ -33,6 +33,33 @@
         <button onclick="patchCourseContent(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Patch</button>
         <button onclick="loadCourseContentChildren(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Get Children</button>
         <button onclick="postCourseContentChildren(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Post Child</button>
+        <h2>Assignments</h2>
+        <h3>Assignment Columns</h3>
+        <label for="asBox">Assignment ID:</label><br>
+        <input type="text" id="asBox" value="_213466_1"><br>
+        <button onclick="getAssignment(document.getElementById('cidBox').value, document.getElementById('asBox').value)">Get</button>
+        <button onclick="delAssignment(document.getElementById('cidBox').value, document.getElementById('asBox').value)">Delete</button>
+        <button onclick="updateAssignment()">Update</button>
+        <h3>Load Assignments</h3>
+        <button onclick="loadAssignments(document.getElementById('cidBox').value)">Get</button>
+        <h3>Create Assignment Column</h3>
+        <!--form-->
+          <label for="createAssName">Name:</label><br>
+          <input type="text" id="createAssName"><br>
+          <label for="createAssDesc">Description:</label><br>
+          <input type="text" id="createAssDesc"><br>
+          <label for="assScorePossible">Possible score:</label><br>
+          <input type="text" id="assScorePossible"><br>
+          <button onclick="createAssignment()">Create</button>
+        <!--/form-->
+        <h3>Get Assignment attempts</h3>
+        <label for="assigAttBox">Assignment Attempt:</label><br>
+        <input type="text" id="assigAttBox">
+        <button onclick="loadAssignmentAttempt(
+                    document.getElementById('cidBox').value,
+                    document.getElementById('asBox').value,
+                    document.getElementById('assigAttBox').value,
+                )">Get</button>
 
         <h2>Send mail</h2>
         <form>
@@ -64,194 +91,8 @@
         <input type="text" id="folderBox" value="Test">
         <button onclick="createFolder(document.getElementById('cidBox').value,document.getElementById('folderBox').value)">Create Folder</button>
         <button onclick="deleteFolder(document.getElementById('cidBox').value,document.getElementById('folderBox').value)">Delete Folder</button>
-        <script>
-            var user = null;
-            var course = null;
 
-            function loadUserByUserId(userId) {
-                let user = new BB.BBUserInfoById(userId);
-                user.getUserInfo().then((result) => {
-                    console.log(result);
-                });
-
-                console.log(user.getUserName);
-
-                return user;
-            }
-
-            function loadEnrolledCourses(userId) {
-                if(user == null) {
-                    user = userId[0] == '_' ? new BB.BBUserInfoById(userId) : new BB.BBUserInfoByUsername(userId);
-                }
-                user.getEnrolledCourses().then((result) => {
-                    console.log(result);
-
-                })
-                return user
-            }
-
-            function loadCourse(courseId) {
-                course = new BB.BBCourse(courseId);
-                course.getCourseInformation().then((result) => {
-                    console.log(result);
-                })
-            }
-            function loadUserByUserName(userName) {
-                let user = new BB.BBUserInfoByUsername(userName);
-                user.getUserInfo().then((result) => {
-                    console.log(result);
-                });
-
-                console.log(user.getUserId);
-            }
-
-            function postCourse() {
-                course = new BB.BBCourse();
-                course.postCourse().then((result) => {
-                    console.log(result);
-                })
-            }
-
-            function deleteCourse(courseId) {
-                course = new BB.BBCourse(courseId);
-                course.deleteCourse().then((result) => {
-                    console.log(result);
-                })
-            }
-
-            function patchCourse(courseId) {
-                course = new BB.BBCourse(courseId);
-                course.patchCourse().then((result) => {
-                    console.log(result);
-                })
-            }
-
-            function loadCourseContents(courseId) {
-                course = new BB.BBCourse(courseId);
-                course.getCourseContents().then((result) => {
-                    console.log(result);
-                })
-            }
-
-            function postCourseContent(courseId) {
-                course = new BB.BBCourse(courseId);
-                course.postCourseContent().then((result) => {
-                    console.log(result);
-                })
-            }
-
-            function deleteCourseContent(courseId, contentId) {
-                course = new BB.BBCourse(courseId);
-                course.deleteCourseContent(contentId).then((result) => {
-                    console.log(result);
-                })
-            }
-
-            function patchCourseContent(courseId, contentId) {
-                course = new BB.BBCourse(courseId);
-                course.patchCourseContent(contentId).then((result) => {
-                    console.log(result);
-                })
-            }
-
-            function loadCourseContent(courseId, contentId) {
-                course = new BB.BBCourse(courseId);
-                course.getCourseContent(contentId).then((result) => {
-                    console.log(result);
-                })
-            }
-
-            function loadCourseContentChildren(courseId, contentId) {
-                course = new BB.BBCourse(courseId);
-                course.getCourseContentChildren(contentId).then((result) => {
-                    console.log(result);
-                })
-            }
-
-            function postCourseContentChildren(courseId, contentId) {
-                course = new BB.BBCourse(courseId);
-                course.postCourseContentChildren(contentId).then((result) => {
-                    console.log(result);
-                })
-            }
-
-
-            function loadCourseChildren(courseId) {
-                course = new BB.BBCourse(courseId);
-                course.getCourseChildren().then((result) => {
-                    console.log(result);
-                })
-            }
-
-            /**
-             *
-             * @param {string} target
-             * @param {string} subject
-             * @param {string} body
-             * @param {FileList} attachments
-             */
-            function sendMail(target, subject, body, attachments) {
-                let emailTarget;
-                switch (target) {
-                    case "AllUsers":
-                        emailTarget = BB.EmailTarget.AllUsers;
-                        break;
-                    case "AllGroups":
-                        emailTarget = BB.EmailTarget.AllGroups;
-                        break;
-                    case "AllTeachers":
-                        emailTarget = BB.EmailTarget.AllTeachers;
-                        break;
-                    case "AllStudents":
-                        emailTarget = BB.EmailTarget.AllStudents;
-                        break;
-                    case "AllCourseManagers":
-                        emailTarget = BB.EmailTarget.AllCourseManagers;
-                        break;
-                    case "AllObservers":
-                        emailTarget = BB.EmailTarget.AllObservers;
-                        break;
-                    default:
-                        throw new Error('Not supported target!');
-                }
-
-                const recipient = new BB.EmailRecipient(emailTarget);
-                let email = new BB.BBEmail('_20166_1', recipient);
-                email.message = body;
-                email.subject = subject;
-
-                for (let i = 0; i < attachments.length; i++) {
-                    email.addAttachment(attachments.item(i));
-                }
-
-                email.send().then((result)=> {
-                    console.log(result);
-                });
-            }
-
-            function createFolder(courseId,name){
-                if(course == null){
-                    course = new BB.BBCourse(courseId);
-                }
-                file = new BB.BBFile(course);
-                file.createFolder(name).then((result) => {
-                })
-            }
-
-            function deleteFolder(courseId,name){
-                if(course == null){
-                    course = new BB.BBCourse(courseId);
-                }
-                file = new BB.BBFile(course);
-                file.deleteFolder(name).then((result) => {
-                })
-            }
-
-            window.onload = () => {
-                BB.Backend.setBackend(new BB.BBIframeBackend());
-            }
-        </script>
-
+        <script src="index.js"></script>
         <script src="client.js"></script>
     </body>
 </html>

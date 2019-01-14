@@ -1,7 +1,10 @@
+/* tslint:disable:max-line-length */
+
 import { BBAbstractBackend, WindowConnectionManager, WindowFunctionCall } from '../../common';
 import BBCourses from './BBCourses';
 import BBEmails from './BBEmails';
 import BBFiles from './BBFiles';
+import BBGradeColumns from './BBGradeColumns';
 import BBGroups from './BBGroups';
 import BBMisc from './BBMisc';
 import BBUsers from './BBUsers';
@@ -27,12 +30,13 @@ export default class BBIframeBackend extends BBAbstractBackend {
         this.connectionManager = connectionManager;
     }
 
-    public courses = new BBCourses('courses',this);
-    public email = new BBEmails('email',this);
-    public files = new BBFiles('files',this);
-    public groups = new BBGroups('groups',this);
-    public misc = new BBMisc('misc',this);
-    public users = new BBUsers('users',this);
+    public courses = new BBCourses('courses', this);
+    public email = new BBEmails('email', this);
+    public files = new BBFiles('files', this);
+    public gradeColumns = new BBGradeColumns('gradeColumns', this);
+    public groups = new BBGroups('groups', this);
+    public misc = new BBMisc('misc', this);
+    public users = new BBUsers('users', this);
 
     private checkIfInsideIframe(): boolean {
         try {
