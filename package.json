@@ -9,6 +9,7 @@
         "compile-backend": "tsc -p backend.tsconfig.json",
         "build": "webpack --config webpack/webpack.config.js",
         "compile-test": "tsc -p test.tsconfig.json",
+        "lint": "tslint -p tsconfig.json",
         "test": "jest"
     },
     "author": "wbrinksma",

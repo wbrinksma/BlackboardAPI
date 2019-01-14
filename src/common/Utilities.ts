@@ -55,4 +55,20 @@ export default class Utilities {
             replace(/</g, '&lt;').
             replace(/>/g, '&gt;');
     }
+
+    /**
+     * Helper to determine if the given string is true or false, outside JavaScript's regular way of determining it.
+     * In this case, values 'on', 'true' and 'yes' are considered true + an approximation of the atoi() function from C.
+     * BlackBoard sometimes returns boolean results as a string holding 'yes' or 'no'.
+     *
+     *
+     * Based on the wfStringToBool function used by MediaWiki:
+     * https://phabricator.wikimedia.org/source/mediawiki/browse/master/includes/GlobalFunctions.php
+     *
+     * @param {string} value
+     * @return boolean representation of the string
+     */
+    public static stringToBoolean(value: string): boolean {
+        return value === 'on' || value === 'true' || value === 'yes' || /^\s*[+-]?0*[1-9]/.test(value);
+    }
 }

@@ -33,9 +33,16 @@
         <button onclick="patchCourseContent(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Patch</button>
         <button onclick="loadCourseContentChildren(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Get Children</button>
         <button onclick="postCourseContentChildren(document.getElementById('cidBox').value, document.getElementById('contentBox').value)">Post Child</button>
-        <p>Load Assignments</p>
+        <h2>Assignments</h2>
+        <h3>Assignment Columns</h3>
+        <label for="asBox">Assignment ID:</label><br>
+        <input type="text" id="asBox" value="_213466_1"><br>
+        <button onclick="getAssignment(document.getElementById('cidBox').value, document.getElementById('asBox').value)">Get</button>
+        <button onclick="delAssignment(document.getElementById('cidBox').value, document.getElementById('asBox').value)">Delete</button>
+        <button onclick="updateAssignment()">Update</button>
+        <h3>Load Assignments</h3>
         <button onclick="loadAssignments(document.getElementById('cidBox').value)">Get</button>
-        <p>Create Assignment Cloumn</p>
+        <h3>Create Assignment Column</h3>
         <!--form-->
           <label for="createAssName">Name:</label><br>
           <input type="text" id="createAssName"><br>
@@ -45,6 +52,14 @@
           <input type="text" id="assScorePossible"><br>
           <button onclick="createAssignment()">Create</button>
         <!--/form-->
+        <h3>Get Assignment attempts</h3>
+        <label for="assigAttBox">Assignment Attempt:</label><br>
+        <input type="text" id="assigAttBox">
+        <button onclick="loadAssignmentAttempt(
+                    document.getElementById('cidBox').value,
+                    document.getElementById('asBox').value,
+                    document.getElementById('assigAttBox').value,
+                )">Get</button>
 
         <h2>Send mail</h2>
         <form>
@@ -74,13 +89,6 @@
         </form>
         <h2>Files</h2>
         <button onclick="createFolder(document.getElementById('cidBox').value)">Create Folder</button>
-
-        <h2>Assignment Columns</h2>
-        <label for="asBox">Assignment ID:</label><br>
-        <input type="text" id="asBox" value="_213466_1"><br>
-        <button onclick="getAssignment(document.getElementById('cidBox').value, document.getElementById('asBox').value)">Get</button>
-        <button onclick="delAssignment(document.getElementById('cidBox').value, document.getElementById('asBox').value)">Delete</button>
-        <button onclick="updateAssignment()">Update</button>
 
         <script src="index.js"></script>
         <script src="client.js"></script>

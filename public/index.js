@@ -245,7 +245,19 @@ function delAssignment(courseId, assignmentId) {
     });
 }
 
+/**
+ * @param {string} courseId
+ * @param {string} assignmentColumnId
+ * @param {string} assignmentId
+ */
+function loadAssignmentAttempt(courseId, assignmentColumnId, assignmentId) {
+    let attempt = new BB.BBAssignmentAttempt(courseId, assignmentColumnId, assignmentId);
+
+    attempt.getAttemptInformation().then((result) => {
+        console.log(result);
+    });
+}
 
 window.onload = () => {
     BB.Backend.setBackend(new BB.BBIframeBackend());
-}
+};
