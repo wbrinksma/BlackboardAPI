@@ -19,6 +19,12 @@ export default class HTTPRequest {
             getRequest.send(formData);
         });
     }
+    public static syncRequest(type: string, url: string, formData: FormData = null): string {
+        const getRequest = new XMLHttpRequest();
+        getRequest.open(type, url, false);
+        getRequest.send(formData);
+        return getRequest.status === 200 ? getRequest.responseText : getRequest.statusText;
+    }
     public static getAsync(url: string): Promise<string> {
         return this.asyncRequest("GET", url);
     }
@@ -27,8 +33,8 @@ export default class HTTPRequest {
         return this.asyncRequest("POST", url, formData);
     }
 
-    public static deleteAsync(url: string): Promise<string> {
-        return this.asyncRequest("DELETE", url);
+    public static deleteAsync(url: string, formData: FormData): Promise<string> {
+        return this.asyncRequest("DELETE", url, formData);
     }
 
     public static patchAsync(url: string, formData: FormData): Promise<string> {
