@@ -1,4 +1,4 @@
-import { HTTPRequest } from '../../common';
+import { HTTPRequest, Utilities } from '../../common';
 import Courses from '../../common/BBAbstractBackend/courses';
 
 export default class BBCourses extends Courses {
@@ -65,7 +65,7 @@ export default class BBCourses extends Courses {
     public deleteCourse(parameters: BBBackend.CourseID): Promise<string> {
         const path = "/learn/api/public/v1/courses/" + parameters.courseId;
         return new Promise((resolve, reject) => {
-            HTTPRequest.deleteAsync(path).then((response) => {
+            HTTPRequest.deleteAsync(path, null).then((response) => {
                 resolve(response);
             });
         });
@@ -123,7 +123,7 @@ export default class BBCourses extends Courses {
     public deleteCourseContent(parameters: BBBackend.CourseContentParameter): Promise<string> {
         const path = "/learn/api/public/v1/courses/" + parameters.courseId + '/contents/' + parameters.contentId
         return new Promise((resolve, reject) => {
-            HTTPRequest.deleteAsync(path).then((response) => {
+            HTTPRequest.deleteAsync(path, null).then((response) => {
                 resolve(response);
             });
         });
@@ -254,11 +254,18 @@ export default class BBCourses extends Courses {
     }
 
     public createAssignmentCol(parameters: BBBackend.CreateColParameter): Promise<BBBackend.IAssignment> {
-      const path: string = "/learn/api/public/v1/courses/" + parameters.courseId + "/gradebook/columns";
+      const path: string = "https://blackboard.nhlstenden.com/webapps/gradebook/do/instructor/addModifyItemDefinition";
+      const nonce = Utilities.getNonceFromCourseId(parameters.courseId);
+      const body = JSON.parse(parameters.body);
       const formData = new FormData();
 
-      formData.append('courseId', parameters.courseId); // Obsolete?
-      formData.append('input', parameters.body);
+      formData.append('blackboard.platform.security.NonceUtil.nonce', nonce);
+      formData.append('courseId', parameters.courseId);
+      formData.append('actionType', 'create');
+
+      for(var key in body) {
+        formData.append(key, body[key]);
+      }
 
       return new Promise((resolve, reject) => {
         HTTPRequest.postAsync(path, formData).then((response) => {

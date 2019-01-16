@@ -188,15 +188,37 @@ function createAssignment() {
     let request = new BB.BBCourse(course);
 
     let json = {
-        name: name,
-        description: desc,
-        score: {
-            possible: score
-        },
-        grading: {
-            type: "Attempts",
-            anonymousGrading: {}
-        }
+        columnName: name,
+        gradebookDisplayName: desc,
+        descriptiontext_f: "",
+        descriptiontext_w: "",
+        rubrics_gradableItem: "",
+        duedate_datetime: "",
+        pickdate: "",
+        pickname: "",
+        duedate_date: "",
+        gradeableItemId: "",
+        originalPrimarySchema: "",
+        duedate_time: "",
+        pointsDisplay: score,
+        courseId: course,
+        position: 0,
+        scorable: true,
+        visible: true,
+        hideAttempt: false,
+        descriptiontype: "H",
+        textbox_prefix: "descriptiontext",
+        descriptiontext: "<p>:)</p>",
+        primarySchemaChanged: false,
+        bottom_Submit: "Submit",
+        usedInCalculation: false
+        // score: {
+        //     possible: score
+        // },
+        // grading: {
+        //     type: "Attempts",
+        //     anonymousGrading: {}
+        // }
     };
 
     request.createAssignmentCol(JSON.stringify(json)).then((result) => {
