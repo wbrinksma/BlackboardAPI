@@ -1,5 +1,5 @@
 {
-    "name": "blackboardapi",
+    "name": "blackboardlib",
     "version": "0.0.3",
     "description": "API for communication with Blackboard",
     "scripts": {
