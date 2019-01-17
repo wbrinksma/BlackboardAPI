@@ -8,6 +8,6 @@
         "removeComments": true
     },
     "include": [
-        "src/test/*"
+        "lib/test/*"
     ]
 }
