@@ -20,10 +20,10 @@ export default class BBFiles extends Files {
         });
     }
 
-    public uploadFile(file: Blob): Promise<BBBackend.FileId> {
+    public uploadFile(parameters: BBBackend.FileUpload): Promise<BBBackend.FileId> {
         const path: string = "/learn/api/public/v1/uploads";
         const formData: FormData = new FormData();
-        formData.append('file', file);
+        formData.append('file', parameters.file);
 
         return new Promise((resolve, reject) => {
             HTTPRequest.postAsync(path, formData).then((response) => {

@@ -27,8 +27,8 @@ export default abstract class Files {
     /**
      * Upload a file to Blackboard's temporary storage.
      * The returned id is used in other parts of Blackboard to refer to the file.
-     * @param {Blob} file a file.
+     * @param parameters The parameters to use with this function.
      * @returns A promise with the id of the uploaded file to use in other parts of Blackboard.
      */
-    public abstract uploadFile(file: Blob): Promise<BBBackend.FileId>;
+    public abstract uploadFile(parameters: BBBackend.FileUpload): Promise<BBBackend.FileId>;
 }

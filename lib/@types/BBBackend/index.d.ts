@@ -10,6 +10,7 @@ declare namespace BBBackend {
     type ColumnID = {"courseId": string, "columnId": string};
     type AssignmentID = ColumnID & {"attemptId": string};
     type FileId = {"id": string};
+    type FileUpload = {"file": File};
 
     type EnrolledCoursesParameter = UserID & Offset;
 
