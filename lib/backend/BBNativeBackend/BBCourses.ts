@@ -29,32 +29,32 @@ export default class BBCourses extends Courses {
                 const courseInformation = JSON.parse(response);
 
                 const resultObject: BBBackend.ICourseInformation = {
-                    id: courseInformation.courseId,
-                    uuid: courseInformation.uuid,
-                    externalId: courseInformation.externalId,
-                    dataSourceId: courseInformation.dataSourceId,
-                    courseId: courseInformation.courseId,
-                    name: courseInformation.name,
-                    description: courseInformation.description,
-                    created: courseInformation.created,
-                    organization: courseInformation.organization,
-                    ultraStatus: courseInformation.ultraStatus,
+                    accessCode: courseInformation.enrollment.accessCode,
                     allowGuests: courseInformation.allowGuests,
-                    readOnly: courseInformation.readOnly,
                     available: courseInformation.availability.available,
+                    courseId: courseInformation.courseId,
+                    created: courseInformation.created,
+                    dataSourceId: courseInformation.dataSourceId,
+                    description: courseInformation.description,
                     duration: courseInformation.availability.duration.type,
                     enrollment: courseInformation.enrollment.type,
-                    accessCode: courseInformation.enrollment.accessCode,
-                    locale: courseInformation.locale.force,
+                    externalId: courseInformation.externalId,
                     hasChildren: courseInformation.hasChildren,
-                    parentId: courseInformation.parentId
-                }
+                    id: courseInformation.courseId,
+                    locale: courseInformation.locale.force,
+                    name: courseInformation.name,
+                    organization: courseInformation.organization,
+                    parentId: courseInformation.parentId,
+                    readOnly: courseInformation.readOnly,
+                    ultraStatus: courseInformation.ultraStatus,
+                    uuid: courseInformation.uuid
+                };
             });
         });
     }
 
     public postCourse(): Promise<string> {
-        const path = "/learn/api/public/v1/courses/"
+        const path = "/learn/api/public/v1/courses/";
         return new Promise((resolve, reject) => {
             HTTPRequest.postAsync(path, null).then((response) => {
                 resolve(response);
@@ -74,7 +74,7 @@ export default class BBCourses extends Courses {
     public patchCourse(parameters: BBBackend.CourseID): Promise<string> {
         const path = "/learn/api/public/v1/courses/" + parameters.courseId;
         return new Promise((resolve, reject) => {
-            HTTPRequest.patchAsync(path,null).then((response) => {
+            HTTPRequest.patchAsync(path, null).then((response) => {
                 resolve(response);
             });
         });
@@ -112,7 +112,7 @@ export default class BBCourses extends Courses {
     }
 
     public postCourseContent(parameters: BBBackend.CourseID): Promise<string> {
-        const path = "/learn/api/public/v1/courses/" + parameters.courseId + '/contents'
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId + '/contents';
         return new Promise((resolve, reject) => {
             HTTPRequest.postAsync(path, null).then((response) => {
                 resolve(response);
@@ -121,7 +121,7 @@ export default class BBCourses extends Courses {
     }
 
     public deleteCourseContent(parameters: BBBackend.CourseContentParameter): Promise<string> {
-        const path = "/learn/api/public/v1/courses/" + parameters.courseId + '/contents/' + parameters.contentId
+        const path = "/learn/api/public/v1/courses/" + parameters.courseId + '/contents/' + parameters.contentId;
         return new Promise((resolve, reject) => {
             HTTPRequest.deleteAsync(path).then((response) => {
                 resolve(response);
@@ -145,18 +145,18 @@ export default class BBCourses extends Courses {
                 const result = JSON.parse(response);
 
                 const resultObject: BBBackend.ICourseContent = {
-                    id: result.id,
-                    parentId: result.parentId,
-                    title: result.title,
+                    allowGuests: result.availability.allowGuests,
+                    available: result.availability.available,
                     body: result.body,
-                    description: result.description,
                     created: result.created,
-                    position: result.position,
+                    description: result.description,
+                    hasAssociatedGroups: result.hasAssociatedGroups,
                     hasChildren: result.hasChildren,
                     hasGradebookColumns: result.hasGradebookColumns,
-                    hasAssociatedGroups: result.hasAssociatedGroups,
-                    available: result.availability.available,
-                    allowGuests: result.availability.allowGuests
+                    id: result.id,
+                    parentId: result.parentId,
+                    position: result.position,
+                    title: result.title
                 };
 
                 resolve(resultObject);
@@ -173,18 +173,18 @@ export default class BBCourses extends Courses {
 
                 allCourseContents.results.forEach((result) => {
                     const resultObject: BBBackend.ICourseContent = {
-                        id: result.id,
-                        parentId: result.parentId,
-                        title: result.title,
+                        allowGuests: result.availability.allowGuests,
+                        available: result.availability.available,
                         body: result.body,
-                        description: result.description,
                         created: result.created,
-                        position: result.position,
+                        description: result.description,
+                        hasAssociatedGroups: result.hasAssociatedGroups,
                         hasChildren: result.hasChildren,
                         hasGradebookColumns: result.hasGradebookColumns,
-                        hasAssociatedGroups: result.hasAssociatedGroups,
-                        available: result.availability.available,
-                        allowGuests: result.availability.allowGuests
+                        id: result.id,
+                        parentId: result.parentId,
+                        position: result.position,
+                        title: result.title
                     };
 
                     responseInfo.push(resultObject);
