@@ -35,9 +35,11 @@ declare namespace BBBackend {
     type FileBodyParameter = FileInfoParameter & {"body": string};
 
     type CourseContentParameter = CourseID & ContentID;
-    type AssignmentParameter = CourseID & ContentID;
     type CreateColParameter = CourseID & {"body": string};
     type UpdateColParameter = CreateColParameter & {"columnId": string};
+
+    type CreateAssignmentParameter = ColumnID & {"attemptInput": string};
+    type UpdateAssignmentParameter = AssignmentID & CreateAssignmentParameter;
 
     interface IUserInformation {
         readonly firstName: string;
@@ -115,13 +117,14 @@ declare namespace BBBackend {
     }
 
     interface IAssignment {
-        readonly id: string;
-        readonly name: string;
-        readonly desc: string;
-        readonly possibleScore: number;
-        readonly decimals: number;
+        readonly attemptsAllowed: number;
         readonly available: boolean;
         readonly contentId: string;
+        readonly desc: string;
+        readonly due: string;
+        readonly id: string;
+        readonly name: string;
+        readonly score: number;
     }
 
     interface IAssignmentAttempt {
@@ -131,6 +134,7 @@ declare namespace BBBackend {
         readonly id: string;
         readonly notes: string;
         readonly score: number;
+        readonly status: string;
         readonly studentComments: string;
         readonly studentSubmission: string;
         readonly text: string;

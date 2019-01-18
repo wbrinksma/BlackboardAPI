@@ -29,12 +29,33 @@ export default abstract class GradeColumns {
     public abstract deleteAssignmentCol(parameters: BBBackend.ColumnID): Promise<BBBackend.ITaskComplete>;
 
     /**
+     * Create an assignment column.
+     * @param parameters The parameters used in this function.
+     * @returns A promise with the information of the newly created assignment column.
+     */
+    public abstract createAssignmentCol(parameters: BBBackend.CreateColParameter): Promise<BBBackend.IAssignment>;
+
+    /**
      * Update an assignment column.
      * @param parameters The parameters used in this function.
      * @see {@link docs/column_example.md|docs/column_example.md} for an example of a config body.
      * @returns A promise with the updated assignment column.
      */
     public abstract updateAssignmentCol(parameters: BBBackend.UpdateColParameter): Promise<BBBackend.IAssignment>;
+
+    /**
+     * Create a new assignment attempt.
+     * @param parameters The parameters used in this function.
+     * @returns A promise with the information of the newly created assignment attempt.
+     */
+    public abstract createAssignmentAttempt(parameters: BBBackend.CreateAssignmentParameter): Promise<BBBackend.IAssignmentAttempt>;
+
+    /**
+     * Update an assignment attempt.
+     * @param parameters The parameters used in this function.
+     * @returns A promise with the updated assignment attempt.
+     */
+    public abstract updateAssignmentAttempt(parameters: BBBackend.UpdateAssignmentParameter): Promise<BBBackend.IAssignmentAttempt>;
 
     /**
      * Retrieve a single assignment attempt.

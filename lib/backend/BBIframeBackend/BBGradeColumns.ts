@@ -20,8 +20,20 @@ export default class BBGradeColumns extends GradeColumns {
         return this.backend.sendMessageThroughConnectionManager(this.category, "deleteAssignmentCol", parameters);
     }
 
+    public createAssignmentCol(parameters: BBBackend.CreateColParameter): Promise<BBBackend.IAssignment> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "createAssignmentCol", parameters);
+    }
+
     public updateAssignmentCol(parameters: BBBackend.UpdateColParameter): Promise<BBBackend.IAssignment> {
         return this.backend.sendMessageThroughConnectionManager(this.category, "updateAssignmentCol", parameters);
+    }
+
+    public createAssignmentAttempt(parameters: BBBackend.CreateAssignmentParameter): Promise<BBBackend.IAssignmentAttempt> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "createAssignmentAttempt", parameters);
+    }
+
+    public updateAssignmentAttempt(parameters: BBBackend.UpdateAssignmentParameter): Promise<BBBackend.IAssignmentAttempt> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "updateAssignmentAttempt", parameters);
     }
 
     public getAssignmentAttempt(parameters: BBBackend.AssignmentID): Promise<BBBackend.IAssignmentAttempt> {
