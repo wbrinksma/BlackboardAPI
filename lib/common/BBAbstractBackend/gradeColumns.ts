@@ -66,9 +66,45 @@ export default abstract class GradeColumns {
     public abstract getAssignmentAttempt(parameters: BBBackend.AssignmentID): Promise<BBBackend.IAssignmentAttempt>;
 
     /**
-     * Retrieve a list ofe assignment attempts.
+     * Retrieve a list of assignment attempts.
      * @param parameters A combination of course ID and column ID.
      * @return A promise with a list of assignment attempts.
      */
     public abstract getAssignmentAttempts(parameters: BBBackend.ColumnID): Promise<BBBackend.IAssignmentAttempt[]>;
+
+    /**
+     * Retrieve a list of files associated with the assignment attempt.
+     * @param parameters A combination of course ID and Assignment attempt ID.
+     * @return A promise with the files associated with the assignment attempt.
+     */
+    public abstract getFilesFromAssignmentAttempt(parameters: BBBackend.AssignmentAttemptFilesParameter): Promise<BBBackend.IAssignmentAttemptFile[]>;
+
+    /**
+     * Remove a file from an assignment attempt.
+     * @param parameters A combination of course ID, Assignment attempt ID and the file ID.
+     * @return A promise that indicates whether the deletion succeeded.
+     */
+    public abstract deleteFileFromAssignmentAttempt(parameters: BBBackend.AssignmentAttemptFileParameter): Promise<BBBackend.ITaskComplete>;
+
+    /**
+     * Retrieve information about a file associated with an assignment attempt.
+     * @param parameters A combination of course ID, Assignment attempt ID and the file ID.
+     * @return A promise with information about the file.
+     */
+    public abstract getFileFromAssignmentAttempt(parameters: BBBackend.AssignmentAttemptFileParameter): Promise<BBBackend.IAssignmentAttemptFile>;
+
+    /**
+     * Download a file from an assignment attempt.
+     * @param parameters A combination of course ID, Assignment attempt ID and the file ID.
+     * @returns A promise with the file.
+     */
+    public abstract downloadFileFromAssignmentAttempt(parameters: BBBackend.AssignmentAttemptFileParameter): Promise<File>;
+
+    /**
+     * Add a file to an assignment attempt.
+     * @param parameters A combination of course ID, Assignment attempt ID and the ID of a recently uploaded file.
+     * @see {@link docs/uploads.md|docs/uploads.md}
+     * @returns A promise with information about the added file.
+     */
+    public abstract addFileToAssignmentAttempt(parameters: BBBackend.AssignmentAttemptParameter): Promise<BBBackend.IAssignmentAttemptFile>;
 }

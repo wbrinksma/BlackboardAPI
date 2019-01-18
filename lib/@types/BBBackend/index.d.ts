@@ -9,6 +9,7 @@ declare namespace BBBackend {
     type ContentID = {"contentId": string};
     type ColumnID = {"courseId": string, "columnId": string};
     type AssignmentID = ColumnID & {"attemptId": string};
+    type FileId = {"id": string};
 
     type EnrolledCoursesParameter = UserID & Offset;
 
@@ -40,6 +41,10 @@ declare namespace BBBackend {
 
     type CreateAssignmentParameter = ColumnID & {"attemptInput": string};
     type UpdateAssignmentParameter = AssignmentID & CreateAssignmentParameter;
+
+    type AssignmentAttemptFilesParameter = CourseID & {"attemptId": string};
+    type AssignmentAttemptFileParameter = CourseID & {"attemptId": string, "attemptFileId": string};
+    type AssignmentAttemptParameter = AssignmentAttemptFilesParameter & {"fileId": string};
 
     interface IUserInformation {
         readonly firstName: string;
@@ -139,5 +144,11 @@ declare namespace BBBackend {
         readonly studentSubmission: string;
         readonly text: string;
         readonly userId: string;
+    }
+
+    interface IAssignmentAttemptFile {
+        readonly id: string;
+        readonly name: string;
+        readonly url: string;
     }
 }

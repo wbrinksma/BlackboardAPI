@@ -20,6 +20,10 @@ export default class BBFiles extends Files {
     }
 
     public createFolder(parameters: BBBackend.CreateFolderParameter): Promise<BBBackend.ITaskComplete> {
-        return this.backend.sendMessageThroughConnectionManager( this.category, "createFolder", parameters );
+        return this.backend.sendMessageThroughConnectionManager(this.category, "createFolder", parameters);
+    }
+
+    public uploadFile(file: Blob): Promise<BBBackend.FileId> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "uploadFile", file);
     }
 }
