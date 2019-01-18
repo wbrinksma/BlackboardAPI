@@ -1,4 +1,4 @@
-import { BBIframeBackend } from "..";
+import {BBIframeBackend} from "..";
 import Files from "../../common/BBAbstractBackend/files";
 
 export default class BBFiles extends Files {
