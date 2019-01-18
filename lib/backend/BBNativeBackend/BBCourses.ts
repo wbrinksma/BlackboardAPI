@@ -89,18 +89,18 @@ export default class BBCourses extends Courses {
 
                 allCourseContents.results.forEach((result) => {
                     const resultObject: BBBackend.ICourseContent = {
-                        id: result.id,
-                        parentId: result.parentId,
-                        title: result.title,
+                        allowGuests: result.availability.allowGuests,
+                        available: result.availability.available,
                         body: result.body,
-                        description: result.description,
                         created: result.created,
-                        position: result.position,
+                        description: result.description,
+                        hasAssociatedGroups: result.hasAssociatedGroups,
                         hasChildren: result.hasChildren,
                         hasGradebookColumns: result.hasGradebookColumns,
-                        hasAssociatedGroups: result.hasAssociatedGroups,
-                        available: result.availability.available,
-                        allowGuests: result.availability.allowGuests
+                        id: result.id,
+                        parentId: result.parentId,
+                        position: result.position,
+                        title: result.title,
                     };
 
                     responseInfo.push(resultObject);
@@ -224,57 +224,5 @@ export default class BBCourses extends Courses {
                 resolve(responseInfo);
             });
         });
-    }
-
-    public getAssignmentsCol(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
-        const path: string = "/learn/api/public/v1/courses/" + parameters.courseId + "/gradebook/columns";
-
-        return new Promise((resolve, reject) => {
-            HTTPRequest.getAsync(path).then((response) => {
-                const assignmentInformation = JSON.parse(response);
-                const responseInfo = new Array<BBBackend.IAssignment>();
-
-                assignmentInformation.results.forEach((result) => {
-                    const resultObject: BBBackend.IAssignment = {
-                        available: result.availability.available,
-                        contentId: result.contentId,
-                        decimals: result.score.decimalPlaces,
-                        desc: result.description,
-                        id: result.id,
-                        name: result.name,
-                        possibleScore: result.score.possible
-                    };
-
-                    responseInfo.push(resultObject);
-                });
-
-                resolve(responseInfo);
-            });
-        });
-    }
-
-    public createAssignmentCol(parameters: BBBackend.CreateColParameter): Promise<BBBackend.IAssignment> {
-      const path: string = "/learn/api/public/v1/courses/" + parameters.courseId + "/gradebook/columns";
-      const formData = new FormData();
-
-      formData.append('courseId', parameters.courseId); // Obsolete?
-      formData.append('input', parameters.body);
-
-      return new Promise((resolve, reject) => {
-        HTTPRequest.postAsync(path, formData).then((response) => {
-          const information = JSON.parse(response);
-          const column: BBBackend.IAssignment = {
-            available: information.availability.available,
-            contentId: information.contentId,
-            decimals: information.decimals,
-            desc: information.description,
-            id: information.id,
-            name: information.name,
-            possibleScore: information.score.possible
-          };
-
-          resolve(column);
-        });
-      });
     }
 }

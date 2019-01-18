@@ -181,14 +181,14 @@ export default class BBCourse {
         });
     }
 
-    public getAssignmentsCol(): Promise<BBBackend.IAssignment[]> {
+    public getAssignmentCols(): Promise<BBBackend.IAssignment[]> {
         return new Promise((resolve, reject) => {
             if (this.assignments) {
                 resolve(this.assignments);
                 return;
             }
 
-            Backend.getBackend().courses.getAssignmentsCol(this._courseId).then((assignments) => {
+            Backend.getBackend().gradeColumns.getAssignmentCols(this._courseId).then((assignments) => {
                 resolve(assignments);
             });
         });
@@ -201,7 +201,7 @@ export default class BBCourse {
                 body: config
             };
 
-            Backend.getBackend().courses.createAssignmentCol(parameters).then((assignment) => {
+            Backend.getBackend().gradeColumns.createAssignmentCol(parameters).then((assignment) => {
                 resolve(assignment);
             });
         });

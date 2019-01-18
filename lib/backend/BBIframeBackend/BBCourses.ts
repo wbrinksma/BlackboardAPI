@@ -63,12 +63,4 @@ export default class BBCourses extends Courses {
     public getCourseChildren(parameters: BBBackend.CourseID): Promise<BBBackend.ICourseChild[]> {
         return this.backend.sendMessageThroughConnectionManager(this.category, "getCourseChildren", parameters);
     }
-
-    public getAssignmentsCol(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
-        return this.backend.sendMessageThroughConnectionManager(this.category, "getAssignmentsCol", parameters);
-    }
-
-    public createAssignmentCol(parameters: BBBackend.CreateColParameter): Promise<BBBackend.IAssignment> {
-        return this.backend.sendMessageThroughConnectionManager(this.category, "createAssignmentCol", parameters);
-    }
 }
