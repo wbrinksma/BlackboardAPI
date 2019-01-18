@@ -97,7 +97,7 @@ export default class BBCourses extends Courses {
                         created: result.created,
                         position: result.position,
                         hasChildren: result.hasChildren,
-                        hasGrafebookColumns: result.hasGrafebookColumns,
+                        hasGradebookColumns: result.hasGradebookColumns,
                         hasAssociatedGroups: result.hasAssociatedGroups,
                         available: result.availability.available,
                         allowGuests: result.availability.allowGuests
@@ -153,7 +153,7 @@ export default class BBCourses extends Courses {
                     created: result.created,
                     position: result.position,
                     hasChildren: result.hasChildren,
-                    hasGrafebookColumns: result.hasGrafebookColumns,
+                    hasGradebookColumns: result.hasGradebookColumns,
                     hasAssociatedGroups: result.hasAssociatedGroups,
                     available: result.availability.available,
                     allowGuests: result.availability.allowGuests
@@ -181,7 +181,7 @@ export default class BBCourses extends Courses {
                         created: result.created,
                         position: result.position,
                         hasChildren: result.hasChildren,
-                        hasGrafebookColumns: result.hasGrafebookColumns,
+                        hasGradebookColumns: result.hasGradebookColumns,
                         hasAssociatedGroups: result.hasAssociatedGroups,
                         available: result.availability.available,
                         allowGuests: result.availability.allowGuests

@@ -81,7 +81,7 @@ declare namespace BBBackend {
         readonly created: string;
         readonly position: number;
         readonly hasChildren: boolean;
-        readonly hasGrafebookColumns: boolean;
+        readonly hasGradebookColumns: boolean;
         readonly hasAssociatedGroups: boolean;
         readonly available: string;
         readonly allowGuests: boolean;
