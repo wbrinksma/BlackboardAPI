@@ -2,7 +2,6 @@
 
 import { HTTPRequest, Utilities } from '../../common';
 import GradeColumns from '../../common/BBAbstractBackend/gradeColumns';
-import IAssignmentAttemptFile = BBBackend.IAssignmentAttemptFile;
 
 export default class BBGradeColumns extends GradeColumns {
     public getAssignmentCols(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
@@ -42,21 +41,6 @@ export default class BBGradeColumns extends GradeColumns {
                 const result: BBBackend.ITaskComplete = {success: true};
 
                 resolve(result);
-            });
-        });
-    }
-
-    public createAssignmentCol(parameters: BBBackend.CreateColParameter): Promise<BBBackend.IAssignment> {
-        const path = "/learn/api/public/v2/courses/" + parameters.courseId + "/gradebook/columns";
-        const formData = new FormData();
-        formData.append('input', parameters.body);
-
-        return new Promise((resolve, reject) => {
-            HTTPRequest.postAsync(path, formData).then((response) => {
-                const information = JSON.parse(response);
-                const column: BBBackend.IAssignment = this.createIAssignment(information);
-
-                resolve(column);
             });
         });
     }
@@ -192,7 +176,7 @@ export default class BBGradeColumns extends GradeColumns {
                 this.getFileFromAssignmentAttempt(parameters),
                 HTTPRequest.downloadAsync(path)
             ] ).then((responses: any[]) => {
-                const fileInfo: IAssignmentAttemptFile = responses[0];
+                const fileInfo: BBBackend.IAssignmentAttemptFile = responses[0];
                 const blob: Blob = responses[1];
                 const file: File = new File([blob], fileInfo.name);
 

@@ -1,4 +1,4 @@
-import { HTTPRequest } from '../../common';
+import { HTTPRequest, Utilities } from '../../common';
 import Courses from '../../common/BBAbstractBackend/courses';
 
 export default class BBCourses extends Courses {
@@ -222,6 +222,30 @@ export default class BBCourses extends Courses {
                 });
 
                 resolve(responseInfo);
+            });
+        });
+    }
+
+    public createAssignmentCol(parameters: BBBackend.CreateColParameter): Promise<BBBackend.IAssignment> {
+        const path = "/learn/api/public/v2/courses/" + parameters.courseId + "/gradebook/columns";
+        const formData = new FormData();
+        formData.append('input', parameters.body);
+
+        return new Promise((resolve, reject) => {
+            HTTPRequest.postAsync(path, formData).then((response) => {
+                const information = JSON.parse(response);
+                const column: BBBackend.IAssignment = {
+                    attemptsAllowed: information.grading.attemptsAllowed,
+                    available: Utilities.stringToBoolean(information.availability.available),
+                    contentId: information.contentId,
+                    desc: information.description,
+                    due: information.grading.due,
+                    id: information.id,
+                    name: information.name,
+                    score: information.score.possible
+                };
+
+                resolve(column);
             });
         });
     }

@@ -201,7 +201,7 @@ export default class BBCourse {
                 body: config
             };
 
-            Backend.getBackend().gradeColumns.createAssignmentCol(parameters).then((assignment) => {
+            Backend.getBackend().courses.createAssignmentCol(parameters).then((assignment) => {
                 resolve(assignment);
             });
         });
