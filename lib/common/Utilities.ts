@@ -69,6 +69,8 @@ export default class Utilities {
      * @return boolean representation of the string
      */
     public static stringToBoolean(value: string): boolean {
+        value = value.toLowerCase();
+
         return value === 'on' || value === 'true' || value === 'yes' || /^\s*[+-]?0*[1-9]/.test(value);
     }
 }

@@ -181,14 +181,14 @@ export default class BBCourse {
         });
     }
 
-    public getAssignmentsCol(): Promise<BBBackend.IAssignment[]> {
+    public getAssignmentCols(): Promise<BBBackend.IAssignment[]> {
         return new Promise((resolve, reject) => {
             if (this.assignments) {
                 resolve(this.assignments);
                 return;
             }
 
-            Backend.getBackend().courses.getAssignmentsCol(this._courseId).then((assignments) => {
+            Backend.getBackend().courses.getAssignmentCols(this._courseId).then((assignments) => {
                 resolve(assignments);
             });
         });
