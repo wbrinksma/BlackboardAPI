@@ -9,7 +9,7 @@ export default class BBGradeColumns extends GradeColumns {
         const path = "/learn/api/public/v2/courses/" + parameters.courseId + "/gradebook/columns";
         return new Promise((resolve, reject) => {
             HTTPRequest.getAsync(path).then((response) => {
-                const columns: any[] = JSON.parse(response);
+                const columns: any[] = JSON.parse(response).results;
 
                 const result: BBBackend.IAssignment[] = [];
 
@@ -122,7 +122,7 @@ export default class BBGradeColumns extends GradeColumns {
         const path = "/learn/api/public/v2/courses/" + parameters.courseId + "/gradebook/columns/" + parameters.columnId + "/attempts";
         return new Promise((resolve, reject) => {
             HTTPRequest.getAsync(path).then((response) => {
-                const attempts: any[] = JSON.parse(response);
+                const attempts: any[] = JSON.parse(response).results;
 
                 const result: BBBackend.IAssignmentAttempt[] = [];
 
@@ -140,7 +140,7 @@ export default class BBGradeColumns extends GradeColumns {
 
         return new Promise((resolve, reject) => {
             HTTPRequest.getAsync(path).then((response) => {
-                const files: any[] = JSON.parse(response);
+                const files: any[] = JSON.parse(response).results;
 
                 const result: BBBackend.IAssignmentAttemptFile[] = [];
 
