@@ -1,3 +1,5 @@
+> This file was used by the developers and now serves purely as reference.
+
 # Request from API
 
 ## Request headers:

@@ -227,7 +227,7 @@ export default class BBCourses extends Courses {
     }
 
     public getAssignmentsCol(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
-        const path: string = "/learn/api/public/v1/courses/" + parameters.courseId + "/gradebook/columns";
+        const path: string = "/learn/api/public/v2/courses/" + parameters.courseId + "/gradebook/columns";
 
         return new Promise((resolve, reject) => {
             HTTPRequest.getAsync(path).then((response) => {
@@ -236,9 +236,8 @@ export default class BBCourses extends Courses {
 
                 assignmentInformation.results.forEach((result) => {
                     const resultObject: BBBackend.IAssignment = {
-                        available: result.availability.available,
+                        available: result.availability.available === 'Yes' ? true : false,
                         contentId: result.contentId,
-                        decimals: result.score.decimalPlaces,
                         desc: result.description,
                         id: result.id,
                         name: result.name,
@@ -271,9 +270,8 @@ export default class BBCourses extends Courses {
         HTTPRequest.postAsync(path, formData).then((response) => {
           const information = JSON.parse(response);
           const column: BBBackend.IAssignment = {
-            available: information.availability.available,
+            available: information.availability.available === 'Yes' ? true : false,
             contentId: information.contentId,
-            decimals: information.decimals,
             desc: information.description,
             id: information.id,
             name: information.name,
