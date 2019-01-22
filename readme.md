@@ -17,7 +17,9 @@ This project is still in its infancy, meaning that it will not work fully until 
 
 In this state, the build process uses a makefile which in turn uses npm and the Typescript compiler with separate configuration files. This might change in the future.
 
-## Documentation
+## Getting started
+
+### Documentation
 
 To get started, these markdown files are propbably of use:
 
@@ -27,13 +29,21 @@ To get started, these markdown files are propbably of use:
 
 - [How to send emails to course members using the API](docs/email.md)
 
-## Building
+- [Using the Blackboard CLI](docs/cli.md)
+
+### Building
 ```
 $ npm i # First run only
 $ npm run build
 ```
 
-All classes provided by this project are available under `BB`.
+> All classes provided by this project are available under `BB`.
+
+### Learn by example
+
+[This repository](https://github.com/Pieterv24/blackboard-webpack-example) is a
+useful example on how to use the BlackboardAPI with a minimal webpack.
+
 
 ## TSLint
 ```
