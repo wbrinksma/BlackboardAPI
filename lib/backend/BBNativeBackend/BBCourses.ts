@@ -234,19 +234,45 @@ export default class BBCourses extends Courses {
         return new Promise((resolve, reject) => {
             HTTPRequest.postAsync(path, formData).then((response) => {
                 const information = JSON.parse(response);
-                const column: BBBackend.IAssignment = {
-                    attemptsAllowed: information.grading.attemptsAllowed,
-                    available: Utilities.stringToBoolean(information.availability.available),
-                    contentId: information.contentId,
-                    desc: information.description,
-                    due: information.grading.due,
-                    id: information.id,
-                    name: information.name,
-                    score: information.score.possible
-                };
+                const column: BBBackend.IAssignment = this.createIAssignment(information);
 
                 resolve(column);
             });
         });
+    }
+
+    public getAssignmentCols(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
+        const path = "/learn/api/public/v2/courses/" + parameters.courseId + "/gradebook/columns";
+        return new Promise((resolve, reject) => {
+            HTTPRequest.getAsync(path).then((response) => {
+                const columns: any[] = JSON.parse(response).results;
+
+                const result: BBBackend.IAssignment[] = [];
+
+                for (const column of columns) {
+                    result.push(this.createIAssignment(column));
+                }
+
+                resolve(result);
+            });
+        });
+    }
+
+    /**
+     * Creates an IAssignment from a JSON response.
+     *
+     * @param {any} information
+     */
+    private createIAssignment(information: any): BBBackend.IAssignment {
+        return {
+            attemptsAllowed: information.grading.attemptsAllowed,
+            available: Utilities.stringToBoolean(information.availability.available),
+            contentId: information.contentId,
+            desc: information.description,
+            due: information.grading.due,
+            id: information.id,
+            name: information.name,
+            score: information.score.possible
+        };
     }
 }

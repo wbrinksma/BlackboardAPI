@@ -188,7 +188,7 @@ export default class BBCourse {
                 return;
             }
 
-            Backend.getBackend().gradeColumns.getAssignmentCols(this._courseId).then((assignments) => {
+            Backend.getBackend().courses.getAssignmentCols(this._courseId).then((assignments) => {
                 resolve(assignments);
             });
         });

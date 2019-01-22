@@ -40,10 +40,6 @@ export default class BBGradeColumns extends GradeColumns {
         return this.backend.sendMessageThroughConnectionManager(this.category, "getAssignmentAttempts", parameters);
     }
 
-    public getAssignmentCols(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
-        return this.backend.sendMessageThroughConnectionManager(this.category, "getAssignmentCols", parameters);
-    }
-
     public addFileToAssignmentAttempt(parameters: BBBackend.AssignmentAttemptParameter): Promise<BBBackend.IAssignmentAttemptFile> {
         return this.backend.sendMessageThroughConnectionManager(this.category, "addFileToAssignmentAttempt", parameters);
     }

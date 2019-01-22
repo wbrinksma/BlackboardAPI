@@ -4,23 +4,6 @@ import { HTTPRequest, Utilities } from '../../common';
 import GradeColumns from '../../common/BBAbstractBackend/gradeColumns';
 
 export default class BBGradeColumns extends GradeColumns {
-    public getAssignmentCols(parameters: BBBackend.CourseID): Promise<BBBackend.IAssignment[]> {
-        const path = "/learn/api/public/v2/courses/" + parameters.courseId + "/gradebook/columns";
-        return new Promise((resolve, reject) => {
-            HTTPRequest.getAsync(path).then((response) => {
-                const columns: any[] = JSON.parse(response).results;
-
-                const result: BBBackend.IAssignment[] = [];
-
-                for (const column of columns) {
-                    result.push(this.createIAssignment(column));
-                }
-
-                resolve(result);
-            });
-        });
-    }
-
     public getAssignmentCol(parameters: BBBackend.ColumnID): Promise<BBBackend.IAssignment> {
         const path = "/learn/api/public/v2/courses/" + parameters.courseId + "/gradebook/columns/" + parameters.columnId;
         return new Promise((resolve, reject) => {
