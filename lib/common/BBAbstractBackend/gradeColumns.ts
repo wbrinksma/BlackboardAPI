@@ -107,4 +107,11 @@ export default abstract class GradeColumns {
      * @returns A promise with information about the added file.
      */
     public abstract addFileToAssignmentAttempt(parameters: BBBackend.AssignmentAttemptParameter): Promise<BBBackend.IAssignmentAttemptFile>;
+
+    /**
+     * Retrieve the score for a particular user.
+     * @param parameters A combination for the course ID and the User ID.
+     * @returns A promise with information about all grades for the given course.
+     */
+    public abstract getUserGrades(parameters: BBBackend.UserGradesParameter): Promise<BBBackend.IGrade[]>;
 }

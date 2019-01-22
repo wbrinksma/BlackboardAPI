@@ -14,6 +14,8 @@ declare namespace BBBackend {
 
     type EnrolledCoursesParameter = UserID & Offset;
 
+    type UserGradesParameter = UserID & CourseID;
+
     type SendMailParameter = CourseID & {
         "attachments": Blob[],
         "recipients": Recipient,
@@ -120,6 +122,14 @@ declare namespace BBBackend {
         readonly id: string;
         readonly name: string;
         readonly desc: string;
+    }
+
+    interface IGrade {
+        readonly columnId: string;
+        readonly text: string;
+        readonly score: number;
+        readonly notes: string;
+        readonly feedback: string;
     }
 
     interface IAssignment {

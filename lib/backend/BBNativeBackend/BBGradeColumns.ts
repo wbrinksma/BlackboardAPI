@@ -217,6 +217,30 @@ export default class BBGradeColumns extends GradeColumns {
         });
     }
 
+    public getUserGrades(parameters: BBBackend.UserGradesParameter): Promise<BBBackend.IGrade[]> {
+        const path: string = "/learn/api/public/v2/courses/" + parameters.courseId + "/gradebook/users/" + parameters.userId;
+
+        return new Promise((resolve, reject) => {
+            HTTPRequest.getAsync(path).then((response) => {
+                const results: any[] = JSON.parse(response).results;
+
+                const grades: BBBackend.IGrade[] = [];
+
+                for (const result of results) {
+                    grades.push({
+                        columnId: result.columnId,
+                        feedback: result.feedback,
+                        notes: result.notes,
+                        score: result.score,
+                        text: result.text
+                    });
+                }
+
+                resolve(grades);
+            });
+        });
+    }
+
     /**
      * Creates an IAssignmentAttemptFile from a JSON response.
      *

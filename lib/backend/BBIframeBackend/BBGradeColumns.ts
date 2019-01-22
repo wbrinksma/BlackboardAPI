@@ -67,4 +67,8 @@ export default class BBGradeColumns extends GradeColumns {
     public getFilesFromAssignmentAttempt(parameters: BBBackend.AssignmentAttemptFilesParameter): Promise<BBBackend.IAssignmentAttemptFile[]> {
         return this.backend.sendMessageThroughConnectionManager(this.category, "getFilesFromAssignmentAttempt", parameters);
     }
+
+    public getUserGrades( parameters: BBBackend.UserGradesParameter ): Promise<BBBackend.IGrade[]> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "getUserGrades", parameters);
+    }
 }
