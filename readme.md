@@ -15,7 +15,7 @@ An API to communicate with a Blackboard server. This can be used to build apps o
 
 This project is still in its infancy, meaning that it will not work fully until a stable release is published.
 
-In this state, the build process uses a makefile which in turn uses npm and the Typescript compiler with seperate configuration files. This might change in the future.
+In this state, the build process uses a makefile which in turn uses npm and the Typescript compiler with separate configuration files. This might change in the future.
 
 ## Documentation
 
@@ -28,10 +28,14 @@ To get started, these markdown files are propbably of use:
 - [How to send emails to course members using the API](docs/email.md)
 
 ## Building
-
-### UNIX
-
 ```
-$ npm i # only for first run
+$ npm i # First run only
 $ npm run build
+```
+
+All classes provided by this project are available under `BB`.
+
+## TSLint
+```
+$ npm run lint
 ```
