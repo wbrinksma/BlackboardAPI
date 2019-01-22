@@ -253,35 +253,4 @@ export default class BBCourses extends Courses {
             });
         });
     }
-
-    public createAssignmentCol(parameters: BBBackend.CreateColParameter): Promise<BBBackend.IAssignment> {
-      const path: string = "https://blackboard.nhlstenden.com/webapps/gradebook/do/instructor/addModifyItemDefinition";
-      const nonce = Utilities.getNonceFromCourseId(parameters.courseId);
-      const body = JSON.parse(parameters.body);
-      const formData = new FormData();
-
-      formData.append('blackboard.platform.security.NonceUtil.nonce', nonce);
-      formData.append('courseId', parameters.courseId);
-      formData.append('actionType', 'create');
-
-      for(var key in body) {
-        formData.append(key, body[key]);
-      }
-
-      return new Promise((resolve, reject) => {
-        HTTPRequest.postAsync(path, formData).then((response) => {
-          const information = JSON.parse(response);
-          const column: BBBackend.IAssignment = {
-            available: information.availability.available === 'Yes' ? true : false,
-            contentId: information.contentId,
-            desc: information.description,
-            id: information.id,
-            name: information.name,
-            possibleScore: information.score.possible
-          };
-
-          resolve(column);
-        });
-      });
-    }
 }

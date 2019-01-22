@@ -39,29 +39,6 @@ export default class BBGradeColumns extends GradeColumns {
         });
     }
 
-    public updateAssignmentCol(parameters: BBBackend.UpdateColParameter): Promise<BBBackend.IAssignment> {
-        const path = "/learn/api/public/v2/courses/" + parameters.courseId + "/gradebook/columns/" + parameters.columnId;
-        const nonce = Utilities.getNonceFromCourseId(parameters.courseId);
-        const formData = new FormData();
-        formData.append('blackboard.platform.security.NonceUtil.nonce', nonce);
-        return new Promise((resolve, reject) => {
-            HTTPRequest.patchAsync(path, formData).then((response) => {
-                const column = JSON.parse(response);
-
-                const result: BBBackend.IAssignment = {
-                    available: column.availability.available === 'Yes' ? true : false,
-                    contentId: column.contentId,
-                    desc: column.description,
-                    id: column.id,
-                    name: column.name,
-                    possibleScore: column.score.possible
-                };
-
-                resolve(result);
-            });
-        });
-    }
-
     public getAssignmentAttempt(parameters: BBBackend.AssignmentID): Promise<BBBackend.IAssignmentAttempt> {
         const path = "/learn/api/public/v1/courses/" + parameters.courseId + "/gradebook/columns/" + parameters.columnId + "/attempts/" + parameters.attemptId;
         return new Promise((resolve, reject) => {

@@ -193,17 +193,4 @@ export default class BBCourse {
             });
         });
     }
-
-    public createAssignmentCol(config: string): Promise<BBBackend.IAssignment> {
-        return new Promise((resolve, reject) => {
-            const parameters: BBBackend.CreateColParameter = {
-                courseId: this._courseId.courseId,
-                body: config
-            };
-
-            Backend.getBackend().courses.createAssignmentCol(parameters).then((assignment) => {
-                resolve(assignment);
-            });
-        });
-    }
 }

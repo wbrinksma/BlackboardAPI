@@ -44,23 +44,4 @@ export default class BBGradeColumn {
             });
         });
     }
-
-    public updateAssignmentCol(config: string): Promise<BBBackend.ITaskComplete> {
-        return new Promise((resolve) => {
-            const params: BBBackend.UpdateColParameter = {
-              columnId: this._columnId.columnId,
-              courseId: this._columnId.courseId,
-              body: config
-            };
-
-            Backend.getBackend().gradeColumns.updateAssignmentCol(params).then((information) => {
-                const response: BBBackend.ITaskComplete = {success: true};
-
-                this._column = information;
-                this._columnId.columnId = this._column.id;
-
-                resolve(response);
-            });
-        });
-    }
 }
