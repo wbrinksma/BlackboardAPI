@@ -1,13 +1,13 @@
 {
   "name": "blackboardlib-cli",
-  "version": "1.0.0",
+  "version": "0.0.5",
   "description": "CLI tool for blackboardlib to generate server files",
   "main": "./bin/cli.js",
   "author": "pieterv24",
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
-    "blackboardlib": "0.0.3",
+    "blackboardlib": "0.0.4",
     "html-webpack-plugin": "^4.0.0-beta.5",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",

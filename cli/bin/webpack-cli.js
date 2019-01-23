@@ -13,9 +13,9 @@ function runWebpack(savePath, title, clientUrl, serverUrl, production) {
 
   let webpackFile;
   if (production) {
-    webpackFile = './webpack/webpack.config.js'
+    webpackFile = path.resolve(__dirname, '../webpack/webpack.config.js')
   } else {
-    webpackFile = './webpack/webpack.dev.config.js'
+    webpackFile = path.resolve(__dirname, '../webpack/webpack.dev.config.js')
   }
 
   const webpack = spawn(command, [
