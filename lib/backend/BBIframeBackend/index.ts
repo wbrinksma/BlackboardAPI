@@ -1,6 +1,6 @@
 /* tslint:disable:max-line-length */
 
-import { BBAbstractBackend, WindowConnectionManager, WindowFunctionCall } from '../../common';
+import {BBAbstractBackend, WindowConnectionManager, WindowFunctionCall} from '../../common';
 import BBCourses from './BBCourses';
 import BBEmails from './BBEmails';
 import BBFiles from './BBFiles';

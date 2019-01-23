@@ -20,11 +20,43 @@ export default class BBGradeColumns extends GradeColumns {
         return this.backend.sendMessageThroughConnectionManager(this.category, "deleteAssignmentCol", parameters);
     }
 
+    public createAssignmentAttempt(parameters: BBBackend.CreateAssignmentParameter): Promise<BBBackend.IAssignmentAttempt> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "createAssignmentAttempt", parameters);
+    }
+
+    public updateAssignmentAttempt(parameters: BBBackend.UpdateAssignmentParameter): Promise<BBBackend.IAssignmentAttempt> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "updateAssignmentAttempt", parameters);
+    }
+
     public getAssignmentAttempt(parameters: BBBackend.AssignmentID): Promise<BBBackend.IAssignmentAttempt> {
         return this.backend.sendMessageThroughConnectionManager(this.category, "getAssignmentAttempt", parameters);
     }
 
     public getAssignmentAttempts(parameters: BBBackend.ColumnID): Promise<BBBackend.IAssignmentAttempt[]> {
         return this.backend.sendMessageThroughConnectionManager(this.category, "getAssignmentAttempts", parameters);
+    }
+
+    public addFileToAssignmentAttempt(parameters: BBBackend.AssignmentAttemptParameter): Promise<BBBackend.IAssignmentAttemptFile> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "addFileToAssignmentAttempt", parameters);
+    }
+
+    public deleteFileFromAssignmentAttempt(parameters: BBBackend.AssignmentAttemptFileParameter): Promise<BBBackend.ITaskComplete> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "deleteFileFromAssignmentAttempt", parameters);
+    }
+
+    public downloadFileFromAssignmentAttempt(parameters: BBBackend.AssignmentAttemptFileParameter): Promise<File> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "downloadFileFromAssignmentAttempt", parameters);
+    }
+
+    public getFileFromAssignmentAttempt(parameters: BBBackend.AssignmentAttemptFileParameter): Promise<BBBackend.IAssignmentAttemptFile> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "getFileFromAssignmentAttempt", parameters);
+    }
+
+    public getFilesFromAssignmentAttempt(parameters: BBBackend.AssignmentAttemptFilesParameter): Promise<BBBackend.IAssignmentAttemptFile[]> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "getFilesFromAssignmentAttempt", parameters);
+    }
+
+    public getUserGrades( parameters: BBBackend.UserGradesParameter ): Promise<BBBackend.IGrade[]> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "getUserGrades", parameters);
     }
 }

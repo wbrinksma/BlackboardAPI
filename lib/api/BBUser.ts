@@ -4,6 +4,7 @@ export default class BBUser {
     private _userId: string;
 
     private enrolledCourses: BBBackend.ICourseID[];
+    private grades: BBBackend.IGrade[];
 
     constructor(userId: string) {
         this._userId = userId;
@@ -28,6 +29,25 @@ export default class BBUser {
             Backend.getBackend().courses.getEnrolledCourses(parameters).then((information) => {
                 this.enrolledCourses = information;
                 resolve(this.enrolledCourses);
+            });
+        });
+    }
+
+    public getGrades(course: BBBackend.CourseID): Promise<BBBackend.IGrade[]> {
+        return new Promise((resolve, reject) => {
+            if (this.grades) {
+                resolve(this.grades);
+                return;
+            }
+
+            const parameters: BBBackend.UserGradesParameter = {
+                courseId: course.courseId,
+                userId: this.userId
+            };
+
+            Backend.getBackend().gradeColumns.getUserGrades(parameters).then((information) => {
+                this.grades = information;
+                resolve(this.grades);
             });
         });
     }

@@ -1,4 +1,4 @@
-import { BBIframeBackend } from "..";
+import {BBIframeBackend} from "..";
 import Files from "../../common/BBAbstractBackend/files";
 
 export default class BBFiles extends Files {
@@ -20,6 +20,10 @@ export default class BBFiles extends Files {
     }
 
     public createFolder(parameters: BBBackend.CreateFolderParameter): Promise<BBBackend.ITaskComplete> {
-        return this.backend.sendMessageThroughConnectionManager( this.category, "createFolder", parameters );
+        return this.backend.sendMessageThroughConnectionManager(this.category, "createFolder", parameters);
+    }
+
+    public uploadFile(parameters: BBBackend.FileUpload): Promise<BBBackend.FileId> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "uploadFile", parameters);
     }
 }

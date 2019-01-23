@@ -18,9 +18,17 @@ export default abstract class Files {
     public abstract setFileBody(parameters: BBBackend.FileBodyParameter): Promise<BBBackend.ITaskComplete>;
 
     /**
-     * Create a folder in the content management system
+     * Create a folder in the content management system.
      * @param parameters The parameters to use with this function.
      * @returns A promise which indicates when the task is complete.
      */
     public abstract createFolder(parameters: BBBackend.CreateFolderParameter): Promise<BBBackend.ITaskComplete>;
+
+    /**
+     * Upload a file to Blackboard's temporary storage.
+     * The returned id is used in other parts of Blackboard to refer to the file.
+     * @param parameters The parameters to use with this function.
+     * @returns A promise with the id of the uploaded file to use in other parts of Blackboard.
+     */
+    public abstract uploadFile(parameters: BBBackend.FileUpload): Promise<BBBackend.FileId>;
 }

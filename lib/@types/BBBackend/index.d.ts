@@ -9,8 +9,12 @@ declare namespace BBBackend {
     type ContentID = {"contentId": string};
     type ColumnID = {"courseId": string, "columnId": string};
     type AssignmentID = ColumnID & {"attemptId": string};
+    type FileId = {"id": string};
+    type FileUpload = {"file": File};
 
     type EnrolledCoursesParameter = UserID & Offset;
+
+    type UserGradesParameter = UserID & CourseID;
 
     type SendMailParameter = CourseID & {
         "attachments": Blob[],
@@ -35,9 +39,15 @@ declare namespace BBBackend {
     type FileBodyParameter = FileInfoParameter & {"body": string};
 
     type CourseContentParameter = CourseID & ContentID;
-    type AssignmentParameter = CourseID & ContentID;
     type CreateColParameter = CourseID & {"body": string};
     type UpdateColParameter = CreateColParameter & {"columnId": string};
+
+    type CreateAssignmentParameter = ColumnID & {"attemptInput": string};
+    type UpdateAssignmentParameter = AssignmentID & CreateAssignmentParameter;
+
+    type AssignmentAttemptFilesParameter = CourseID & {"attemptId": string};
+    type AssignmentAttemptFileParameter = CourseID & {"attemptId": string, "attemptFileId": string};
+    type AssignmentAttemptParameter = AssignmentAttemptFilesParameter & {"fileId": string};
 
     interface IUserInformation {
         readonly firstName: string;
@@ -79,7 +89,7 @@ declare namespace BBBackend {
         readonly created: string;
         readonly position: number;
         readonly hasChildren: boolean;
-        readonly hasGrafebookColumns: boolean;
+        readonly hasGradebookColumns: boolean;
         readonly hasAssociatedGroups: boolean;
         readonly available: string;
         readonly allowGuests: boolean;
@@ -114,13 +124,23 @@ declare namespace BBBackend {
         readonly desc: string;
     }
 
+    interface IGrade {
+        readonly columnId: string;
+        readonly text: string;
+        readonly score: number;
+        readonly notes: string;
+        readonly feedback: string;
+    }
+
     interface IAssignment {
-        readonly id: string;
-        readonly name: string;
-        readonly desc: string;
-        readonly possibleScore: number;
+        readonly attemptsAllowed: number;
         readonly available: boolean;
         readonly contentId: string;
+        readonly desc: string;
+        readonly due: string;
+        readonly id: string;
+        readonly name: string;
+        readonly score: number;
     }
 
     interface IAssignmentAttempt {
@@ -130,9 +150,16 @@ declare namespace BBBackend {
         readonly id: string;
         readonly notes: string;
         readonly score: number;
+        readonly status: string;
         readonly studentComments: string;
         readonly studentSubmission: string;
         readonly text: string;
         readonly userId: string;
+    }
+
+    interface IAssignmentAttemptFile {
+        readonly id: string;
+        readonly name: string;
+        readonly url: string;
     }
 }

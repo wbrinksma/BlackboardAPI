@@ -4,13 +4,13 @@ An API to communicate with a Blackboard server. This can be used to build apps o
 
 This project is still in its infancy, meaning that it will not work fully until a stable release is published.
 
-In this state, the build process uses a makefile which in turn uses npm and the Typescript compiler with separate configuration files. This might change in the future.
+Currently, the build process relies on webpack which in turn uses npm and the Typescript compiler with separate configuration files. This might change in the future.
 
 ## Getting started
 
 ### Documentation
 
-To get started, these markdown files are propbably of use:
+To get started, these markdown files are probably of use:
 
 - [The structure of the code](docs/project_structure.md)
 
@@ -36,7 +36,7 @@ Please refer to the examples to see how to use the library.
 useful example on how to use the BlackboardAPI with a minimal webpack in react.
 
 [Webpack-Example](https://github.com/Pieterv24/blackboard-webpack-example) is a
-useful example on how to use the BlackboardAPI with a minimal webpack configuration. 
+useful example on how to use the BlackboardAPI with a minimal webpack configuration.
 
 
 ## TSLint
