@@ -18,16 +18,17 @@ export default class BBGradeColumns extends GradeColumns {
     }
 
     public deleteAssignmentCol(parameters: BBBackend.ColumnID): Promise<BBBackend.ITaskComplete> {
-        const path = "https://blackboard.nhlstenden.com/webapps/gradebook/do/instructor/deleteItem?course_id=" + parameters.courseId;
+        const path = "/webapps/gradebook/do/instructor/deleteItem?course_id=" + parameters.courseId;
         return new Promise((resolve, reject) => {
-            const nonce: string = Utilities.getNonceFromCourseId(parameters.courseId);
-            const formData = new FormData();
-            formData.append('itemId', parameters.columnId);
-            formData.append('blackboard.platform.security.NonceUtil.nonce', nonce);
-            HTTPRequest.postAsync(path, formData).then((response) => {
-                const result: BBBackend.ITaskComplete = {success: true};
+            Utilities.getNonceFromCourseId(parameters.courseId).then((nonce) => {
+                const formData = new FormData();
+                formData.append('itemId', parameters.columnId);
+                formData.append('blackboard.platform.security.NonceUtil.nonce', nonce);
+                HTTPRequest.postAsync(path, formData).then((response) => {
+                    const result: BBBackend.ITaskComplete = {success: true};
 
-                resolve(result);
+                    resolve(result);
+                });
             });
         });
     }

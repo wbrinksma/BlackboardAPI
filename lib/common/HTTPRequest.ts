@@ -19,12 +19,6 @@ export default class HTTPRequest {
             getRequest.send(body);
         });
     }
-    public static syncRequest(type: string, url: string, formData: FormData = null): string {
-        const getRequest = new XMLHttpRequest();
-        getRequest.open(type, url, false);
-        getRequest.send(formData);
-        return getRequest.status === 200 ? getRequest.responseText : getRequest.statusText;
-    }
     public static getAsync(url: string): Promise<string> {
         return this.asyncRequest("GET", url);
     }
