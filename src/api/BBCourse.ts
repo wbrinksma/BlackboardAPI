@@ -11,7 +11,6 @@ export default class BBCourse {
 
     constructor(courseId: string = null) {
         this._courseId = {courseId};
-        console.log('Creating')
         this.getCourseInformation()
     }
 
@@ -22,7 +21,6 @@ export default class BBCourse {
                 return;
             }
             Backend.getBackend().courses.getCourseInformation(this._courseId).then((information) => {
-                console.log('Got information')
                 this.courseInformation = information;
                 resolve(this.courseInformation);
             });

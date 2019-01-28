@@ -7,8 +7,6 @@ function loadUserByUserId(userId) {
         console.log(result);
     });
 
-    console.log(user.getUserName);
-
     return user;
 }
 
@@ -34,8 +32,6 @@ function loadUserByUserName(userName) {
     user.getUserInfo().then((result) => {
         console.log(result);
     });
-
-    console.log(user.getUserId);
 }
 
 function postCourse() {
@@ -174,7 +170,6 @@ function createFolder(courseId){
         course = new BB.BBCourse(courseId);
     }
     let file = new BB.BBFile(course);
-    console.log(file);
     file.createFolder().then((result) => {
         console.log(result);
     })
@@ -256,6 +251,61 @@ function loadAssignmentAttempt(courseId, assignmentColumnId, assignmentId) {
     attempt.getAttemptInformation().then((result) => {
         console.log(result);
     });
+}
+
+function createFolder(courseId,name){
+    if(course == null){
+        course = new BB.BBCourse(courseId);
+    }
+    file = new BB.BBFile(course,name);
+    file.createFolder().then((result) => {
+    })
+}
+
+function deleteFile(courseId,name){
+    if(course == null){
+        course = new BB.BBCourse(courseId);
+    }
+    file = new BB.BBFile(course,name);
+    file.deleteFile().then((result) => {
+    })
+}
+
+function downloadFile(courseId,name){
+    if(course == null){
+        course = new BB.BBCourse(courseId);
+    }
+    file = new BB.BBFile(course,name);
+    file.downloadFile().then((result) => {
+    })
+}
+
+function publishFile(courseId,name,attachment){
+    if(course == null){
+        course = new BB.BBCourse(courseId);
+    }
+    file = new BB.BBFile(course,name);
+    file.setBody(attachment.files.item(0));
+    file.publishFile().then((result) => {
+    })
+}
+
+function setPermissions(courseId,name,bAllowEveryone,B,G,P,S,T,U,bAllowRead,bAllowWrite,bAllowDelete,bAllowManage){
+    if(course == null){
+        course = new BB.BBCourse(courseId);
+    }
+    file = new BB.BBFile(course,name);
+    let permissions = {
+        bAllowEveryone,
+        B,G,P,S,T,U,
+        bAllowRead,
+        bAllowWrite,
+        bAllowDelete,
+        bAllowManage
+    }
+
+    file.setPermissions(permissions).then((result) => {
+    })
 }
 
 window.onload = () => {

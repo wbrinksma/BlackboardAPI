@@ -25,14 +25,25 @@ declare namespace BBBackend {
         "navItem": string
     };
 
-    type FolderParameter = CourseID & {
+    type FileInfoParameter = CourseID & {
         "id": string,
-        "folderName": string
+        "name": string
     };
 
-    type FileInfoParameter = CourseID & {};
-
-    type FileBodyParameter = FileInfoParameter & {"body": string};
+    type FileAttachmentParameter = FileInfoParameter & {"body": Blob};
+    type FilePermissions = FileInfoParameter & {
+        "bAllowEveryone": string,
+        "B": string,
+        "G": string,
+        "P": string,
+        "S": string,
+        "T": string,
+        "U": string,
+        "bAllowRead": string,
+        "bAllowWrite": string,
+        "bAllowDelete": string,
+        "bAllowManage": string,
+    }
 
     type CourseContentParameter = CourseID & ContentID;
     type AssignmentParameter = CourseID & ContentID;

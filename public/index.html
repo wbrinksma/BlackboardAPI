@@ -90,8 +90,34 @@
         <h2>Files</h2>
         <input type="text" id="folderBox" value="Test">
         <button onclick="createFolder(document.getElementById('cidBox').value,document.getElementById('folderBox').value)">Create Folder</button>
-        <button onclick="deleteFolder(document.getElementById('cidBox').value,document.getElementById('folderBox').value)">Delete Folder</button>
-
+        <button onclick="deleteFile(document.getElementById('cidBox').value,document.getElementById('folderBox').value)">Delete Folder or File</button>
+        <button onclick="downloadFile(document.getElementById('cidBox').value,document.getElementById('folderBox').value)">Download Folder or File</button><br>
+        <input type="file" id="bodyAttachmentBox"><br>
+        <button onclick="publishFile(document.getElementById('cidBox').value,document.getElementById('folderBox').value,document.getElementById('bodyAttachmentBox'))">Create File</button>
+        <br>
+        <input id="bAllowEveryone" type="checkbox" value="true" name="bAllowEveryone">
+        <label for="bAllowEveryone">All Course Users</label>
+        <input id="B" type="checkbox" value="true" name="B">
+        <label for="B">Course Builder</label>
+        <input id="G" type="checkbox" value="true" name="G">
+        <label for="G">Grader</label>
+        <input id="P" type="checkbox" value="true" name="P">
+        <label for="P">Course Manager</label>
+        <input id="S" type="checkbox" value="true" name="S">
+        <label for="S">Student</label>
+        <input id="T" type="checkbox" value="true" name="T">
+        <label for="T">Teacher</label>
+        <input id="U" type="checkbox" value="true" name="U">
+        <label for="U">Guest</label>
+        <input id="bAllowRead" type="checkbox" value="true" name="bAllowRead">
+        <label for="bAllowRead">Read</label>
+        <input id="bAllowWrite" type="checkbox" value="true" name="bAllowWrite">
+        <label for="bAllowWrite">Write</label>
+        <input id="bAllowDelete" type="checkbox" value="true" name="bAllowDelete">
+        <label for="bAllowDelete">Delete</label>
+        <input id="bAllowManage" type="checkbox" value="true" name="bAllowManage">
+        <label for="bAllowManage">Manage</label>
+        <button onclick="setPermissions(document.getElementById('cidBox').value,document.getElementById('folderBox').value,document.getElementById('bAllowEveryone').checked,document.getElementById('B').checked,document.getElementById('G').checked,document.getElementById('P').checked,document.getElementById('S').checked,document.getElementById('T').checked,document.getElementById('U').checked,document.getElementById('bAllowRead').checked,document.getElementById('bAllowWrite').checked,document.getElementById('bAllowDelete').checked,document.getElementById('bAllowManage').checked)">Set File Permissions</button>
         <script src="index.js"></script>
         <script src="client.js"></script>
     </body>

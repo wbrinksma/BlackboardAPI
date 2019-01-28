@@ -11,23 +11,37 @@ export default abstract class Files {
     public abstract getFileInfo(parameters: BBBackend.FileInfoParameter): Promise<BBBackend.IFileInfo>;
 
     /**
-     * Set the body of a public file in the course's public file system.
-     * @param parameters The parameters to use with this function.
-     * @returns A promise which indicates when the task is complete.
-     */
-    public abstract setFileBody(parameters: BBBackend.FileBodyParameter): Promise<BBBackend.ITaskComplete>;
-
-    /**
      * Create a folder in the content management system
      * @param parameters The parameters to use with this function.
      * @returns A promise which indicates when the task is complete.
      */
-    public abstract createFolder(parameters: BBBackend.FolderParameter): Promise<BBBackend.ITaskComplete>;
+    public abstract createFolder(parameters: BBBackend.FileInfoParameter): Promise<BBBackend.ITaskComplete>;
 
-        /**
-     * Delete a folder in the content management system
+    /**
+     * Delete a file or folder in the content management system
      * @param parameters The parameters to use with this function.
      * @returns A promise which indicates when the task is complete.
      */
-    public abstract deleteFolder(parameters: BBBackend.FolderParameter): Promise<BBBackend.ITaskComplete>;
+    public abstract deleteFile(parameters: BBBackend.FileInfoParameter): Promise<BBBackend.ITaskComplete>;
+
+    /**
+     * Download a file or folder in the content management system
+     * @param parameters The parameters to use with this function.
+     * @returns A promise which indicates when the task is complete.
+     */
+    public abstract downloadFile(parameters: BBBackend.FileInfoParameter): Promise<BBBackend.ITaskComplete>;
+
+    /**
+     * Publish a file in the content management system
+     * @param parameters The parameters to use with this function.
+     * @returns A promise which indicates when the task is complete.
+     */
+    public abstract publishFile(parameters: BBBackend.FileAttachmentParameter): Promise<BBBackend.ITaskComplete>;
+
+    /**
+     * Set permisions of a file in the content management system
+     * @param parameters The parameters to use with this function.
+     * @returns A promise which indicates when the task is complete.
+     */
+    public abstract setPermissions(parameters: BBBackend.FileInfoParameter): Promise<BBBackend.ITaskComplete>;
 }
