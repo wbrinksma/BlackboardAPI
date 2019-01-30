@@ -18,7 +18,6 @@ export default class Utilities {
             });
         });
     }
-
     /**
      * Get a Blackboard nonce from a specified document, located by the formName
      * @param {HTMLDocument} doc The document the nonce is on

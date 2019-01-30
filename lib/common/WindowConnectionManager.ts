@@ -22,7 +22,6 @@ export default class WindowConnectionManager {
         if (onReturn) {
             this.callbackList[message.uuid] = onReturn;
         }
-
         this.window.postMessage(message, "*");
     }
 
@@ -38,7 +37,6 @@ export default class WindowConnectionManager {
             }
         } else if (message instanceof WindowFunctionReturn) {
             const frMessage: WindowFunctionReturn = message;
-
             if (frMessage.uuid in connectionManager.callbackList) {
                 connectionManager.callbackList[frMessage.uuid](frMessage.returnValue);
                 delete connectionManager.callbackList[frMessage.uuid];

@@ -31,26 +31,28 @@ export default class BBCourses extends Courses {
                 const courseInformation = JSON.parse(response);
 
                 const resultObject: BBBackend.ICourseInformation = {
+                    id: courseInformation.id,
+                    uuid: courseInformation.uuid,
+                    externalId: courseInformation.externalId,
+                    dataSourceId: courseInformation.dataSourceId,
+                    courseId: courseInformation.courseId,
+                    name: courseInformation.name,
+                    description: courseInformation.description,
+                    created: courseInformation.created,
+                    organization: courseInformation.organization,
+                    ultraStatus: courseInformation.ultraStatus,
                     accessCode: courseInformation.enrollment.accessCode,
                     allowGuests: courseInformation.allowGuests,
                     available: courseInformation.availability.available,
-                    courseId: courseInformation.courseId,
-                    created: courseInformation.created,
-                    dataSourceId: courseInformation.dataSourceId,
-                    description: courseInformation.description,
                     duration: courseInformation.availability.duration.type,
                     enrollment: courseInformation.enrollment.type,
-                    externalId: courseInformation.externalId,
                     hasChildren: courseInformation.hasChildren,
-                    id: courseInformation.courseId,
-                    locale: courseInformation.locale.force,
-                    name: courseInformation.name,
-                    organization: courseInformation.organization,
                     parentId: courseInformation.parentId,
+                    locale: courseInformation.locale.force,
                     readOnly: courseInformation.readOnly,
-                    ultraStatus: courseInformation.ultraStatus,
-                    uuid: courseInformation.uuid
                 };
+
+                resolve(resultObject)
             });
         });
     }

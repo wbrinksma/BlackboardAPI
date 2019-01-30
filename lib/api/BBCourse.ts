@@ -11,21 +11,7 @@ export default class BBCourse {
 
     constructor(courseId: string = null) {
         this._courseId = {courseId};
-        this.getCourseInformation();
-    }
-
-    get courseId(): string {
-        this.getCourseInformation().then(() => {
-            return this.courseInformation.courseId;
-        });
-        return;
-    }
-
-    get courseName(): string {
-        this.getCourseInformation().then(() => {
-            return this.courseInformation.name;
-        });
-        return;
+        this.getCourseInformation()
     }
 
     public getCourseInformation(): Promise<BBBackend.ICourseInformation> {
