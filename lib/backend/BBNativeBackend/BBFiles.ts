@@ -105,4 +105,22 @@ export default class BBFiles extends Files {
             });
         })
     }
+
+
+    public uploadFile(parameters: BBBackend.FileUpload): Promise<BBBackend.FileId> {
+        const path: string = "/learn/api/public/v1/uploads";
+        const formData: FormData = new FormData();
+        formData.append('file', parameters.file);
+
+        return new Promise((resolve, reject) => {
+            HTTPRequest.postAsync(path, formData).then((response) => {
+                const id: any = JSON.parse(response);
+
+                const result: BBBackend.FileId = {
+                    id: id.id
+                };
+                resolve(result);
+            });
+        });
+    }   
 }

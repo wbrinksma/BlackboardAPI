@@ -34,4 +34,8 @@ export default class BBFiles extends Files {
     public setPermissions(parameters: BBBackend.FilePermissions): Promise<BBBackend.ITaskComplete> {
         return this.backend.sendMessageThroughConnectionManager( this.category, "setPermissions", parameters)
     }
+
+    public uploadFile(parameters: BBBackend.FileUpload): Promise<BBBackend.FileId> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "uploadFile", parameters);
+    }
 }
