@@ -95,3 +95,40 @@ releaseAfter (string, optional): Date after which grades are released from being
   }
 }
 ```
+
+### Form data (JSON object)
+
+```
+{
+columnName: hello
+gradebookDisplayName: is it me you're looking for?
+descriptiontext_f: null
+descriptiontext_w: null
+descriptiontype: H
+textbox_prefix: descriptiontext
+descriptiontext: <p>:)</p>
+schema: _123418_1
+secondarySchema: 0
+categoryId: {unset id}
+pointsDisplay: 3
+rubrics_gradableItem: null
+duedate_datetime: null
+pickdate: null
+pickname: null
+duedate_date: null
+duedate_time: null
+scorable: true
+visible: true
+showStatToStudent: false
+bottom_Submit: Submit
+hideAttempt: false
+course_id: _20166_1
+position: 0
+actionType: create
+gradeableItemId: null
+primarySchemaChanged: false
+originalPrimarySchema: null
+usedInCalculation: false
+toolComputedPoints: null
+}
+```
