@@ -30,7 +30,10 @@ jobs:
 
   - script: |
         latestVersion=`npm show $(packageName) version`
-        echo $latestVersion
+        IFS=. read major minor patch <<<"${latestVersion}"
+        echo "Major: ${major}"
+        echo "Minor: ${minor}"
+        echo "Patch: ${patch}"
         echo '##vso[task.setvariable variable=myVariable]'$latestVersion
 
   - script: |
