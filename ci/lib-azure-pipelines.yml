@@ -29,7 +29,7 @@ jobs:
   #   displayName: 'Install Node.js'
 
   - script: |
-        if [ -z "$version"]; then echo a; else echo b fi
+        if [ -z "$version"]; then echo a; else echo b; fi
         if [ -z "$incrementPatch" ]; then incrementPatch=1; fi
         latestVersion=`npm show $(packageName) version`
         IFS=. read major minor patch <<<"${latestVersion}"
