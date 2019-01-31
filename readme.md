@@ -1,3 +1,9 @@
+|package|version|status|
+|-------|-------|------|
+|blackboardlib|[![LatestVersion](https://img.shields.io/npm/v/blackboardlib/latest.svg)]()|[![Build Status](https://dev.azure.com/BBReverseEngineering/BlackboardLib%20CI/_apis/build/status/BlackboardLib%20Build%20Library?branchName=master)](https://dev.azure.com/BBReverseEngineering/BlackboardLib%20CI/_build/latest?definitionId=12&branchName=master)|
+|blackboardlib-cli|[![LatestVersion](https://img.shields.io/npm/v/blackboardlib-cli/latest.svg)]()|[![Build Status](https://dev.azure.com/BBReverseEngineering/BlackboardLib%20CI/_apis/build/status/BlackboardLib%20Build%20CLI?branchName=master)](https://dev.azure.com/BBReverseEngineering/BlackboardLib%20CI/_build/latest?definitionId=11&branchName=master)|
+
+
 # BlackboardAPI
 
 An API to communicate with a Blackboard server. This can be used to build apps on the Blackboard platform that can either be hosten on-site or off-site through the use of special loaders.
