@@ -64,11 +64,16 @@ jobs:
     vmImage: 'Ubuntu 16.04'
 
   steps:
+  - task: DownloadBuildArtifacts@0
+    displayName: 'Download Build Artifacts'
+    inputs:
+      artifactName: lib
+
   - task: Npm@1
     displayName: 'npm publish'
     inputs:
       command: custom
-      workingDir: dist
+      workingDir: '$(System.ArtifactsDirectory)/lib'
       verbose: false
       customCommand: 'publish --dry-run'
       pubishEndpoint: 'NPM Pieterv24'
