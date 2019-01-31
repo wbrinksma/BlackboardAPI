@@ -40,9 +40,9 @@ jobs:
     displayName: Set version variables
 
   - script: |
-        echo "Major: ${major}"
-        echo "Minor: ${minor}"
-        echo "Patch: ${patch}"
+        echo "Major: $(major)"
+        echo "Minor: $(minor)"
+        echo "Patch: $(patch)"
 
   # - script: |
   #     npm install
