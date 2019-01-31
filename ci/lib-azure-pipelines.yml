@@ -14,30 +14,10 @@ trigger:
     - '**/readme.md'
 
 variables:
-- name: major
-  value: 0
-- name: minor
-  value: 0
-- name: patch
-  value: 1
+- name: packageName
+  value: blackboardlib
 
 jobs:
-- job: Update_Version
-
-  pool:
-    vmImage: 'Ubuntu 16.04'
-
-  steps:
-  - script: |
-      npm version major
-    condition: gt(variables['major'], 0)
-  - script: |
-      npm version minor
-    condition: gt(variables['minor'], 0)
-  - script: |
-      npm version patch
-    condition: gt(variables['patch'], 0)
-
 - job: Build_Library
   pool:
     vmImage: 'Ubuntu 16.04'
@@ -47,6 +27,13 @@ jobs:
     inputs:
       versionSpec: '11.x'
     displayName: 'Install Node.js'
+
+  - powershell: |
+      $latestVersion = npm show version
+      Write-Host '##vso[task.setvariable variable=latestNPMVersion]$latestVersion'
+
+  - powershell: |
+      Write-Host "$(latestNPMVersion)"
 
   - script: |
       npm install
