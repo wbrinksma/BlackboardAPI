@@ -28,6 +28,7 @@ steps:
   inputs:
     SourceFolder: $(Build.SourcesDirectory)/cli
     Contents: |
+      **/*
       !node_modules/**
     TargetFolder: $(Build.SourcesDirectory)/cli/dist
 
