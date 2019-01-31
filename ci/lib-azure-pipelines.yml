@@ -29,9 +29,11 @@ jobs:
   #   displayName: 'Install Node.js'
 
   - powershell: |
-      $latestVersion = npm show version
+      $latestVersion = npm show $env:packageName version
       Write-Host $latestVersion
       Write-Host '##vso[task.setvariable variable=latestNPMVersion]$latestVersion'
+    env:
+      packageName: $(packageName)
 
   - powershell: |
       Write-Host "$(latestNPMVersion)"
