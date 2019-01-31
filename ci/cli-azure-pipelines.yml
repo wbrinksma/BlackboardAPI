@@ -18,16 +18,18 @@ variables:
 - name: packageName
   value: blackboardlib-cli
 
-pool:
-  vmImage: 'Ubuntu 16.04'
+jobs:
+- job: Prepare_Pipelines
+  pool:
+    vmImage: 'Ubuntu 16.04'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '11.x'
-  displayName: 'Install Node.js'
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '11.x'
+    displayName: 'Install Node.js'
 
-- script: |
+  - script: |
       if [[ $(version) =~ ^[0-9]*?\.[0-9]*?\.[0-9]*?$ ]]; then
           IFS=. read major minor patch <<<"$(version)"
       else 
@@ -46,18 +48,32 @@ steps:
       echo "Patch: ${patch}"
       newVersion=$major.$minor.$patch
       eval npm version --no-git-tag-version $newVersion
-  displayName: Update to latest version
+    displayName: Update to latest version
 
-- task: CopyFiles@2
-  displayName: 'Copy cli files to dist'
-  inputs:
-    SourceFolder: $(Build.SourcesDirectory)/cli
-    Contents: |
-      **/*
-      !node_modules/**
-    TargetFolder: $(Build.SourcesDirectory)/cli/dist
+  - task: CopyFiles@2
+    displayName: 'Copy cli files to dist'
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/cli
+      Contents: |
+        **/*
+        !node_modules/**
+      TargetFolder: $(Build.SourcesDirectory)/cli/dist
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    ArtifactName: 'cli'
-    PathtoPublish: '$(Build.SourcesDirectory)/cli/dist'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      ArtifactName: 'cli'
+      PathtoPublish: '$(Build.SourcesDirectory)/cli/dist'
+
+- job: Publish_Library
+  pool:
+    vmImage: 'Ubuntu 16.04'
+
+  steps:
+  - task: Npm@1
+    displayName: 'npm publish'
+    inputs:
+      command: custom
+      workingDir: cli/dist
+      verbose: false
+      customCommand: 'publish --dry-run'
+      pubishEndpoint: 'NPM Pieterv24'

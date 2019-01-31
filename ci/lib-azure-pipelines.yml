@@ -29,24 +29,24 @@ jobs:
     displayName: 'Install Node.js'
 
   - script: |
-        if [[ $(version) =~ ^[0-9]*?\.[0-9]*?\.[0-9]*?$ ]]; then
-            IFS=. read major minor patch <<<"$(version)"
-        else 
-            if [ -z "$(incrementPatch)" ]; then incrementPatch=1; fi
-            latestVersion=`npm show $(packageName) version`
-            IFS=. read major minor patch <<<"${latestVersion}"
-            if [ "$(incrementMajor)" = 1 ]; then major=$(expr $major + 1); fi
-            if [ "$(incrementMinor)" = 1 ]; then minor=$(expr $minor + 1); fi
-            if [ "$incrementPatch" = 1 ] || [ "$(incrementPatch)" = 1 ]; then patch=$(expr $patch + 1); fi  
-        fi
-        echo '##vso[task.setvariable variable=major]'$major
-        echo '##vso[task.setvariable variable=minor]'$minor
-        echo '##vso[task.setvariable variable=patch]'$patch
-        echo "Major: ${major}"
-        echo "Minor: ${minor}"
-        echo "Patch: ${patch}"
-        newVersion=$major.$minor.$patch
-        eval npm version --no-git-tag-version $newVersion
+      if [[ $(version) =~ ^[0-9]*?\.[0-9]*?\.[0-9]*?$ ]]; then
+          IFS=. read major minor patch <<<"$(version)"
+      else 
+          if [ -z "$(incrementPatch)" ]; then incrementPatch=1; fi
+          latestVersion=`npm show $(packageName) version`
+          IFS=. read major minor patch <<<"${latestVersion}"
+          if [ "$(incrementMajor)" = 1 ]; then major=$(expr $major + 1); fi
+          if [ "$(incrementMinor)" = 1 ]; then minor=$(expr $minor + 1); fi
+          if [ "$incrementPatch" = 1 ] || [ "$(incrementPatch)" = 1 ]; then patch=$(expr $patch + 1); fi  
+      fi
+      echo '##vso[task.setvariable variable=major]'$major
+      echo '##vso[task.setvariable variable=minor]'$minor
+      echo '##vso[task.setvariable variable=patch]'$patch
+      echo "Major: ${major}"
+      echo "Minor: ${minor}"
+      echo "Patch: ${patch}"
+      newVersion=$major.$minor.$patch
+      eval npm version --no-git-tag-version $newVersion
     displayName: Update to latest version
 
   - script: |
@@ -58,3 +58,17 @@ jobs:
     inputs:
       ArtifactName: 'lib'
       PathtoPublish: '$(Build.SourcesDirectory)/dist'
+
+- job: Publish_Library
+  pool:
+    vmImage: 'Ubuntu 16.04'
+
+  steps:
+  - task: Npm@1
+    displayName: 'npm publish'
+    inputs:
+      command: custom
+      workingDir: dist
+      verbose: false
+      customCommand: 'publish --dry-run'
+      pubishEndpoint: 'NPM Pieterv24'
