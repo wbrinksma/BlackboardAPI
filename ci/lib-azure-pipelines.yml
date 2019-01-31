@@ -46,7 +46,7 @@ jobs:
         echo "Minor: ${minor}"
         echo "Patch: ${patch}"
         newVersion=$major.$minor.$patch
-        echo newVersion
+        echo $newVersion
         `npm version --no-git-tag-version $newVersion`
     displayName: Set version variables
 
