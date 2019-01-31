@@ -23,10 +23,10 @@ jobs:
     vmImage: 'Ubuntu 16.04'
 
   steps:
-  # - task: NodeTool@0
-  #   inputs:
-  #     versionSpec: '11.x'
-  #   displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '11.x'
+    displayName: 'Install Node.js'
 
   - script: |
         if [[ $(version) =~ ^[0-9]*?\.[0-9]*?\.[0-9]*?$ ]]; then
@@ -54,12 +54,12 @@ jobs:
         echo "Minor: $(minor)"
         echo "Patch: $(patch)"
 
-  # - script: |
-  #     npm install
-  #     npm run build
-  #   displayName: 'npm install and build'
+  - script: |
+      npm install
+      npm run build
+    displayName: 'npm install and build'
 
-  # - task: PublishBuildArtifacts@1
-  #   inputs:
-  #     ArtifactName: 'lib'
-  #     PathtoPublish: '$(Build.SourcesDirectory)/dist'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      ArtifactName: 'lib'
+      PathtoPublish: '$(Build.SourcesDirectory)/dist'
