@@ -30,13 +30,13 @@ jobs:
   steps:
   - script: |
       npm version major
-    condition: gt(variables[], 0)
+    condition: gt(variables['major'], 0)
   - script: |
       npm version major
-    condition: gt(variables[], 0)
+    condition: gt(variables['minor'], 0)
   - script: |
       npm version major
-    condition: gt(variables[], 0)
+    condition: gt(variables['patch'], 0)
 
 - job: Build_Library
   pool:
