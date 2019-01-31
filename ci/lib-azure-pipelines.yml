@@ -32,10 +32,10 @@ jobs:
       npm version major
     condition: gt(variables['major'], 0)
   - script: |
-      npm version major
+      npm version minor
     condition: gt(variables['minor'], 0)
   - script: |
-      npm version major
+      npm version patch
     condition: gt(variables['patch'], 0)
 
 - job: Build_Library
