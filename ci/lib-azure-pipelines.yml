@@ -7,27 +7,53 @@ trigger:
   batch: true
   branches:
     include:
-      - master
+    - master
   paths:
     exclude:
-      - cli/
-      - '**/readme.md'
+    - cli/
+    - '**/readme.md'
 
-pool:
-  vmImage: 'Ubuntu 16.04'
+variables:
+- name: major
+  value: 0
+- name: minor
+  value: 0
+- name: patch
+  value: 1
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '11.x'
-  displayName: 'Install Node.js'
+jobs:
+- job: Update_Version
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+  pool:
+    vmImage: 'Ubuntu 16.04'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    ArtifactName: 'lib'
-    PathtoPublish: '$(Build.SourcesDirectory)/dist'
+  steps:
+  - script: |
+      npm version major
+    condiction: gt(variables[], 0)
+  - script: |
+      npm version major
+    condiction: gt(variables[], 0)
+  - script: |
+      npm version major
+    condiction: gt(variables[], 0)
+
+- job: Build_Library
+  pool:
+    vmImage: 'Ubuntu 16.04'
+
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '11.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      npm install
+      npm run build
+    displayName: 'npm install and build'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      ArtifactName: 'lib'
+      PathtoPublish: '$(Build.SourcesDirectory)/dist'
