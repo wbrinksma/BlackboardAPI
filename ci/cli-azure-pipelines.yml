@@ -79,7 +79,7 @@ jobs:
     displayName: 'npm publish'
     inputs:
       command: custom
-      workingDir: cli
+      workingDir: '$(System.ArtifactsDirectory)'
       verbose: false
       customCommand: 'publish --dry-run'
       pubishEndpoint: 'NPM Pieterv24'
