@@ -30,4 +30,4 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     ArtifactName: 'lib'
-    PathtoPublish: '$(Build.SourcesDirectory)'
+    PathtoPublish: '$(Build.SourcesDirectory)/dist'
