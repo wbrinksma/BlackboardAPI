@@ -23,24 +23,25 @@ jobs:
     vmImage: 'Ubuntu 16.04'
 
   steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '11.x'
-    displayName: 'Install Node.js'
+  # - task: NodeTool@0
+  #   inputs:
+  #     versionSpec: '11.x'
+  #   displayName: 'Install Node.js'
 
   - powershell: |
       $latestVersion = npm show version
+      Write-Host $latestVersion
       Write-Host '##vso[task.setvariable variable=latestNPMVersion]$latestVersion'
 
   - powershell: |
       Write-Host "$(latestNPMVersion)"
 
-  - script: |
-      npm install
-      npm run build
-    displayName: 'npm install and build'
+  # - script: |
+  #     npm install
+  #     npm run build
+  #   displayName: 'npm install and build'
 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      ArtifactName: 'lib'
-      PathtoPublish: '$(Build.SourcesDirectory)/dist'
+  # - task: PublishBuildArtifacts@1
+  #   inputs:
+  #     ArtifactName: 'lib'
+  #     PathtoPublish: '$(Build.SourcesDirectory)/dist'
