@@ -77,4 +77,4 @@ jobs:
       workingDir: '$(System.ArtifactsDirectory)/lib'
       verbose: false
       customCommand: 'publish'
-      pubishEndpoint: 'NPM Pieterv24'
+      pubishEndpoint: 'NPM'
