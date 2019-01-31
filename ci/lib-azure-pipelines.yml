@@ -31,12 +31,12 @@ jobs:
   - powershell: |
       $latestVersion = npm show $env:packageName version
       Write-Host $latestVersion
-      Write-Host '##vso[task.setvariable variable=latestNPMVersion]$latestVersion'
+      $Env:latestVersion = $latestVersion
     env:
       packageName: $(packageName)
 
   - powershell: |
-      Write-Host "$(latestNPMVersion)"
+      Write-Host "$Env:latestVersion"
 
   # - script: |
   #     npm install
