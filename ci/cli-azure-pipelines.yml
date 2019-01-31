@@ -14,6 +14,10 @@ trigger:
     include:
       - cli/
 
+variables:
+- name: packageName
+  value: blackboardlib-cli
+
 pool:
   vmImage: 'Ubuntu 16.04'
 
@@ -22,6 +26,27 @@ steps:
   inputs:
     versionSpec: '11.x'
   displayName: 'Install Node.js'
+
+- script: |
+      if [[ $(version) =~ ^[0-9]*?\.[0-9]*?\.[0-9]*?$ ]]; then
+          IFS=. read major minor patch <<<"$(version)"
+      else 
+          if [ -z "$(incrementPatch)" ]; then incrementPatch=1; fi
+          latestVersion=`npm show $(packageName) version`
+          IFS=. read major minor patch <<<"${latestVersion}"
+          if [ "$(incrementMajor)" = 1 ]; then major=$(expr $major + 1); fi
+          if [ "$(incrementMinor)" = 1 ]; then minor=$(expr $minor + 1); fi
+          if [ "$incrementPatch" = 1 ] || [ "$(incrementPatch)" = 1 ]; then patch=$(expr $patch + 1); fi  
+      fi
+      echo '##vso[task.setvariable variable=major]'$major
+      echo '##vso[task.setvariable variable=minor]'$minor
+      echo '##vso[task.setvariable variable=patch]'$patch
+      echo "Major: ${major}"
+      echo "Minor: ${minor}"
+      echo "Patch: ${patch}"
+      newVersion=$major.$minor.$patch
+      eval npm version --no-git-tag-version $newVersion
+  displayName: Update to latest version
 
 - task: CopyFiles@2
   displayName: 'Copy cli files to dist'

@@ -47,12 +47,7 @@ jobs:
         echo "Patch: ${patch}"
         newVersion=$major.$minor.$patch
         eval npm version --no-git-tag-version $newVersion
-    displayName: Set version variables
-
-  - script: |
-        echo "Major: $(major)"
-        echo "Minor: $(minor)"
-        echo "Patch: $(patch)"
+    displayName: Update to latest version
 
   - script: |
       npm install
