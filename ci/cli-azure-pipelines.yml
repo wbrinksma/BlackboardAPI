@@ -65,7 +65,7 @@ jobs:
       PathtoPublish: '$(Build.SourcesDirectory)/cli/dist'
 
 - job: Publish_Cli
-  dependentOn: Prepare_Pipelines
+  dependsOn: Prepare_Pipelines
   pool:
     vmImage: 'Ubuntu 16.04'
 
