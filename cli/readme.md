@@ -1,4 +1,4 @@
-# The BlackboardAPI CLI
+# The BlackboardLib-CLI
 
 > This shows how to generate server files for a (web)server.
 

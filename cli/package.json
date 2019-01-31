@@ -1,9 +1,13 @@
 {
   "name": "blackboardlib-cli",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "CLI tool for blackboardlib to generate server files",
   "main": "./bin/cli.js",
   "author": "pieterv24",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wbrinksma/BlackboardAPI"
+  },
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {

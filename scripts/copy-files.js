@@ -39,7 +39,7 @@ function copyTypings() {
 }
 
 function run() {
-    ['../LICENSE'].map(file => copyFile(file));
+    ['../LICENSE', '../readme.md'].map(file => copyFile(file));
     copyTypings();
     createPackageFile();
 }
