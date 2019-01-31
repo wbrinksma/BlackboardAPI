@@ -76,5 +76,5 @@ jobs:
       command: custom
       workingDir: '$(System.ArtifactsDirectory)/lib'
       verbose: false
-      customCommand: 'publish --dry-run'
+      customCommand: 'publish'
       pubishEndpoint: 'NPM Pieterv24'

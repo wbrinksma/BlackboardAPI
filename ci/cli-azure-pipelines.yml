@@ -81,5 +81,5 @@ jobs:
       command: custom
       workingDir: '$(System.ArtifactsDirectory)/cli'
       verbose: true
-      customCommand: 'publish --dry-run'
+      customCommand: 'publish'
       pubishEndpoint: 'NPM Pieterv24'
