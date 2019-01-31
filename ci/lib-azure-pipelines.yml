@@ -10,6 +10,7 @@ trigger:
       - master
   paths:
     exclude:
+      - cli/
       - '**/readme.md'
 
 pool:
@@ -24,21 +25,9 @@ steps:
 - script: |
     npm install
     npm run build
-  displayName: 'install dependencies and build library'
-  
-- script: |
-    cd cli/
-    npm install
-  displayName: 'install cli dependencies'
+  displayName: 'npm install and build'
 
 - task: PublishBuildArtifacts@1
-  displayName: "publish library artifact"
   inputs:
     ArtifactName: 'lib'
-    PathtoPublish: '$(Build.SourcesDirectory)/dist'
-
-- task: PublishBuildArtifacts@1
-  displayName: "publish cli artifact"
-  inputs:
-    ArtifactName: 'cli'
-    PathtoPublish: '$(Build.SourcesDirectory)/cli'
+    PathtoPublish: '$(Build.SourcesDirectory)'
