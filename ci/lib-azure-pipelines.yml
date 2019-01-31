@@ -31,7 +31,7 @@ jobs:
   - script: |
         latestVersion=`npm show $(packageName) version`
         echo $latestVersion
-        echo '##vso[task.setvariable variable=myVariable]asdfsdf'
+        echo '##vso[task.setvariable variable=myVariable]'$latestVersion
 
   - script: |
         echo my var is $(myVariable)
