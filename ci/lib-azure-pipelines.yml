@@ -60,6 +60,7 @@ jobs:
       PathtoPublish: '$(Build.SourcesDirectory)/dist'
 
 - job: Publish_Library
+  dependsOn: Build_Library
   pool:
     vmImage: 'Ubuntu 16.04'
 
