@@ -14,25 +14,72 @@ trigger:
     include:
       - cli/
 
-pool:
-  vmImage: 'Ubuntu 16.04'
+variables:
+- name: packageName
+  value: blackboardlib-cli
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '11.x'
-  displayName: 'Install Node.js'
+jobs:
+- job: Prepare_Pipelines
+  pool:
+    vmImage: 'Ubuntu 16.04'
 
-- task: CopyFiles@2
-  displayName: 'Copy cli files to dist'
-  inputs:
-    SourceFolder: $(Build.SourcesDirectory)/cli
-    Contents: |
-      **/*
-      !node_modules/**
-    TargetFolder: $(Build.SourcesDirectory)/cli/dist
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '11.x'
+    displayName: 'Install Node.js'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    ArtifactName: 'cli'
-    PathtoPublish: '$(Build.SourcesDirectory)/cli/dist'
+  - script: |
+      if [[ $(version) =~ ^[0-9]*?\.[0-9]*?\.[0-9]*?$ ]]; then
+          IFS=. read major minor patch <<<"$(version)"
+      else 
+          if [ -z "$(incrementPatch)" ]; then incrementPatch=1; fi
+          latestVersion=`npm show $(packageName) version`
+          IFS=. read major minor patch <<<"${latestVersion}"
+          if [ "$(incrementMajor)" = 1 ]; then major=$(expr $major + 1); fi
+          if [ "$(incrementMinor)" = 1 ]; then minor=$(expr $minor + 1); fi
+          if [ "$incrementPatch" = 1 ] || [ "$(incrementPatch)" = 1 ]; then patch=$(expr $patch + 1); fi  
+      fi
+      echo '##vso[task.setvariable variable=major]'$major
+      echo '##vso[task.setvariable variable=minor]'$minor
+      echo '##vso[task.setvariable variable=patch]'$patch
+      echo "Major: ${major}"
+      echo "Minor: ${minor}"
+      echo "Patch: ${patch}"
+      newVersion=$major.$minor.$patch
+      eval npm version --no-git-tag-version $newVersion
+    displayName: Update to latest version
+
+  - task: CopyFiles@2
+    displayName: 'Copy cli files to dist'
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)/cli
+      Contents: |
+        **/*
+        !node_modules/**
+      TargetFolder: $(Build.SourcesDirectory)/cli/dist
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      ArtifactName: 'cli'
+      PathtoPublish: '$(Build.SourcesDirectory)/cli/dist'
+
+- job: Publish_Cli
+  dependsOn: Prepare_Pipelines
+  pool:
+    vmImage: 'Ubuntu 16.04'
+
+  steps:
+  - task: DownloadBuildArtifacts@0
+    displayName: 'Download Build Artifacts'
+    inputs:
+      artifactName: cli
+
+  - task: Npm@1
+    displayName: 'npm publish'
+    inputs:
+      command: custom
+      workingDir: '$(System.ArtifactsDirectory)/cli'
+      verbose: true
+      customCommand: 'publish'
+      pubishEndpoint: 'NPM Pieterv24'
