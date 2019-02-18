@@ -10,7 +10,7 @@ An API to communicate with a Blackboard server. This can be used to build apps o
 
 This project is still in its infancy, meaning that it will not work fully until a stable release is published.
 
-Currently, the build process relies on webpack which in turn uses npm and the Typescript compiler with separate configuration files. This might change in the future.
+In the meantime you should be able to use the current product, however be aware of possible bugs.
 
 ## Getting started
 
