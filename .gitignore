@@ -1,5 +1,5 @@
-# OS generated files #
-######################
+# OS/IDE generated files #
+##########################
 .DS_Store
 .DS_Store?
 ._*
@@ -7,13 +7,17 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+.idea/
+*.bak
 
 # Build directories #
-######################
+#####################
 build/
-node_modules/
 debug/
+dist/
+testBB/
 
-# Documentation directories #
-##############################
-docs/
+# NPM related stuff #
+#####################
+package-lock.json
+node_modules/

@@ -2,12 +2,12 @@
     "compilerOptions": {
         "target": "es2015",
         "module": "commonjs",
-        "declaration": true,
-        "outDir": "build",
-        "rootDir": "lib",
+        "sourceMap": false,
+        "outDir": "build/",
+        "rootDir": "src/",
         "removeComments": true
     },
     "include": [
-        "./lib"
+        "lib/test/*"
     ]
 }
