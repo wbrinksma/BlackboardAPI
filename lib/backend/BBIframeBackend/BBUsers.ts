@@ -15,4 +15,8 @@ export default class BBUsers extends Users {
     public getUserInfo(parameters: BBBackend.UserParameter): Promise<BBBackend.IUserInfo> {
         return this.backend.sendMessageThroughConnectionManager(this.category, "getUserInfo", parameters);
     }
+
+    public getCurrentUserId(parameters: null): Promise<string> {
+        return this.backend.sendMessageThroughConnectionManager(this.category, "getCurrentUserId", parameters);
+    }
 }
