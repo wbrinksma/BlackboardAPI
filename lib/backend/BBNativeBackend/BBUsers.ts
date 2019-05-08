@@ -46,4 +46,21 @@ export default class BBUsers extends Users {
             });
         }
     }
+
+    public getCurrentUserId(parameters: null): Promise<string> {
+        const path = "/webapps/blackboard/execute/editUser?context=self_modify";
+        const regex = new RegExp('user_id=(.+?(?="))');
+
+        return new Promise((resolve, reject) => {
+            HTTPRequest.getAsync(path).then((response) => {
+                const userid = regex.exec(response)[1];
+                if (!userid) {
+                    reject();
+                    return;
+                }
+
+                resolve(userid);
+            });
+        });
+    }
 }
