@@ -53,13 +53,13 @@ export default class BBUsers extends Users {
 
         return new Promise((resolve, reject) => {
             HTTPRequest.getAsync(path).then((response) => {
-                const userid = regex.exec(response)[1];
-                if (!userid) {
+                const userid = regex.exec(response);
+                if (userid == null) {
                     reject();
                     return;
                 }
 
-                resolve(userid);
+                resolve(userid[1]);
             });
         });
     }
