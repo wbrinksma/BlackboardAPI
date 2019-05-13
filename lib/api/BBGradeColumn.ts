@@ -43,5 +43,21 @@ export default class BBGradeColumn {
                 resolve(response);
             });
         });
-    }
+	}
+	
+	public getAssignmentAttempts(): Promise<BBBackend.IAssignmentAttempt[]> {
+		return new Promise((resolve) => {
+            Backend.getBackend().gradeColumns.getAssignmentAttempts(this._columnId).then((information) => {
+                resolve(information);
+            });
+        });
+	}
+
+	public getAssignmentAttempt(assignmentId: any): Promise<BBBackend.IAssignmentAttempt> {
+		return new Promise((resolve) => {
+            Backend.getBackend().gradeColumns.getAssignmentAttempt(assignmentId).then((information) => {
+                resolve(information);
+            });
+        });
+	}
 }
