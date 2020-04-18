@@ -52,7 +52,7 @@ export default class BBCourses extends Courses {
                     readOnly: courseInformation.readOnly,
                 };
 
-                resolve(resultObject)
+                resolve(resultObject);
             });
         });
     }

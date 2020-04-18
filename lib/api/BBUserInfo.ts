@@ -12,6 +12,14 @@ export abstract class BBUserInfo {
     private userInfo: BBBackend.IUserInfo;
     private enrolledCourses: BBBackend.ICourseID[];
 
+    public getCurrentUserId(): Promise<string> {
+        return new Promise((resolve, reject) => {
+            Backend.getBackend().users.getCurrentUserId(null).then((userid) => {
+                resolve(userid);
+            });
+        })
+    }
+
     public getUserName(): Promise<string> {
       return new Promise((resolve, reject) => {
           if (this._userName) {
